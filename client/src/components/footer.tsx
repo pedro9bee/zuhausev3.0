@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Home } from "lucide-react";
+import whiteLogo from "@assets/white_logo_transparent_background_1749928120484.png";
 
 export default function Footer() {
   return (
@@ -8,10 +8,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-zuhause-blue rounded-lg flex items-center justify-center mr-3">
-                <Home className="text-white" size={24} />
-              </div>
-              <span className="text-2xl font-bold">ZuHause</span>
+              <img 
+                src={whiteLogo} 
+                alt="ZuHause Imóveis" 
+                className="h-12 w-auto"
+              />
             </div>
             <p className="text-gray-300 text-lg mb-6 max-w-md">16 anos oferecendo uma experiência única e humana na compra e venda de imóveis no Rio de Janeiro.</p>
             <div className="flex space-x-4">

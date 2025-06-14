@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Home, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import whiteLogo from "@assets/white_logo_transparent_background_1749928120484.png";
+import darkLogo from "@assets/watermark_logo_transparent_background_1749928120484.png";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,10 +33,11 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center">
-            <div className="w-10 h-10 bg-zuhause-blue rounded-lg flex items-center justify-center">
-              <Home className="text-white" size={20} />
-            </div>
-            <span className="ml-3 text-xl font-bold text-zuhause-blue">ZuHause</span>
+            <img 
+              src={darkLogo} 
+              alt="ZuHause Imóveis" 
+              className="h-10 w-auto"
+            />
           </Link>
           
           <div className="hidden md:block">

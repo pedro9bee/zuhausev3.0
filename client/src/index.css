@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+
+  /* ZuHause custom colors */
+  --zuhause-blue: hsl(225, 57%, 42%);
+  --zuhause-blue-light: hsl(214, 90%, 62%);
+  --zuhause-blue-dark: hsl(224, 76%, 27%);
+  --zuhause-gradient: linear-gradient(135deg, hsl(225, 57%, 42%) 0%, hsl(214, 90%, 62%) 100%);
+  --section-gradient: linear-gradient(135deg, hsl(210, 40%, 98%) 0%, hsl(214, 32%, 91%) 100%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .bg-zuhause-gradient {
+    background: var(--zuhause-gradient);
+  }
+
+  .bg-section-gradient {
+    background: var(--section-gradient);
+  }
+
+  .text-zuhause-blue {
+    color: hsl(225, 57%, 42%);
+  }
+
+  .bg-zuhause-blue {
+    background-color: hsl(225, 57%, 42%);
+  }
+
+  .bg-zuhause-blue-light {
+    background-color: hsl(214, 90%, 62%);
+  }
+
+  .bg-zuhause-blue-dark {
+    background-color: hsl(224, 76%, 27%);
+  }
+
+  .hover\:bg-zuhause-blue-dark:hover {
+    background-color: hsl(224, 76%, 27%);
+  }
+
+  .border-zuhause-blue {
+    border-color: hsl(225, 57%, 42%);
+  }
+
+  .ring-zuhause-blue {
+    --tw-ring-color: hsl(225, 57%, 42%);
+  }
+
+  .focus\:ring-zuhause-blue:focus {
+    --tw-ring-color: hsl(225, 57%, 42%);
+  }
+}

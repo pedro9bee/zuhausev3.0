@@ -8,7 +8,7 @@ import ContactForm from "@/components/contact-form";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Star, Home, Tag, Key, Calculator, Handshake, ClipboardList, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Star, HomeIcon, Tag, Key, Calculator, Handshake, ClipboardList, MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function Home() {
   const { data: properties = [], isLoading: propertiesLoading } = useQuery<Property[]>({
@@ -120,7 +120,7 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: Home, title: "Compra de Imóveis", desc: "Encontramos o imóvel perfeito para você, com todo suporte jurídico e financeiro necessário." },
+              { icon: HomeIcon, title: "Compra de Imóveis", desc: "Encontramos o imóvel perfeito para você, com todo suporte jurídico e financeiro necessário." },
               { icon: Tag, title: "Venda de Imóveis", desc: "Vendemos seu imóvel pelo melhor preço, com estratégias de marketing personalizadas." },
               { icon: Key, title: "Locação", desc: "Administramos aluguéis com transparência e eficiência para proprietários e inquilinos." },
               { icon: Calculator, title: "Avaliação", desc: "Avaliamos seu imóvel com precisão, baseado em análise de mercado atualizada." },

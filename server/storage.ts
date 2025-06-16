@@ -202,42 +202,42 @@ export class MemStorage implements IStorage {
         location: "Leblon",
         rating: 5,
         message: "Atendimento de primeira qualidade! A equipe foi muito paciente e me mostrou várias opções até encontrarmos a casa ideal para minha família.",
-        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/women/25.jpg"
       },
       {
         name: "Gabriel Santos",
         location: "Campo Grande",
         rating: 5,
         message: "Comprei meu primeiro apartamento com a ZuHause. Eles explicaram todo o processo e me deram total segurança na negociação.",
-        avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/men/55.jpg"
       },
       {
         name: "Patricia Lima",
         location: "Botafogo",
         rating: 5,
         message: "Profissionais excepcionais! Me ajudaram tanto na venda do meu antigo apartamento quanto na compra do novo. Processo muito bem coordenado.",
-        avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/women/72.jpg"
       },
       {
         name: "Ricardo Alves",
         location: "Flamengo",
         rating: 5,
         message: "Excelente trabalho de avaliação do meu imóvel. A ZuHause conseguiu um preço justo e vendeu rapidamente. Muito satisfeito com o resultado.",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/men/33.jpg"
       },
       {
         name: "Marina Fernandes",
         location: "São Conrado",
         rating: 5,
         message: "Atendimento humanizado e personalizado. A equipe realmente entende as necessidades do cliente e trabalha para encontrar a melhor solução.",
-        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/women/85.jpg"
       },
       {
         name: "Leonardo Oliveira",
         location: "Laranjeiras",
         rating: 5,
         message: "Processo de locação muito eficiente. A ZuHause cuidou de toda a documentação e conseguiu inquilinos qualificados para meu imóvel rapidamente.",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/men/28.jpg"
       },
       {
         name: "Stephanie Moura",

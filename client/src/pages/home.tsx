@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Star, HomeIcon, Tag, Key, Calculator, Handshake, ClipboardList, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Instagram } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Home() {
   const { data: properties = [], isLoading: propertiesLoading } = useQuery<Property[]>({
@@ -59,9 +60,11 @@ export default function Home() {
           )}
           
           <div className="text-center mt-12">
-            <Button className="bg-zuhause-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg">
-              Ver Todos os Imóveis
-            </Button>
+            <Link href="/properties">
+              <Button className="bg-zuhause-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg">
+                Ver Todos os Imóveis
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

@@ -60,7 +60,7 @@ export default function Home() {
           )}
           
           <div className="text-center mt-12">
-            <Link href="/properties">
+            <Link href="/propriedades">
               <Button className="bg-zuhause-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg">
                 Ver Todos os Imóveis
               </Button>

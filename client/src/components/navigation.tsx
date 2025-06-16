@@ -48,12 +48,12 @@ export default function Navigation() {
               >
                 Início
               </button>
-              <button 
-                onClick={() => scrollToSection('propriedades')}
+              <Link 
+                href="/properties"
                 className="text-gray-600 hover:text-zuhause-blue px-3 py-2 text-sm font-medium transition-colors"
               >
                 Propriedades
-              </button>
+              </Link>
               <button 
                 onClick={() => scrollToSection('sobre')}
                 className="text-gray-600 hover:text-zuhause-blue px-3 py-2 text-sm font-medium transition-colors"
@@ -106,12 +106,13 @@ export default function Navigation() {
             >
               Início
             </button>
-            <button 
-              onClick={() => scrollToSection('propriedades')}
+            <Link 
+              href="/properties"
               className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-zuhause-blue w-full text-left"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Propriedades
-            </button>
+            </Link>
             <button 
               onClick={() => scrollToSection('sobre')}
               className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-zuhause-blue w-full text-left"

@@ -71,7 +71,7 @@ export default function PropertyDetail() {
           {/* Property Images */}
           <div className="relative mb-8">
             <img 
-              src={property.images[0]} 
+              src={property.images && property.images.length > 0 ? property.images[0] : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600"} 
               alt={property.title}
               className="w-full h-96 object-cover rounded-2xl"
             />
@@ -124,7 +124,7 @@ export default function PropertyDetail() {
                 <p className="text-gray-600 leading-relaxed">{property.description}</p>
               </div>
 
-              {property.features.length > 0 && (
+              {property.features && property.features.length > 0 && (
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Características</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">

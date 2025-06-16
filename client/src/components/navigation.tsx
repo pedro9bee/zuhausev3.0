@@ -49,7 +49,7 @@ export default function Navigation() {
                 Início
               </button>
               <Link 
-                href="/properties"
+                href="/propriedades"
                 className="text-gray-600 hover:text-zuhause-blue px-3 py-2 text-sm font-medium transition-colors"
               >
                 Propriedades
@@ -107,7 +107,7 @@ export default function Navigation() {
               Início
             </button>
             <Link 
-              href="/properties"
+              href="/propriedades"
               className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-zuhause-blue w-full text-left"
               onClick={() => setIsMobileMenuOpen(false)}
             >

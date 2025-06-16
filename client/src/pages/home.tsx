@@ -8,7 +8,9 @@ import ContactForm from "@/components/contact-form";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Star, HomeIcon, Tag, Key, Calculator, Handshake, ClipboardList, MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Instagram } from "lucide-react";
 
 export default function Home() {
   const { data: properties = [], isLoading: propertiesLoading } = useQuery<Property[]>({
@@ -154,10 +156,16 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {[
-              { name: "João Silva", role: "Consultor Sênior", experience: "12 anos de experiência", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
-              { name: "Maria Santos", role: "Diretora Comercial", experience: "16 anos de experiência", image: "https://images.unsplash.com/photo-1494790108755-2616b332e234?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
-              { name: "Carlos Mendes", role: "Consultor", experience: "8 anos de experiência", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
-              { name: "Ana Costa", role: "Consultora", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Júnior Martins", role: "Corretor", experience: "12 anos de experiência", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Pedro Lemos", role: "Diretor de AI", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1494790108755-2616b332e234?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Carlos Mendes", role: "Consultor de Investimentos Imobiliários", experience: "8 anos de experiência", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Ana Costa", role: "Coordenadora de Marketing Digital Imobiliário", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Ricardo Santos", role: "Especialista em Crédito Imobiliário", experience: "7 anos de experiência", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Fernanda Silva", role: "Gestora de Relacionamento com o Cliente", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Marcelo Oliveira", role: "Coordenador de Parcerias Estratégicas", experience: "9 anos de experiência", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Juliana Ribeiro", role: "Curadora de Portfólio Residencial", experience: "6 anos de experiência", image: "https://images.unsplash.com/photo-1494790108755-2616b332e234?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Bruno Almeida", role: "Analista de Precificação de Imóveis", experience: "4 anos de experiência", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Thiago Pereira", role: "Fotógrafo Imobiliário e Criador de Conteúdo", experience: "8 anos de experiência", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
             ].map((member, index) => (
               <div key={index} className="text-center group">
                 <div className="relative mb-6">
@@ -210,34 +218,46 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial) => (
-                <Card key={testimonial.id} className="bg-white p-8 shadow-lg">
-                  <CardContent className="p-0">
-                    <div className="flex items-center mb-6">
-                      <div className="flex text-yellow-400 mr-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} size={16} fill="currentColor" />
-                        ))}
-                      </div>
-                      <span className="text-gray-600 text-sm">{testimonial.rating}.0</span>
-                    </div>
-                    <p className="text-gray-600 mb-6 italic">"{testimonial.message}"</p>
-                    <div className="flex items-center">
-                      <img 
-                        src={testimonial.avatar} 
-                        alt={testimonial.name} 
-                        className="w-12 h-12 rounded-full object-cover mr-4" 
-                      />
-                      <div>
-                        <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                        <div className="text-gray-600 text-sm">{testimonial.location}</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {testimonials.map((testimonial) => (
+                  <CarouselItem key={testimonial.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                    <Card className="bg-white p-8 shadow-lg h-full">
+                      <CardContent className="p-0">
+                        <div className="flex items-center mb-6">
+                          <div className="flex text-yellow-400 mr-4">
+                            {[...Array(testimonial.rating)].map((_, i) => (
+                              <Star key={i} size={16} fill="currentColor" />
+                            ))}
+                          </div>
+                          <span className="text-gray-600 text-sm">{testimonial.rating}.0</span>
+                        </div>
+                        <p className="text-gray-600 mb-6 italic">"{testimonial.message}"</p>
+                        <div className="flex items-center">
+                          <img 
+                            src={testimonial.avatar} 
+                            alt={testimonial.name} 
+                            className="w-12 h-12 rounded-full object-cover mr-4" 
+                          />
+                          <div>
+                            <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                            <div className="text-gray-600 text-sm">{testimonial.location}</div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           )}
         </div>
       </section>
@@ -273,12 +293,16 @@ export default function Home() {
               
               <div className="mt-8">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Siga-nos nas Redes Sociais</h3>
-                <div className="flex space-x-4">
-                  {["instagram", "facebook", "whatsapp", "linkedin"].map((social) => (
-                    <Button key={social} className="w-12 h-12 bg-zuhause-gradient rounded-lg p-0 hover:opacity-90 transition-opacity">
-                      <i className={`fab fa-${social} text-lg`}></i>
-                    </Button>
-                  ))}
+                <div className="flex items-center space-x-4">
+                  <a 
+                    href="https://www.instagram.com/zuhauseimoveisrj?igsh=a2RxanhkNWs0NDJh" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 bg-zuhause-gradient rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity"
+                  >
+                    <Instagram className="text-white" size={20} />
+                  </a>
+                  <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
                 </div>
               </div>
             </div>

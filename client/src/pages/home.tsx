@@ -161,7 +161,7 @@ export default function Home() {
             {[
               { name: "Júnior Martins", role: "Corretor", experience: "12 anos de experiência", image: "/attached_assets/Junior Martins_1750110494934.png" },
               { name: "Pedro Lemos", role: "Diretor de AI", experience: "5 anos de experiência", image: "/attached_assets/kk_1750110195335.png" },
-              { name: "Carlos Mendes", role: "Consultor de Investimentos Imobiliários", experience: "8 anos de experiência", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Camila Souza", role: "Corretora", experience: "6 anos de experiência", image: "/attached_assets/Leonardo_Kino_XL_A_candid_shot_of_the_real_estate_agent_holdin_0_1750111077584.jpg" },
               { name: "Ana Costa", role: "Coordenadora de Marketing Digital Imobiliário", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Ricardo Santos", role: "Especialista em Crédito Imobiliário", experience: "7 anos de experiência", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Fernanda Silva", role: "Gestora de Relacionamento com o Cliente", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
@@ -169,6 +169,7 @@ export default function Home() {
               { name: "Juliana Ribeiro", role: "Curadora de Portfólio Residencial", experience: "6 anos de experiência", image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Bruno Almeida", role: "Analista de Precificação de Imóveis", experience: "4 anos de experiência", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Thiago Pereira", role: "Fotógrafo Imobiliário e Criador de Conteúdo", experience: "8 anos de experiência", image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Carlos Mendes", role: "Consultor de Investimentos Imobiliários", experience: "8 anos de experiência", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
             ].map((member, index) => (
               <div key={index} className="text-center group">
                 <div className="relative mb-6">

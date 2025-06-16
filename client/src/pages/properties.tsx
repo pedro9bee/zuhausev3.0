@@ -28,7 +28,9 @@ import {
   MessageCircle,
   Filter,
   Grid3X3,
-  List
+  List,
+  Wand2,
+  Sparkles
 } from "lucide-react";
 
 export default function Properties() {
@@ -230,6 +232,60 @@ export default function Properties() {
                 Funcionalidade de áudio personalizada em desenvolvimento
               </p>
             </div>
+
+            {/* AI Decoration Section */}
+            <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl border border-purple-200 shadow-sm">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-3">
+                  <Wand2 className="text-white" size={20} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Casa Decorada com IA</h3>
+                  <p className="text-sm text-gray-600">Visualize como ficaria mobiliada</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-700 mb-6 text-sm leading-relaxed">
+                Veja como este imóvel ficaria totalmente decorado e mobiliado usando nossa tecnologia de Inteligência Artificial. 
+                Simulação completa de uma casa pronta para morar com decoração moderna e funcional.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                <div className="bg-white p-3 rounded-lg shadow-sm border">
+                  <div className="flex items-center mb-2">
+                    <Sparkles size={14} className="text-purple-500 mr-2" />
+                    <span className="text-xs font-medium text-gray-900">Sala de Estar</span>
+                  </div>
+                  <div className="text-xs text-gray-600">Mobília completa</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg shadow-sm border">
+                  <div className="flex items-center mb-2">
+                    <Sparkles size={14} className="text-purple-500 mr-2" />
+                    <span className="text-xs font-medium text-gray-900">Quartos</span>
+                  </div>
+                  <div className="text-xs text-gray-600">Camas e decoração</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg shadow-sm border">
+                  <div className="flex items-center mb-2">
+                    <Sparkles size={14} className="text-purple-500 mr-2" />
+                    <span className="text-xs font-medium text-gray-900">Cozinha</span>
+                  </div>
+                  <div className="text-xs text-gray-600">Eletrodomésticos</div>
+                </div>
+                <div className="bg-white p-3 rounded-lg shadow-sm border">
+                  <div className="flex items-center mb-2">
+                    <Sparkles size={14} className="text-purple-500 mr-2" />
+                    <span className="text-xs font-medium text-gray-900">Banheiros</span>
+                  </div>
+                  <div className="text-xs text-gray-600">Acabamentos</div>
+                </div>
+              </div>
+              
+              <Button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all duration-300 shadow-lg">
+                <Wand2 size={16} className="mr-2" />
+                Ver Casa Decorada com IA
+              </Button>
+            </div>
           </div>
 
           {/* Contact Sidebar */}
@@ -245,7 +301,10 @@ export default function Properties() {
                   <Phone size={16} className="mr-2" />
                   (21) 99999-9999
                 </Button>
-                <Button className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors">
+                <Button 
+                  className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors"
+                  onClick={() => window.open('https://wa.me/5521975155741', '_blank')}
+                >
                   <MessageCircle size={16} className="mr-2" />
                   WhatsApp
                 </Button>
@@ -304,7 +363,7 @@ export default function Properties() {
               <div className="flex items-center justify-center gap-6 text-sm text-gray-500">
                 <div className="flex items-center gap-2">
                   <TrendingUp size={16} />
-                  <span>Mais de 500 imóveis</span>
+                  <span>Portfólio Premium</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Award size={16} />

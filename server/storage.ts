@@ -160,42 +160,42 @@ export class MemStorage implements IStorage {
         location: "Barra da Tijuca",
         rating: 5,
         message: "Atendimento excepcional! A equipe da ZuHause foi fundamental para encontrarmos nosso apartamento dos sonhos na Barra. Profissionais competentes e humanos.",
-        avatar: "https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/men/32.jpg"
       },
       {
         name: "Marcos Silva",
         location: "Recreio",
         rating: 5,
         message: "Vendemos nossa casa em tempo recorde! A estratégia de marketing foi perfeita e o preço alcançado superou nossas expectativas. Recomendo demais!",
-        avatar: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/men/45.jpg"
       },
       {
         name: "Juliana Oliveira",
         location: "Ipanema",
         rating: 5,
         message: "Atendimento personalizado desde o primeiro contato. Eles realmente se importam com o cliente e fazem tudo para encontrar o imóvel ideal.",
-        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/women/44.jpg"
       },
       {
         name: "Felipe Costa",
         location: "Copacabana",
         rating: 5,
         message: "Processo de compra muito transparente e sem complicações. A ZuHause cuidou de todos os detalhes burocráticos e conseguiu um excelente financiamento.",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/men/22.jpg"
       },
       {
         name: "Camila Rodrigues",
         location: "Tijuca",
         rating: 5,
         message: "Equipe super atenciosa e profissional. Me ajudaram a encontrar o apartamento perfeito dentro do meu orçamento. Recomendo muito!",
-        avatar: "https://images.unsplash.com/photo-1494790108755-2616b332e234?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/women/68.jpg"
       },
       {
         name: "André Souza",
         location: "Jacarepaguá",
         rating: 5,
         message: "Vendi meu imóvel com a ZuHause e foi uma experiência incrível. Conseguiram valorizar muito bem minha propriedade no mercado.",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+        avatar: "https://randomuser.me/api/portraits/men/41.jpg"
       },
       {
         name: "Luciana Pereira",

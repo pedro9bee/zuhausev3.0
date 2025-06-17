@@ -126,20 +126,15 @@ export default function Home() {
               <div className="relative max-w-sm w-full">
                 {/* Video Container - Ready for video integration with vertical aspect ratio */}
                 <div className="relative bg-gradient-to-br from-zuhause-blue/10 to-purple-600/10 rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/50">
-                  <div className="aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                    {/* Placeholder for video - will be replaced with actual video */}
-                    <div className="text-center text-gray-500">
-                      <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div className="w-0 h-0 border-l-[12px] border-l-zuhause-blue border-y-[8px] border-y-transparent ml-1"></div>
-                      </div>
-                      <p className="font-semibold text-gray-600">Vídeo de Apresentação</p>
-                      <p className="text-sm opacity-75 mt-1">Formato vertical</p>
-                      <p className="text-xs opacity-50 mt-2">9:16 - Mobile First</p>
-                    </div>
-                    
-                    {/* Decorative elements */}
-                    <div className="absolute top-4 right-4 w-12 h-12 bg-zuhause-blue/20 rounded-full animate-pulse"></div>
-                    <div className="absolute bottom-4 left-4 w-8 h-8 bg-purple-500/20 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                  <div className="aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden">
+                    <video 
+                      className="w-full h-full object-cover"
+                      controls
+                      poster="/attached_assets/DSC05718-HDR-20_1750156747504.jpg"
+                    >
+                      <source src="/attached_assets/Frame01_1750177625956.mp4" type="video/mp4" />
+                      Seu navegador não suporta vídeos HTML5.
+                    </video>
                   </div>
                   
                   {/* Floating decorative elements */}

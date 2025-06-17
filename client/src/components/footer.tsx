@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import whiteLogo from "@assets/white_logo_transparent_background_1749928120484.png";
 import { Instagram } from "lucide-react";
-import { FaYoutube, FaWhatsapp, FaLinkedin } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -27,28 +27,12 @@ export default function Footer() {
                 <Instagram size={20} />
               </a>
               <a 
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
-              >
-                <FaYoutube size={20} />
-              </a>
-              <a 
                 href="https://wa.me/5521975155741"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-green-500 transition-colors"
               >
                 <FaWhatsapp size={20} />
-              </a>
-              <a 
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
-              >
-                <FaLinkedin size={20} />
               </a>
             </div>
           </div>

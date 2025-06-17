@@ -98,8 +98,15 @@ ZuHause is a full-stack real estate platform built for property management and c
 
 ## Changelog
 
-Changelog:
-- June 14, 2025. Initial setup
+Recent Changes:
+- June 17, 2025: Enhanced hero section with new premium property image and button animations
+- June 17, 2025: Integrated search functionality between home page and properties page with URL parameters
+- June 17, 2025: Redesigned services section with creative card animations, removed "Saber mais" buttons
+- June 17, 2025: Prepared "Sobre Nós" section for video integration with creative placeholder design
+- June 17, 2025: Swapped team member positions (Bruno Almeida and Ana Costa)
+- June 17, 2025: Enhanced contact form with "Trabalhar na Zuhause" option and PDF file upload functionality
+- June 17, 2025: Implemented "Trabalhe Conosco" button navigation to contact form
+- June 14, 2025: Initial setup
 
 ## User Preferences
 

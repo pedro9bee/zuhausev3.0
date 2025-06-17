@@ -166,8 +166,7 @@ export default function Home() {
                   <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-zuhause-blue transition-colors duration-300">{service.title}</h3>
                   <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{service.desc}</p>
                 </CardContent>
-                <div className="absolute -bottom-2 -right-2 w-20 h-20 bg-gradient-to-br opacity-20 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-500" 
-                     style={{background: `linear-gradient(135deg, ${service.color.split(' ')[0].replace('from-', '')}, ${service.color.split(' ')[2].replace('to-', '')})`}}></div>
+                <div className="absolute -bottom-2 -right-2 w-20 h-20 bg-gradient-to-br from-zuhause-blue/20 to-purple-500/20 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-500"></div>
               </Card>
             ))}
           </div>

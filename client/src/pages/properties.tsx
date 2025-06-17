@@ -6,10 +6,10 @@ import type { Property } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
+import { useLocation } from "wouter";
 import { 
   MapPin, 
   Bed, 
@@ -42,6 +42,11 @@ export default function Properties() {
   const [sortBy, setSortBy] = useState<"price" | "size" | "date">("price");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+  const [, setLocation] = useLocation();
+
+  const handleNavigation = (path: string) => {
+    setLocation(path);
+  };
 
   const { data: properties = [], isLoading } = useQuery<Property[]>({
     queryKey: ["/api/properties"],
@@ -603,20 +608,15 @@ export default function Properties() {
                         {!property.isForSale && <div className="text-sm text-gray-600">por mês</div>}
                       </div>
                       
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setSelectedProperty(property)}
-                            className="bg-gradient-to-r from-zuhause-blue to-purple-600 text-white border-0 hover:from-purple-600 hover:to-zuhause-blue hover:scale-105 hover:shadow-lg transition-all duration-200 opacity-100"
-                          >
-                            <Eye size={14} className="mr-1" />
-                            Detalhes
-                          </Button>
-                        </DialogTrigger>
-                        {selectedProperty && <PropertyDetailModal property={selectedProperty} />}
-                      </Dialog>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleNavigation(`/propriedade/${property.id}`)}
+                        className="bg-zuhause-blue hover:bg-blue-700 text-white border-0 hover:scale-105 hover:shadow-lg transition-all duration-200"
+                      >
+                        <Eye size={14} className="mr-1" />
+                        Detalhes
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>

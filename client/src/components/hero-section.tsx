@@ -22,22 +22,22 @@ export default function HeroSection() {
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Sua Casa dos <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Sonhos</span><br />
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight text-shadow-lg">
+            Sua Casa dos <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 drop-shadow-lg">Sonhos</span><br />
             Está Aqui
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed text-shadow-md">
             16 anos de experiência no mercado imobiliário, oferecendo uma experiência única e humana na compra e venda de imóveis.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              className="bg-white text-zuhause-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 animate-pulse hover:animate-none"
+              className="bg-white text-zuhause-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-102"
               onClick={() => scrollToSection('propriedades')}
             >
               Ver Propriedades
             </Button>
             <Button 
-              className="bg-white text-zuhause-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 animate-pulse hover:animate-none"
+              className="bg-white text-zuhause-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-102"
               onClick={() => scrollToSection('sobre')}
             >
               Nossa História
@@ -46,7 +46,10 @@ export default function HeroSection() {
         </div>
       </div>
       
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+      <div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer hover:scale-110 transition-transform duration-200"
+        onClick={() => scrollToSection('propriedades')}
+      >
         <ChevronDown size={32} />
       </div>
     </section>

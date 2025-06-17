@@ -106,16 +106,17 @@ export default function Home() {
             </div>
             
             <div className="order-1 lg:order-2 relative">
-              {/* Video Container - Ready for video integration */}
+              {/* Video Container - Ready for video integration with vertical aspect ratio */}
               <div className="relative bg-gradient-to-br from-zuhause-blue/10 to-purple-600/10 rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/50">
-                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                <div className="aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center relative overflow-hidden">
                   {/* Placeholder for video - will be replaced with actual video */}
                   <div className="text-center text-gray-500">
                     <div className="w-20 h-20 bg-white/80 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
                       <div className="w-0 h-0 border-l-[12px] border-l-zuhause-blue border-y-[8px] border-y-transparent ml-1"></div>
                     </div>
                     <p className="font-medium">Vídeo de Apresentação</p>
-                    <p className="text-sm opacity-75">Em breve</p>
+                    <p className="text-sm opacity-75">Formato vertical</p>
+                    <p className="text-xs opacity-50 mt-2">9:16 - Mobile First</p>
                   </div>
                   
                   {/* Decorative elements */}

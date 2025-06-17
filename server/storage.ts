@@ -153,7 +153,13 @@ export class MemStorage implements IStorage {
         type: "Casa Triplex",
         status: "available",
         features: ["Design contemporâneo", "Pé-direito alto", "Espaço gourmet", "Sauna", "Piscina", "4 suítes com varanda", "Suíte master com banheira", "Sala multifuncional", "Home cinema", "Academia"],
-        images: ["/attached_assets/Del Lago_1750107985029.jpg"],
+        images: [
+          "/attached_assets/Del Lago_1750107985029.jpg",
+          "/attached_assets/DSC03637_1750194275120.jpg",
+          "/attached_assets/DSC03569_1750194275120.jpg",
+          "/attached_assets/DSC03629_1750194275121.jpg",
+          "/attached_assets/DSC03642_1750194275122.jpg"
+        ],
         isForSale: true,
         isForRent: false,
         isFeatured: true,

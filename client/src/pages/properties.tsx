@@ -30,7 +30,8 @@ import {
   Grid3X3,
   List,
   Wand2,
-  Sparkles
+  Sparkles,
+  X
 } from "lucide-react";
 
 export default function Properties() {
@@ -503,7 +504,10 @@ export default function Properties() {
                     animation: "slideInUp 0.8s ease-out forwards"
                   }}
                 >
-                  <div className={`relative overflow-hidden ${viewMode === "list" ? "w-80 flex-shrink-0" : ""}`}>
+                  <div 
+                    className={`relative overflow-hidden cursor-pointer ${viewMode === "list" ? "w-80 flex-shrink-0" : ""}`}
+                    onClick={() => setZoomedImage(property.images && property.images.length > 0 ? property.images[0] : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600")}
+                  >
                     <img 
                       src={property.images && property.images.length > 0 ? property.images[0] : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
                       alt={property.title}
@@ -512,6 +516,11 @@ export default function Properties() {
                       }`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+                        Clique para ampliar
+                      </div>
+                    </div>
                     
                     <div className="absolute top-4 left-4">
                       <Badge className={`${property.isForSale ? "bg-green-500 animate-pulse" : "bg-blue-500 animate-pulse"} text-white px-3 py-1 text-xs font-semibold shadow-lg`}>
@@ -618,6 +627,35 @@ export default function Properties() {
       </div>
 
       <Footer />
+
+      {/* Image Zoom Modal */}
+      {zoomedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
+          onClick={() => setZoomedImage(null)}
+        >
+          <div className="relative max-w-7xl max-h-full">
+            <img 
+              src={zoomedImage} 
+              alt="Imagem ampliada"
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+            <Button
+              size="sm"
+              className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white border-0"
+              onClick={(e) => {
+                e.stopPropagation();
+                setZoomedImage(null);
+              }}
+            >
+              <X size={16} />
+            </Button>
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black/50 px-3 py-1 rounded-full">
+              Clique para fechar
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

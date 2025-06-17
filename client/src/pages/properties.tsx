@@ -22,7 +22,8 @@ import {
   Filter,
   Grid3X3,
   List,
-  X
+  X,
+  Star
 } from "lucide-react";
 
 export default function Properties() {
@@ -39,11 +40,7 @@ export default function Properties() {
     const urlParams = new URLSearchParams(window.location.search);
     const transacao = urlParams.get('transacao');
     
-    if (transacao === 'venda') {
-      setFilter('sale');
-    } else if (transacao === 'aluguel') {
-      setFilter('rent');
-    }
+    // All properties are for sale only
   }, [location]);
 
   const handleNavigation = (path: string) => {

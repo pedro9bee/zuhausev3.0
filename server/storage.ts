@@ -88,7 +88,11 @@ export class MemStorage implements IStorage {
           "/attached_assets/Jardim Pindorama_1750105356165.jpg",
           "/attached_assets/DSC04248_1750193852671.jpg",
           "/attached_assets/DSC04028_1750193852672.jpg", 
-          "/attached_assets/DSC04231_1750193852672.jpg"
+          "/attached_assets/DSC04231_1750193852672.jpg",
+          "/attached_assets/DSC03470_1750194498784.jpg",
+          "/attached_assets/DSC03004_1750194498785.jpg",
+          "/attached_assets/DSC03066_1750194498785.jpg",
+          "/attached_assets/DSC03282_1750194498786.jpg"
         ],
         isForSale: true,
         isForRent: false,

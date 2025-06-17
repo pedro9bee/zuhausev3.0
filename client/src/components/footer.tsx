@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-6">
               <img 
@@ -35,17 +35,6 @@ export default function Footer() {
                 <FaWhatsapp size={20} />
               </a>
             </div>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Serviços</h3>
-            <ul className="space-y-3 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Compra de Imóveis</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Venda de Imóveis</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Locação</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Avaliação</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Consultoria</a></li>
-            </ul>
           </div>
           
           <div>

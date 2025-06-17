@@ -71,6 +71,7 @@ export class MemStorage implements IStorage {
         images: ["/attached_assets/GoldenGreen_1750105349165.jpg"],
         isForSale: true,
         isForRent: false,
+        isFeatured: true,
       },
       {
         title: "Jardim Pindorama",
@@ -86,6 +87,7 @@ export class MemStorage implements IStorage {
         images: ["/attached_assets/Jardim Pindorama_1750105356165.jpg"],
         isForSale: true,
         isForRent: false,
+        isFeatured: true,
       },
       {
         title: "Arouca",
@@ -101,6 +103,7 @@ export class MemStorage implements IStorage {
         images: ["/attached_assets/Arouca_1750105633487.jpg"],
         isForSale: true,
         isForRent: false,
+        isFeatured: true,
       },
       {
         title: "Jardim Itanhangá",

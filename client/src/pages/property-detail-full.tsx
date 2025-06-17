@@ -221,7 +221,10 @@ export default function PropertyDetailFull() {
                 ))
               ) : (
                 <CarouselItem>
-                  <div className="relative h-[70vh] cursor-pointer group" onClick={() => setZoomedImage("https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600")}>
+                  <div className="relative h-[70vh] cursor-pointer group" onClick={() => {
+                    setCurrentImageIndex(0);
+                    setIsImageGalleryOpen(true);
+                  }}>
                     <img 
                       src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600"
                       alt={property.title}

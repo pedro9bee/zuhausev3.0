@@ -10,10 +10,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { Upload, FileText, X } from "lucide-react";
 
 export default function ContactForm() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [interest, setInterest] = useState("");
 
   const form = useForm<InsertContact>({
     resolver: zodResolver(insertContactSchema),
@@ -25,6 +29,25 @@ export default function ContactForm() {
       message: "",
     },
   });
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      if (file.type === "application/pdf") {
+        setSelectedFile(file);
+      } else {
+        toast({
+          title: "Formato inválido",
+          description: "Por favor, selecione apenas arquivos PDF.",
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
+  const removeFile = () => {
+    setSelectedFile(null);
+  };
 
   const contactMutation = useMutation({
     mutationFn: async (data: InsertContact) => {
@@ -106,7 +129,7 @@ export default function ContactForm() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Interesse</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={(value) => { field.onChange(value); setInterest(value); }} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Selecione seu interesse" />
@@ -118,6 +141,7 @@ export default function ContactForm() {
                         <SelectItem value="alugar">Alugar Imóvel</SelectItem>
                         <SelectItem value="avaliacao">Avaliação</SelectItem>
                         <SelectItem value="consultoria">Consultoria</SelectItem>
+                        <SelectItem value="trabalhar">Trabalhar na Zuhause</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -143,6 +167,59 @@ export default function ContactForm() {
                 </FormItem>
               )}
             />
+
+            {/* File Upload for Career Applications */}
+            {interest === "trabalhar" && (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Currículo (PDF)
+                  </label>
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-zuhause-blue transition-colors">
+                    {!selectedFile ? (
+                      <div>
+                        <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                        <div className="text-sm text-gray-600 mb-2">
+                          <label htmlFor="file-upload" className="cursor-pointer text-zuhause-blue hover:underline">
+                            Clique para enviar
+                          </label>
+                          <span> ou arraste seu currículo aqui</span>
+                        </div>
+                        <p className="text-xs text-gray-500">PDF até 10MB</p>
+                        <input
+                          id="file-upload"
+                          type="file"
+                          accept=".pdf"
+                          onChange={handleFileChange}
+                          className="hidden"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                        <div className="flex items-center">
+                          <FileText className="h-8 w-8 text-red-500 mr-3" />
+                          <div className="text-left">
+                            <p className="text-sm font-medium text-gray-900">{selectedFile.name}</p>
+                            <p className="text-xs text-gray-500">
+                              {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={removeFile}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
             
             <Button 
               type="submit" 

@@ -71,46 +71,62 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="sobre" className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="sobre" className="bg-gradient-to-br from-gray-50 via-white to-blue-50 py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-zuhause-blue/5 via-transparent to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Sobre Nós</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">16 anos de experiência transformando sonhos em realidade no mercado imobiliário</p>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Sobre Nós</h2>
-              <div className="text-lg text-gray-600 space-y-4 mb-8">
-                <p>Há <strong className="text-zuhause-blue">16 anos no mercado imobiliário</strong>, atuando em grandes empresas, decidimos dar um passo maior. Agora, estamos prontos para oferecer uma experiência única e humana na compra e venda de imóveis.</p>
+            <div className="order-2 lg:order-1">
+              <div className="text-lg text-gray-600 space-y-6 mb-8">
+                <p className="leading-relaxed">Há <strong className="text-zuhause-blue">16 anos no mercado imobiliário</strong>, atuando em grandes empresas, decidimos dar um passo maior. Agora, estamos prontos para oferecer uma experiência única e humana na compra e venda de imóveis.</p>
                 
-                <p>Nossa trajetória começou com muita determinação e aprendizado. Após anos de dedicação no setor, resolvemos empreender e abrir nossa própria imobiliária, trazendo toda a experiência e paixão pelo que fazemos.</p>
+                <p className="leading-relaxed">Nossa trajetória começou com muita determinação e aprendizado. Após anos de dedicação no setor, resolvemos empreender e abrir nossa própria imobiliária, trazendo toda a experiência e paixão pelo que fazemos.</p>
                 
-                <p>Valorizamos nossos colaboradores, entendendo seus sonhos e objetivos. Juntos, trabalhamos para que cada venda seja uma realização, tanto para o cliente quanto para quem está do nosso lado.</p>
+                <p className="leading-relaxed">Valorizamos nossos colaboradores, entendendo seus sonhos e objetivos. Juntos, trabalhamos para que cada venda seja uma realização, tanto para o cliente quanto para quem está do nosso lado.</p>
               </div>
               
-              <div className="grid grid-cols-3 gap-8 mb-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-zuhause-blue mb-2">16+</div>
-                  <div className="text-sm text-gray-600">Anos de Experiência</div>
+              <div className="grid grid-cols-3 gap-8">
+                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="text-4xl font-bold text-zuhause-blue mb-2">16+</div>
+                  <div className="text-sm text-gray-600 font-medium">Anos de Experiência</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-zuhause-blue mb-2">500+</div>
-                  <div className="text-sm text-gray-600">Imóveis Vendidos</div>
+                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="text-4xl font-bold text-zuhause-blue mb-2">500+</div>
+                  <div className="text-sm text-gray-600 font-medium">Imóveis Vendidos</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-zuhause-blue mb-2">100%</div>
-                  <div className="text-sm text-gray-600">Clientes Satisfeitos</div>
+                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="text-4xl font-bold text-zuhause-blue mb-2">100%</div>
+                  <div className="text-sm text-gray-600 font-medium">Clientes Satisfeitos</div>
                 </div>
               </div>
-              
-              <Button className="bg-zuhause-gradient text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity">
-                Nossa História Completa
-              </Button>
             </div>
             
-            <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=900" 
-                alt="Equipe ZuHause em reunião" 
-                className="rounded-2xl shadow-2xl w-full" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zuhause-blue/20 to-transparent rounded-2xl"></div>
+            <div className="order-1 lg:order-2 relative">
+              {/* Video Container - Ready for video integration */}
+              <div className="relative bg-gradient-to-br from-zuhause-blue/10 to-purple-600/10 rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/50">
+                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                  {/* Placeholder for video - will be replaced with actual video */}
+                  <div className="text-center text-gray-500">
+                    <div className="w-20 h-20 bg-white/80 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
+                      <div className="w-0 h-0 border-l-[12px] border-l-zuhause-blue border-y-[8px] border-y-transparent ml-1"></div>
+                    </div>
+                    <p className="font-medium">Vídeo de Apresentação</p>
+                    <p className="text-sm opacity-75">Em breve</p>
+                  </div>
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute top-4 right-4 w-12 h-12 bg-zuhause-blue/20 rounded-full animate-pulse"></div>
+                  <div className="absolute bottom-4 left-4 w-8 h-8 bg-purple-500/20 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                </div>
+                
+                {/* Floating decorative elements */}
+                <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 animate-bounce"></div>
+                <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
+              </div>
             </div>
           </div>
         </div>
@@ -126,24 +142,32 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: HomeIcon, title: "Compra de Imóveis", desc: "Encontramos o imóvel perfeito para você, com todo suporte jurídico e financeiro necessário." },
-              { icon: Tag, title: "Venda de Imóveis", desc: "Vendemos seu imóvel pelo melhor preço, com estratégias de marketing personalizadas." },
-              { icon: Key, title: "Locação", desc: "Administramos aluguéis com transparência e eficiência para proprietários e inquilinos." },
-              { icon: Calculator, title: "Avaliação", desc: "Avaliamos seu imóvel com precisão, baseado em análise de mercado atualizada." },
-              { icon: Handshake, title: "Consultoria", desc: "Orientamos sobre investimentos imobiliários e oportunidades de mercado." },
-              { icon: ClipboardList, title: "Documentação", desc: "Cuidamos de toda documentação necessária com agilidade e segurança jurídica." },
+              { icon: HomeIcon, title: "Compra de Imóveis", desc: "Encontramos o imóvel perfeito para você, com todo suporte jurídico e financeiro necessário.", color: "from-blue-500 to-purple-600" },
+              { icon: Tag, title: "Venda de Imóveis", desc: "Vendemos seu imóvel pelo melhor preço, com estratégias de marketing personalizadas.", color: "from-green-500 to-blue-500" },
+              { icon: Key, title: "Locação", desc: "Administramos aluguéis com transparência e eficiência para proprietários e inquilinos.", color: "from-purple-500 to-pink-500" },
+              { icon: Calculator, title: "Avaliação", desc: "Avaliamos seu imóvel com precisão, baseado em análise de mercado atualizada.", color: "from-orange-500 to-red-500" },
+              { icon: Handshake, title: "Consultoria", desc: "Orientamos sobre investimentos imobiliários e oportunidades de mercado.", color: "from-teal-500 to-cyan-500" },
+              { icon: ClipboardList, title: "Documentação", desc: "Cuidamos de toda documentação necessária com agilidade e segurança jurídica.", color: "from-indigo-500 to-purple-500" },
             ].map((service, index) => (
-              <Card key={index} className="bg-white p-8 shadow-lg hover:shadow-xl transition-shadow">
-                <CardContent className="p-0">
-                  <div className="w-16 h-16 bg-zuhause-gradient rounded-2xl flex items-center justify-center mb-6">
-                    <service.icon className="text-white" size={24} />
+              <Card 
+                key={index} 
+                className="bg-white p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 hover:rotate-1 group cursor-pointer overflow-hidden relative"
+                style={{
+                  animationDelay: `${index * 150}ms`,
+                  animation: "slideInUp 0.8s ease-out forwards"
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500" 
+                     style={{background: `linear-gradient(135deg, var(--tw-gradient-stops))`}}></div>
+                <CardContent className="p-0 relative z-10">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg group-hover:shadow-xl`}>
+                    <service.icon className="text-white transform group-hover:scale-110 transition-transform duration-300" size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                  <p className="text-gray-600 mb-6">{service.desc}</p>
-                  <Button variant="link" className="text-zuhause-blue font-semibold p-0">
-                    Saiba mais →
-                  </Button>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-zuhause-blue transition-colors duration-300">{service.title}</h3>
+                  <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{service.desc}</p>
                 </CardContent>
+                <div className="absolute -bottom-2 -right-2 w-20 h-20 bg-gradient-to-br opacity-20 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-500" 
+                     style={{background: `linear-gradient(135deg, ${service.color.split(' ')[0].replace('from-', '')}, ${service.color.split(' ')[2].replace('to-', '')})`}}></div>
               </Card>
             ))}
           </div>
@@ -163,12 +187,12 @@ export default function Home() {
               { name: "Júnior Martins", role: "Corretor", experience: "12 anos de experiência", image: "/attached_assets/Junior Martins_1750110494934.png" },
               { name: "Pedro Lemos", role: "Diretor de AI", experience: "5 anos de experiência", image: "/attached_assets/kk_1750110195335.png" },
               { name: "Camila Souza", role: "Corretora", experience: "6 anos de experiência", image: "/attached_assets/Leonardo_Kino_XL_A_candid_shot_of_the_real_estate_agent_holdin_0_1750111077584.jpg" },
-              { name: "Ana Costa", role: "Coordenadora de Marketing Digital Imobiliário", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Bruno Almeida", role: "Analista de Precificação de Imóveis", experience: "4 anos de experiência", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Ricardo Santos", role: "Especialista em Crédito Imobiliário", experience: "7 anos de experiência", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Fernanda Silva", role: "Gestora de Relacionamento com o Cliente", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Marcelo Oliveira", role: "Coordenador de Parcerias Estratégicas", experience: "9 anos de experiência", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Juliana Ribeiro", role: "Curadora de Portfólio Residencial", experience: "6 anos de experiência", image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
-              { name: "Bruno Almeida", role: "Analista de Precificação de Imóveis", experience: "4 anos de experiência", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
+              { name: "Ana Costa", role: "Coordenadora de Marketing Digital Imobiliário", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Thiago Pereira", role: "Fotógrafo Imobiliário e Criador de Conteúdo", experience: "8 anos de experiência", image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Carlos Mendes", role: "Consultor de Investimentos Imobiliários", experience: "8 anos de experiência", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
             ].map((member, index) => (
@@ -191,7 +215,15 @@ export default function Home() {
           <div className="bg-zuhause-gradient rounded-2xl p-12 text-center text-white">
             <h3 className="text-3xl font-bold mb-6">Faça Parte da Nossa Equipe</h3>
             <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">Buscamos profissionais apaixonados pelo mercado imobiliário que compartilhem nossos valores de excelência e humanização.</p>
-            <Button className="bg-white text-zuhause-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-colors">
+            <Button 
+              className="bg-white text-zuhause-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-colors"
+              onClick={() => {
+                const element = document.getElementById('contato');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               Trabalhe Conosco
             </Button>
           </div>

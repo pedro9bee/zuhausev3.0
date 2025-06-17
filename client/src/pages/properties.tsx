@@ -6,7 +6,7 @@ import type { Property } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { 
   MapPin, 
@@ -31,10 +31,23 @@ export default function Properties() {
   const [sortBy, setSortBy] = useState<"price" | "size" | "date">("price");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
-  const [, setLocation] = useLocation();
+  const [location] = useLocation();
+  const [, setNavigationLocation] = useLocation();
+
+  // Parse URL parameters on component mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const transacao = urlParams.get('transacao');
+    
+    if (transacao === 'venda') {
+      setFilter('sale');
+    } else if (transacao === 'aluguel') {
+      setFilter('rent');
+    }
+  }, [location]);
 
   const handleNavigation = (path: string) => {
-    setLocation(path);
+    setNavigationLocation(path);
   };
 
   const { data: properties = [], isLoading } = useQuery<Property[]>({
@@ -66,8 +79,28 @@ export default function Properties() {
   };
 
   const filteredProperties = properties.filter(property => {
-    if (filter === "sale") return property.isForSale;
-    if (filter === "rent") return !property.isForSale;
+    const urlParams = new URLSearchParams(window.location.search);
+    const tipo = urlParams.get('tipo');
+    const local = urlParams.get('local');
+    const preco = urlParams.get('preco');
+    
+    // Filter by transaction type
+    if (filter === "sale" && !property.isForSale) return false;
+    if (filter === "rent" && property.isForSale) return false;
+    
+    // Filter by property type (if specified in URL)
+    if (tipo && !property.title.toLowerCase().includes(tipo.toLowerCase())) return false;
+    
+    // Filter by location (if specified in URL) 
+    if (local && !property.location.toLowerCase().includes(local.toLowerCase())) return false;
+    
+    // Filter by price (if specified in URL)
+    if (preco) {
+      const maxPrice = parseInt(preco);
+      const propertyPrice = parseFloat(property.price);
+      if (propertyPrice > maxPrice) return false;
+    }
+    
     return true;
   });
 

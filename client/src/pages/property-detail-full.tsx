@@ -35,7 +35,8 @@ export default function PropertyDetailFull() {
   const [, params] = useRoute("/propriedade/:id");
   const propertyId = params?.id ? parseInt(params.id) : null;
   const [isAudioPlaying, setIsAudioPlaying] = useState<{ [key: number]: boolean }>({});
-  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+  const [isImageGalleryOpen, setIsImageGalleryOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { data: properties = [], isLoading } = useQuery<Property[]>({
     queryKey: ["/api/properties"],
@@ -117,30 +118,46 @@ export default function PropertyDetailFull() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Image Zoom Modal */}
-      {zoomedImage && (
-        <div 
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
-          onClick={() => setZoomedImage(null)}
-        >
-          <div className="relative max-w-7xl max-h-full">
-            <img 
-              src={zoomedImage} 
-              alt="Imagem ampliada"
-              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-            />
+      {/* Image Gallery Modal */}
+      {isImageGalleryOpen && property && (
+        <div className="fixed inset-0 bg-black/95 z-[9999] flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center relative">
+            {/* Close Button */}
             <Button
               size="sm"
-              className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white border-0"
-              onClick={(e) => {
-                e.stopPropagation();
-                setZoomedImage(null);
-              }}
+              className="absolute top-6 right-6 bg-white/20 hover:bg-white/30 text-white border-0 z-10"
+              onClick={() => setIsImageGalleryOpen(false)}
             >
-              <X size={16} />
+              <X size={20} />
             </Button>
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black/50 px-3 py-1 rounded-full">
-              Clique para fechar
+            
+            {/* Image Counter */}
+            <div className="absolute top-6 left-6 text-white text-lg bg-black/50 px-4 py-2 rounded-full z-10">
+              {currentImageIndex + 1} / {property.images.length}
+            </div>
+            
+            {/* Carousel */}
+            <Carousel className="w-full h-full max-w-6xl">
+              <CarouselContent>
+                {property.images.map((image, index) => (
+                  <CarouselItem key={index}>
+                    <div className="flex items-center justify-center h-[90vh] p-4">
+                      <img 
+                        src={image} 
+                        alt={`${property.title} - ${index + 1}`}
+                        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-6 bg-white/20 hover:bg-white/30 text-white border-0" />
+              <CarouselNext className="right-6 bg-white/20 hover:bg-white/30 text-white border-0" />
+            </Carousel>
+            
+            {/* Instructions */}
+            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black/50 px-4 py-2 rounded-full">
+              Use as setas para navegar • ESC para fechar
             </div>
           </div>
         </div>
@@ -158,7 +175,10 @@ export default function PropertyDetailFull() {
                   <CarouselItem key={index}>
                     <div 
                       className="relative h-[70vh] cursor-pointer group" 
-                      onClick={() => setZoomedImage(image)}
+                      onClick={() => {
+                        setCurrentImageIndex(index);
+                        setIsImageGalleryOpen(true);
+                      }}
                     >
                       <img 
                         src={image} 
@@ -176,9 +196,7 @@ export default function PropertyDetailFull() {
                       <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                         <div className="max-w-7xl mx-auto">
                           <div className="flex flex-wrap items-center gap-4 mb-4">
-                            <Badge className={`${property.isForSale ? "bg-green-500" : "bg-blue-500"} text-white px-4 py-2 text-lg font-semibold shadow-lg`}>
-                              {property.isForSale ? "À Venda" : "Para Alugar"}
-                            </Badge>
+
                             {property.isFeatured && (
                               <Badge className="bg-amber-500 text-white px-4 py-2 text-lg font-semibold shadow-lg animate-pulse">
                                 ✨ Destaque
@@ -195,7 +213,6 @@ export default function PropertyDetailFull() {
                           
                           <div className="text-4xl font-bold drop-shadow-lg">
                             {formatPrice(property.price)}
-                            {!property.isForSale && <span className="text-xl ml-2">por mês</span>}
                           </div>
                         </div>
                       </div>

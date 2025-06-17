@@ -99,13 +99,17 @@ ZuHause is a full-stack real estate platform built for property management and c
 ## Changelog
 
 Recent Changes:
+- June 17, 2025: Implemented advanced image gallery popup with carousel functionality above all UI elements
+- June 17, 2025: Removed all rental references and "À Venda" tags since company focuses exclusively on sales
+- June 17, 2025: Updated search filters to remove rental options, enhanced property type options
+- June 17, 2025: Added premium property video to Properties page hero section
+- June 17, 2025: Fixed contact form positioning in property details to remain fixed while scrolling
+- June 17, 2025: Updated contact form styling from purple to blue theme throughout
+- June 17, 2025: Added new ZuHause logo to navigation header
+- June 17, 2025: Updated Jardim Pindorama property price to R$ 11.680.000
 - June 17, 2025: Enhanced hero section with new premium property image and button animations
 - June 17, 2025: Integrated search functionality between home page and properties page with URL parameters
-- June 17, 2025: Redesigned services section with creative card animations, removed "Saber mais" buttons
-- June 17, 2025: Prepared "Sobre Nós" section for video integration with creative placeholder design
-- June 17, 2025: Swapped team member positions (Bruno Almeida and Ana Costa)
 - June 17, 2025: Enhanced contact form with "Trabalhar na Zuhause" option and PDF file upload functionality
-- June 17, 2025: Implemented "Trabalhe Conosco" button navigation to contact form
 - June 14, 2025: Initial setup
 
 ## User Preferences

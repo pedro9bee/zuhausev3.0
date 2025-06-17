@@ -13,7 +13,7 @@ export default function Footer() {
               <img 
                 src={whiteLogo} 
                 alt="ZuHause Imóveis" 
-                className="h-12 w-auto"
+                className="h-18 w-auto"
               />
             </div>
             <p className="text-gray-300 text-lg mb-6 max-w-md">16 anos oferecendo uma experiência única e humana na compra e venda de imóveis no Rio de Janeiro.</p>

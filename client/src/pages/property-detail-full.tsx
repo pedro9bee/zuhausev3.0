@@ -91,13 +91,13 @@ export default function PropertyDetailFull() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <Navigation />
-        <div className="pt-32 pb-16">
+        <div className="pt-20 sm:pt-32 pb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="bg-white/80 backdrop-blur-sm p-12 rounded-2xl shadow-lg border border-white/50">
+            <div className="bg-white/80 backdrop-blur-sm p-6 sm:p-12 rounded-2xl shadow-lg border border-white/50">
               <div className="text-gray-400 mb-6">
-                <Eye size={64} className="mx-auto" />
+                <Eye size={48} className="mx-auto sm:w-16 sm:h-16" />
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">Imóvel não encontrado</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Imóvel não encontrado</h1>
               <p className="text-gray-600 mb-8">
                 O imóvel que você está procurando não foi encontrado ou pode ter sido removido.
               </p>
@@ -167,14 +167,14 @@ export default function PropertyDetailFull() {
       
       {/* Hero Section with Property Images */}
       <div className="pt-16">
-        <div className="relative h-[70vh] overflow-hidden">
+        <div className="relative h-[50vh] sm:h-[70vh] overflow-hidden">
           <Carousel className="w-full h-full">
             <CarouselContent>
               {property.images && property.images.length > 0 ? (
                 property.images.map((image, index) => (
                   <CarouselItem key={index}>
                     <div 
-                      className="relative h-[70vh] cursor-pointer group" 
+                      className="relative h-[50vh] sm:h-[70vh] cursor-pointer group" 
                       onClick={() => {
                         setCurrentImageIndex(index);
                         setIsImageGalleryOpen(true);
@@ -193,25 +193,24 @@ export default function PropertyDetailFull() {
                       </div>
                       
                       {/* Property Info Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 text-white">
                         <div className="max-w-7xl mx-auto">
-                          <div className="flex flex-wrap items-center gap-4 mb-4">
-
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-2 sm:mb-4">
                             {property.isFeatured && (
-                              <Badge className="bg-amber-500 text-white px-4 py-2 text-lg font-semibold shadow-lg animate-pulse">
+                              <Badge className="bg-amber-500 text-white px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-lg font-semibold shadow-lg animate-pulse">
                                 ✨ Destaque
                               </Badge>
                             )}
                           </div>
                           
-                          <h1 className="text-5xl font-bold mb-4 drop-shadow-lg">{property.title}</h1>
+                          <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 sm:mb-4 drop-shadow-lg">{property.title}</h1>
                           
-                          <div className="flex items-center text-xl mb-6 drop-shadow-lg">
-                            <MapPin size={24} className="mr-3 flex-shrink-0" />
-                            <span>{property.location}</span>
+                          <div className="flex items-center text-sm sm:text-xl mb-3 sm:mb-6 drop-shadow-lg">
+                            <MapPin size={16} className="mr-2 sm:mr-3 flex-shrink-0 sm:w-6 sm:h-6" />
+                            <span className="truncate">{property.location}</span>
                           </div>
                           
-                          <div className="text-4xl font-bold drop-shadow-lg">
+                          <div className="text-xl sm:text-2xl md:text-4xl font-bold drop-shadow-lg">
                             {formatPrice(property.price)}
                           </div>
                         </div>
@@ -221,7 +220,7 @@ export default function PropertyDetailFull() {
                 ))
               ) : (
                 <CarouselItem>
-                  <div className="relative h-[70vh] cursor-pointer group" onClick={() => {
+                  <div className="relative h-[50vh] sm:h-[70vh] cursor-pointer group" onClick={() => {
                     setCurrentImageIndex(0);
                     setIsImageGalleryOpen(true);
                   }}>
@@ -235,72 +234,72 @@ export default function PropertyDetailFull() {
                 </CarouselItem>
               )}
             </CarouselContent>
-            <CarouselPrevious className="left-8 w-12 h-12 bg-white/20 hover:bg-white/30 border-0 text-white" />
-            <CarouselNext className="right-8 w-12 h-12 bg-white/20 hover:bg-white/30 border-0 text-white" />
+            <CarouselPrevious className="left-4 sm:left-8 w-8 h-8 sm:w-12 sm:h-12 bg-white/20 hover:bg-white/30 border-0 text-white" />
+            <CarouselNext className="right-4 sm:right-8 w-8 h-8 sm:w-12 sm:h-12 bg-white/20 hover:bg-white/30 border-0 text-white" />
           </Carousel>
           
           {/* Back Button */}
-          <div className="absolute top-8 left-8 z-10">
+          <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-10">
             <Button 
               onClick={() => window.location.href = '/propriedades'}
-              className="bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-4 py-2"
+              className="bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm px-2 sm:px-4 py-2 text-sm sm:text-base"
             >
-              <ArrowLeft size={16} className="mr-2" />
-              Voltar
+              <ArrowLeft size={14} className="mr-1 sm:mr-2 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Voltar</span>
             </Button>
           </div>
           
           {/* Action Buttons */}
-          <div className="absolute top-8 right-8 z-10 flex gap-4">
-            <Button className="bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm w-12 h-12 p-0">
-              <Heart size={20} />
+          <div className="absolute top-4 right-4 sm:top-8 sm:right-8 z-10 flex gap-2 sm:gap-4">
+            <Button className="bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm w-8 h-8 sm:w-12 sm:h-12 p-0">
+              <Heart size={16} className="sm:w-5 sm:h-5" />
             </Button>
-            <Button className="bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm w-12 h-12 p-0">
-              <Share2 size={20} />
+            <Button className="bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm w-8 h-8 sm:w-12 sm:h-12 p-0">
+              <Share2 size={16} className="sm:w-5 sm:h-5" />
             </Button>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="py-16">
+      <div className="py-8 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-12">
             
             {/* Left Column - Property Details */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-6 sm:space-y-8">
               
               {/* Property Stats */}
-              <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-white/50">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Características do Imóvel</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
-                    <Bed size={32} className="mx-auto mb-3 text-zuhause-blue" />
-                    <div className="text-2xl font-bold text-gray-900">{property.bedrooms}</div>
-                    <div className="text-sm text-gray-600">Quartos</div>
+              <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-lg border border-white/50">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Características do Imóvel</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+                  <div className="text-center p-3 sm:p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
+                    <Bed size={24} className="mx-auto mb-2 sm:mb-3 text-zuhause-blue sm:w-8 sm:h-8" />
+                    <div className="text-lg sm:text-2xl font-bold text-gray-900">{property.bedrooms}</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Quartos</div>
                   </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
-                    <Bath size={32} className="mx-auto mb-3 text-zuhause-blue" />
-                    <div className="text-2xl font-bold text-gray-900">{property.bathrooms}</div>
-                    <div className="text-sm text-gray-600">Banheiros</div>
+                  <div className="text-center p-3 sm:p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
+                    <Bath size={24} className="mx-auto mb-2 sm:mb-3 text-zuhause-blue sm:w-8 sm:h-8" />
+                    <div className="text-lg sm:text-2xl font-bold text-gray-900">{property.bathrooms}</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Banheiros</div>
                   </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
-                    <Square size={32} className="mx-auto mb-3 text-zuhause-blue" />
-                    <div className="text-2xl font-bold text-gray-900">{property.area}</div>
-                    <div className="text-sm text-gray-600">m²</div>
+                  <div className="text-center p-3 sm:p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
+                    <Square size={24} className="mx-auto mb-2 sm:mb-3 text-zuhause-blue sm:w-8 sm:h-8" />
+                    <div className="text-lg sm:text-2xl font-bold text-gray-900">{property.area}</div>
+                    <div className="text-xs sm:text-sm text-gray-600">m²</div>
                   </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
-                    <TrendingUp size={32} className="mx-auto mb-3 text-zuhause-blue" />
-                    <div className="text-lg font-bold text-gray-900">{property.type}</div>
-                    <div className="text-sm text-gray-600">Tipo</div>
+                  <div className="text-center p-3 sm:p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl">
+                    <TrendingUp size={24} className="mx-auto mb-2 sm:mb-3 text-zuhause-blue sm:w-8 sm:h-8" />
+                    <div className="text-sm sm:text-lg font-bold text-gray-900">{property.type}</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Tipo</div>
                   </div>
                 </div>
               </div>
 
               {/* Description */}
-              <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-white/50">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Descrição Completa</h2>
-                <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+              <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-8 rounded-2xl shadow-lg border border-white/50">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Descrição Completa</h2>
+                <div className="prose prose-sm sm:prose-lg max-w-none text-gray-700 leading-relaxed">
                   {property.description.split('\n').map((paragraph, index) => (
                     <p key={index} className="mb-4">{paragraph}</p>
                   ))}
@@ -310,45 +309,45 @@ export default function PropertyDetailFull() {
 
 
               {/* AI Decoration Section */}
-              <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-2xl border border-purple-200 shadow-lg">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-4">
-                    <Wand2 className="text-white" size={24} />
+              <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-4 sm:p-8 rounded-2xl border border-purple-200 shadow-lg">
+                <div className="flex items-center mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-3 sm:mr-4">
+                    <Wand2 className="text-white" size={20} />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900">Casa Decorada com IA</h2>
-                    <p className="text-gray-600">Visualize como ficaria mobiliada</p>
+                    <h2 className="text-lg sm:text-2xl font-bold text-gray-900">Casa Decorada com IA</h2>
+                    <p className="text-sm sm:text-base text-gray-600">Visualize como ficaria mobiliada</p>
                   </div>
                 </div>
                 
-                <p className="text-gray-700 mb-8 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-700 mb-6 sm:mb-8 leading-relaxed">
                   Veja como este imóvel ficaria totalmente decorado e mobiliado usando nossa tecnologia de Inteligência Artificial. 
                   Simulação completa de uma casa pronta para morar com decoração moderna e funcional.
                 </p>
                 
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  <div className="bg-white p-4 rounded-xl shadow-sm border">
-                    <div className="flex items-center mb-3">
-                      <Sparkles size={16} className="text-purple-500 mr-2" />
-                      <span className="font-medium text-gray-900">Sala de Estar</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                  <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border">
+                    <div className="flex items-center mb-2 sm:mb-3">
+                      <Sparkles size={14} className="text-purple-500 mr-2 sm:w-4 sm:h-4" />
+                      <span className="text-sm sm:text-base font-medium text-gray-900">Sala de Estar</span>
                     </div>
-                    <div className="text-sm text-gray-600">Mobília completa</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Mobília completa</div>
                   </div>
-                  <div className="bg-white p-4 rounded-xl shadow-sm border">
-                    <div className="flex items-center mb-3">
-                      <Sparkles size={16} className="text-purple-500 mr-2" />
-                      <span className="font-medium text-gray-900">Quartos</span>
+                  <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border">
+                    <div className="flex items-center mb-2 sm:mb-3">
+                      <Sparkles size={14} className="text-purple-500 mr-2 sm:w-4 sm:h-4" />
+                      <span className="text-sm sm:text-base font-medium text-gray-900">Quartos</span>
                     </div>
-                    <div className="text-sm text-gray-600">Camas e decoração</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Camas e decoração</div>
                   </div>
-                  <div className="bg-white p-4 rounded-xl shadow-sm border">
-                    <div className="flex items-center mb-3">
-                      <Sparkles size={16} className="text-purple-500 mr-2" />
-                      <span className="font-medium text-gray-900">Cozinha</span>
+                  <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border">
+                    <div className="flex items-center mb-2 sm:mb-3">
+                      <Sparkles size={14} className="text-purple-500 mr-2 sm:w-4 sm:h-4" />
+                      <span className="text-sm sm:text-base font-medium text-gray-900">Cozinha</span>
                     </div>
-                    <div className="text-sm text-gray-600">Eletrodomésticos</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Eletrodomésticos</div>
                   </div>
-                  <div className="bg-white p-4 rounded-xl shadow-sm border">
+                  <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border">
                     <div className="flex items-center mb-3">
                       <Sparkles size={16} className="text-purple-500 mr-2" />
                       <span className="font-medium text-gray-900">Banheiros</span>

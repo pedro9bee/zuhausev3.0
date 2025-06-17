@@ -119,6 +119,7 @@ export class MemStorage implements IStorage {
         images: ["/attached_assets/Jardim Itanhangá_1750105882168.jpg"],
         isForSale: true,
         isForRent: false,
+        isFeatured: true,
       },
       {
         title: "Alphaville 2",
@@ -134,6 +135,7 @@ export class MemStorage implements IStorage {
         images: ["/attached_assets/Alphaville 2_1750107264406.jpg"],
         isForSale: true,
         isForRent: false,
+        isFeatured: true,
       },
       {
         title: "Del Lago",
@@ -149,6 +151,7 @@ export class MemStorage implements IStorage {
         images: ["/attached_assets/Del Lago_1750107985029.jpg"],
         isForSale: true,
         isForRent: false,
+        isFeatured: true,
       },
     ];
 
@@ -291,7 +294,8 @@ export class MemStorage implements IStorage {
       features: insertProperty.features || [],
       isForSale: insertProperty.isForSale ?? true,
       isForRent: insertProperty.isForRent ?? false,
-      rentPrice: insertProperty.rentPrice || null
+      rentPrice: insertProperty.rentPrice || null,
+      isFeatured: insertProperty.isFeatured ?? false
     };
     this.properties.set(id, property);
     return property;

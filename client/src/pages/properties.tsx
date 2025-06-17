@@ -339,14 +339,54 @@ export default function Properties() {
               </Button>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl">
-              <div className="flex items-center mb-2">
-                <Award size={16} className="text-amber-600 mr-2" />
-                <span className="font-semibold text-amber-800">Destaque</span>
+            {property.isFeatured && (
+              <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl">
+                <div className="flex items-center mb-2">
+                  <Award size={16} className="text-amber-600 mr-2" />
+                  <span className="font-semibold text-amber-800">Destaque</span>
+                </div>
+                <p className="text-amber-700 text-sm">
+                  Este imóvel faz parte da nossa seleção premium com localização privilegiada.
+                </p>
               </div>
-              <p className="text-amber-700 text-sm">
-                Este imóvel faz parte da nossa seleção premium com localização privilegiada.
+            )}
+
+            {/* Audio Narration Section */}
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 p-4 rounded-xl">
+              <div className="flex items-center mb-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-3">
+                  <Volume2 className="text-white" size={20} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900">Narração do Imóvel</h3>
+                  <p className="text-sm text-gray-600">Ouça a descrição completa</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-700 mb-4 text-sm leading-relaxed">
+                Ouça nossa narração exclusiva com todos os detalhes e características especiais deste imóvel premium.
               </p>
+              
+              <Button 
+                onClick={() => toggleAudio(property.id)}
+                className={`w-full transition-all duration-200 ${
+                  isAudioPlaying[property.id] 
+                    ? 'bg-red-500 hover:bg-red-600 text-white' 
+                    : 'bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white'
+                }`}
+              >
+                {isAudioPlaying[property.id] ? (
+                  <>
+                    <Pause size={16} className="mr-2" />
+                    Pausar Narração
+                  </>
+                ) : (
+                  <>
+                    <Play size={16} className="mr-2" />
+                    Reproduzir Narração
+                  </>
+                )}
+              </Button>
             </div>
           </div>
         </div>

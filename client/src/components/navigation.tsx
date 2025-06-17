@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import whiteLogo from "@assets/white_logo_transparent_background_1749928120484.png";
@@ -8,6 +8,7 @@ import darkLogo from "@assets/watermark_logo_transparent_background_174992812048
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,10 +19,26 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavigation = (target: string) => {
+    if (target.startsWith('#')) {
+      // Section navigation - go to home page first if not already there
+      if (location !== '/') {
+        setLocation('/');
+        setTimeout(() => {
+          const element = document.getElementById(target.substring(1));
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        const element = document.getElementById(target.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else {
+      // Page navigation
+      setLocation(target);
     }
     setIsMobileMenuOpen(false);
   };

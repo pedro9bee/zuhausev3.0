@@ -84,7 +84,12 @@ export class MemStorage implements IStorage {
         type: "Casa",
         status: "available",
         features: ["Piscina privativa", "Área gourmet", "Sistema de automação", "Paisagismo Burle Marx", "Arquitetura assinada", "Segurança 24h", "Condomínio fechado", "Ar condicionado"],
-        images: ["/attached_assets/Jardim Pindorama_1750105356165.jpg"],
+        images: [
+          "/attached_assets/Jardim Pindorama_1750105356165.jpg",
+          "/attached_assets/DSC04248_1750193852671.jpg",
+          "/attached_assets/DSC04028_1750193852672.jpg", 
+          "/attached_assets/DSC04231_1750193852672.jpg"
+        ],
         isForSale: true,
         isForRent: false,
         isFeatured: true,

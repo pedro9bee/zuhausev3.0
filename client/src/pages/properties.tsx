@@ -39,6 +39,7 @@ export default function Properties() {
   const [filter, setFilter] = useState<"all" | "sale" | "rent">("all");
   const [sortBy, setSortBy] = useState<"price" | "size" | "date">("price");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
   const { data: properties = [], isLoading } = useQuery<Property[]>({
     queryKey: ["/api/properties"],
@@ -95,25 +96,35 @@ export default function Properties() {
               {property.images && property.images.length > 0 ? (
                 property.images.map((image, index) => (
                   <CarouselItem key={index}>
-                    <div className="relative h-72 md:h-96">
+                    <div className="relative h-72 md:h-96 cursor-pointer group" onClick={() => setZoomedImage(image)}>
                       <img 
                         src={image} 
                         alt={`${property.title} - ${index + 1}`}
-                        className="w-full h-full object-cover rounded-xl shadow-lg"
+                        className="w-full h-full object-cover rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-xl"></div>
+                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center justify-center">
+                        <div className="text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+                          Clique para ampliar
+                        </div>
+                      </div>
                     </div>
                   </CarouselItem>
                 ))
               ) : (
                 <CarouselItem>
-                  <div className="relative h-72 md:h-96">
+                  <div className="relative h-72 md:h-96 cursor-pointer group" onClick={() => setZoomedImage("https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600")}>
                     <img 
                       src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600"
                       alt={property.title}
-                      className="w-full h-full object-cover rounded-xl shadow-lg"
+                      className="w-full h-full object-cover rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-xl"></div>
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center justify-center">
+                      <div className="text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+                        Clique para ampliar
+                      </div>
+                    </div>
                   </div>
                 </CarouselItem>
               )}
@@ -299,14 +310,14 @@ export default function Properties() {
               <div className="space-y-3">
                 <Button className="w-full bg-white text-zuhause-blue hover:bg-gray-50 transition-colors">
                   <Phone size={16} className="mr-2" />
-                  (21) 99999-9999
+                  (21) 97515-5741
                 </Button>
                 <Button 
-                  className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors"
+                  className="w-full bg-green-500 hover:bg-green-600 text-white transition-colors shadow-lg"
                   onClick={() => window.open('https://wa.me/5521975155741', '_blank')}
                 >
                   <MessageCircle size={16} className="mr-2" />
-                  WhatsApp
+                  Chamar no WhatsApp
                 </Button>
                 <Button className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors">
                   <Mail size={16} className="mr-2" />
@@ -363,11 +374,11 @@ export default function Properties() {
               <div className="flex items-center justify-center gap-6 text-sm text-gray-500">
                 <div className="flex items-center gap-2">
                   <TrendingUp size={16} />
-                  <span>Portfólio Premium</span>
+                  <span>Imóveis Exclusivos</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Award size={16} />
-                  <span>Seleção Premium</span>
+                  <span>Localização Privilegiada</span>
                 </div>
               </div>
             </div>
@@ -525,20 +536,7 @@ export default function Properties() {
                       </Button>
                     </div>
                     
-                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button 
-                            className="w-full bg-zuhause-gradient hover:opacity-90 transition-all duration-300 shadow-lg"
-                            onClick={() => setSelectedProperty(property)}
-                          >
-                            <Eye size={16} className="mr-2" />
-                            Ver Todos os Detalhes
-                          </Button>
-                        </DialogTrigger>
-                        {selectedProperty && <PropertyDetailModal property={selectedProperty} />}
-                      </Dialog>
-                    </div>
+
                   </div>
                   
                   <CardContent className={`${viewMode === "list" ? "flex-1" : ""} p-6`}>
@@ -581,7 +579,7 @@ export default function Properties() {
                             variant="outline"
                             size="sm"
                             onClick={() => setSelectedProperty(property)}
-                            className="hover:bg-zuhause-blue hover:text-white transition-all duration-300 hover:scale-105"
+                            className="bg-gradient-to-r from-zuhause-blue to-purple-600 text-white border-0 hover:from-purple-600 hover:to-zuhause-blue hover:scale-110 hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none"
                           >
                             <Eye size={14} className="mr-1" />
                             Detalhes

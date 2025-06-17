@@ -27,7 +27,7 @@ import {
 
 export default function Properties() {
   const [isAudioPlaying, setIsAudioPlaying] = useState<{ [key: number]: boolean }>({});
-  const [filter, setFilter] = useState<"all" | "sale" | "rent">("all");
+  const [filter, setFilter] = useState<"all" | "featured">("all");
   const [sortBy, setSortBy] = useState<"price" | "size" | "date">("price");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);

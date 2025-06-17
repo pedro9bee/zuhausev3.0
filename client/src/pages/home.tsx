@@ -71,62 +71,82 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="sobre" className="bg-gradient-to-br from-gray-50 via-white to-blue-50 py-20 relative overflow-hidden">
+      <section id="sobre" className="bg-gradient-to-br from-gray-50 via-white to-blue-50 py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-zuhause-blue/5 via-transparent to-transparent"></div>
+        
+        {/* Decorative background elements */}
+        <div className="absolute top-20 left-10 w-32 h-32 bg-zuhause-blue/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl"></div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Sobre Nós</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">16 anos de experiência transformando sonhos em realidade no mercado imobiliário</p>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-8">Sobre Nós</h2>
+            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              16 anos de experiência transformando sonhos em realidade no mercado imobiliário brasileiro
+            </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="text-lg text-gray-600 space-y-6 mb-8">
-                <p className="leading-relaxed">Há <strong className="text-zuhause-blue">16 anos no mercado imobiliário</strong>, atuando em grandes empresas, decidimos dar um passo maior. Agora, estamos prontos para oferecer uma experiência única e humana na compra e venda de imóveis.</p>
-                
-                <p className="leading-relaxed">Nossa trajetória começou com muita determinação e aprendizado. Após anos de dedicação no setor, resolvemos empreender e abrir nossa própria imobiliária, trazendo toda a experiência e paixão pelo que fazemos.</p>
-                
-                <p className="leading-relaxed">Valorizamos nossos colaboradores, entendendo seus sonhos e objetivos. Juntos, trabalhamos para que cada venda seja uma realização, tanto para o cliente quanto para quem está do nosso lado.</p>
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 lg:gap-16 items-start">
+            {/* Content Column */}
+            <div className="xl:col-span-7 space-y-8">
+              <div className="prose prose-lg max-w-none">
+                <div className="text-lg text-gray-700 space-y-6 leading-relaxed">
+                  <p className="text-xl leading-relaxed">
+                    Há <strong className="text-zuhause-blue font-bold">16 anos no mercado imobiliário</strong>, atuando em grandes empresas, decidimos dar um passo maior. Agora, estamos prontos para oferecer uma experiência única e humana na compra e venda de imóveis.
+                  </p>
+                  
+                  <p className="leading-relaxed">
+                    Nossa trajetória começou com muita determinação e aprendizado. Após anos de dedicação no setor, resolvemos empreender e abrir nossa própria imobiliária, trazendo toda a experiência e paixão pelo que fazemos.
+                  </p>
+                  
+                  <p className="leading-relaxed">
+                    Valorizamos nossos colaboradores, entendendo seus sonhos e objetivos. Juntos, trabalhamos para que cada venda seja uma realização, tanto para o cliente quanto para quem está do nosso lado.
+                  </p>
+                </div>
               </div>
               
-              <div className="grid grid-cols-3 gap-8">
-                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                  <div className="text-4xl font-bold text-zuhause-blue mb-2">16+</div>
-                  <div className="text-sm text-gray-600 font-medium">Anos de Experiência</div>
+              {/* Statistics Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
+                <div className="text-center p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
+                  <div className="text-5xl font-bold text-zuhause-blue mb-3 group-hover:scale-110 transition-transform duration-300">16+</div>
+                  <div className="text-sm text-gray-600 font-semibold uppercase tracking-wide">Anos de Experiência</div>
                 </div>
-                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                  <div className="text-4xl font-bold text-zuhause-blue mb-2">500+</div>
-                  <div className="text-sm text-gray-600 font-medium">Imóveis Vendidos</div>
+                <div className="text-center p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
+                  <div className="text-5xl font-bold text-zuhause-blue mb-3 group-hover:scale-110 transition-transform duration-300">500+</div>
+                  <div className="text-sm text-gray-600 font-semibold uppercase tracking-wide">Imóveis Vendidos</div>
                 </div>
-                <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                  <div className="text-4xl font-bold text-zuhause-blue mb-2">100%</div>
-                  <div className="text-sm text-gray-600 font-medium">Clientes Satisfeitos</div>
+                <div className="text-center p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
+                  <div className="text-5xl font-bold text-zuhause-blue mb-3 group-hover:scale-110 transition-transform duration-300">100%</div>
+                  <div className="text-sm text-gray-600 font-semibold uppercase tracking-wide">Clientes Satisfeitos</div>
                 </div>
               </div>
             </div>
             
-            <div className="order-1 lg:order-2 relative">
-              {/* Video Container - Ready for video integration with vertical aspect ratio */}
-              <div className="relative bg-gradient-to-br from-zuhause-blue/10 to-purple-600/10 rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/50">
-                <div className="aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                  {/* Placeholder for video - will be replaced with actual video */}
-                  <div className="text-center text-gray-500">
-                    <div className="w-20 h-20 bg-white/80 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
-                      <div className="w-0 h-0 border-l-[12px] border-l-zuhause-blue border-y-[8px] border-y-transparent ml-1"></div>
+            {/* Video Column */}
+            <div className="xl:col-span-5 flex justify-center">
+              <div className="relative max-w-sm w-full">
+                {/* Video Container - Ready for video integration with vertical aspect ratio */}
+                <div className="relative bg-gradient-to-br from-zuhause-blue/10 to-purple-600/10 rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/50">
+                  <div className="aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                    {/* Placeholder for video - will be replaced with actual video */}
+                    <div className="text-center text-gray-500">
+                      <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div className="w-0 h-0 border-l-[12px] border-l-zuhause-blue border-y-[8px] border-y-transparent ml-1"></div>
+                      </div>
+                      <p className="font-semibold text-gray-600">Vídeo de Apresentação</p>
+                      <p className="text-sm opacity-75 mt-1">Formato vertical</p>
+                      <p className="text-xs opacity-50 mt-2">9:16 - Mobile First</p>
                     </div>
-                    <p className="font-medium">Vídeo de Apresentação</p>
-                    <p className="text-sm opacity-75">Formato vertical</p>
-                    <p className="text-xs opacity-50 mt-2">9:16 - Mobile First</p>
+                    
+                    {/* Decorative elements */}
+                    <div className="absolute top-4 right-4 w-12 h-12 bg-zuhause-blue/20 rounded-full animate-pulse"></div>
+                    <div className="absolute bottom-4 left-4 w-8 h-8 bg-purple-500/20 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
                   </div>
                   
-                  {/* Decorative elements */}
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-zuhause-blue/20 rounded-full animate-pulse"></div>
-                  <div className="absolute bottom-4 left-4 w-8 h-8 bg-purple-500/20 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                  {/* Floating decorative elements */}
+                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 animate-bounce"></div>
+                  <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
                 </div>
-                
-                {/* Floating decorative elements */}
-                <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 animate-bounce"></div>
-                <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
               </div>
             </div>
           </div>

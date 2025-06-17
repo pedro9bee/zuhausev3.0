@@ -207,44 +207,7 @@ export default function Properties() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl border">
-              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <Volume2 className="mr-2 text-zuhause-blue" size={24} />
-                Narração da Descrição
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Ouça uma descrição detalhada deste imóvel com nossa tecnologia de áudio imersivo.
-              </p>
-              <Button
-                onClick={() => toggleAudio(property.id)}
-                disabled={isAudioPlaying[property.id]}
-                className={`w-full ${isAudioPlaying[property.id] 
-                  ? 'bg-gray-400 cursor-not-allowed' 
-                  : 'bg-zuhause-gradient hover:opacity-90'
-                } transition-all duration-300 py-3`}
-              >
-                {isAudioPlaying[property.id] ? (
-                  <>
-                    <div className="animate-pulse flex items-center">
-                      <div className="flex space-x-1 mr-3">
-                        <div className="w-1 h-4 bg-white rounded animate-bounce"></div>
-                        <div className="w-1 h-4 bg-white rounded animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                        <div className="w-1 h-4 bg-white rounded animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                      </div>
-                      Reproduzindo...
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <Play size={18} className="mr-2" />
-                    Ouvir Descrição do Imóvel
-                  </>
-                )}
-              </Button>
-              <p className="text-xs text-gray-500 mt-2 text-center">
-                Funcionalidade de áudio personalizada em desenvolvimento
-              </p>
-            </div>
+
 
             {/* AI Decoration Section */}
             <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl border border-purple-200 shadow-sm">
@@ -296,32 +259,49 @@ export default function Properties() {
               
               <Button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all duration-300 shadow-lg">
                 <Wand2 size={16} className="mr-2" />
-                Ver Casa Decorada com IA
+                Ver Casa Decorada com IA (Em breve)
               </Button>
             </div>
           </div>
 
           {/* Contact Sidebar */}
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-zuhause-blue to-purple-600 p-6 rounded-xl text-white shadow-lg">
-              <h3 className="text-xl font-bold mb-4">Entre em Contato</h3>
-              <p className="text-white/90 mb-6 text-sm">
-                Interessado neste imóvel? Nossa equipe está pronta para ajudar!
-              </p>
+            <div className="bg-gradient-to-br from-zuhause-blue via-purple-600 to-blue-700 p-8 rounded-2xl text-white shadow-2xl border border-white/10 backdrop-blur-sm">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
+                  <Phone size={24} className="text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Entre em Contato</h3>
+                <p className="text-white/90 text-sm leading-relaxed">
+                  Interessado neste imóvel? Nossa equipe especializada está pronta para ajudar você a realizar o sonho da casa própria!
+                </p>
+              </div>
               
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <Button 
-                  className="w-full bg-green-500 hover:bg-green-600 text-white transition-colors shadow-lg"
+                  className="w-full bg-green-500 hover:bg-green-600 text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 border-0 py-4 text-lg font-semibold rounded-xl"
                   onClick={() => window.open('https://wa.me/5521975155741', '_blank')}
                 >
-                  <FaWhatsapp size={16} className="mr-2" />
-                  Chamar no WhatsApp
+                  <FaWhatsapp size={20} className="mr-3" />
+                  <div className="text-left">
+                    <div>Chamar no WhatsApp</div>
+                    <div className="text-xs opacity-90">Resposta rápida garantida</div>
+                  </div>
                 </Button>
-                <Button className="w-full bg-white text-zuhause-blue hover:bg-gray-50 transition-colors">
-                  <Phone size={16} className="mr-2" />
-                  (21) 97515-5741
-                </Button>
-                <Button className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors">
+                
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                  <div className="flex items-center justify-center space-x-3">
+                    <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                      <Phone size={16} className="text-white" />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-lg font-semibold">(21) 97515-5741</div>
+                      <div className="text-xs text-white/80">Ligue agora mesmo</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <Button className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 backdrop-blur-sm py-3 rounded-xl">
                   <Mail size={16} className="mr-2" />
                   Enviar Email
                 </Button>
@@ -331,11 +311,11 @@ export default function Properties() {
             <div className="bg-white p-6 rounded-xl border shadow-sm">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Agendar Visita</h3>
               <p className="text-gray-600 text-sm mb-4">
-                Schedule uma visita personalizada para conhecer este imóvel.
+                Agendar uma visita personalizada para conhecer este imóvel.
               </p>
               <Button className="w-full bg-zuhause-gradient hover:opacity-90 transition-opacity">
                 <Calendar size={16} className="mr-2" />
-                Agendar Visita
+                Agendar Visita (Em breve)
               </Button>
             </div>
 
@@ -383,7 +363,7 @@ export default function Properties() {
                 ) : (
                   <>
                     <Play size={16} className="mr-2" />
-                    Reproduzir Narração
+                    Reproduzir Narração (Em breve)
                   </>
                 )}
               </Button>
@@ -629,7 +609,7 @@ export default function Properties() {
                             variant="outline"
                             size="sm"
                             onClick={() => setSelectedProperty(property)}
-                            className="bg-gradient-to-r from-zuhause-blue to-purple-600 text-white border-0 hover:from-purple-600 hover:to-zuhause-blue hover:scale-110 hover:shadow-xl transition-all duration-300"
+                            className="bg-gradient-to-r from-zuhause-blue to-purple-600 text-white border-0 hover:from-purple-600 hover:to-zuhause-blue hover:scale-105 hover:shadow-lg transition-all duration-200 opacity-100"
                           >
                             <Eye size={14} className="mr-1" />
                             Detalhes

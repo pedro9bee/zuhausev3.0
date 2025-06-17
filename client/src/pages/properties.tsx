@@ -14,17 +14,11 @@ import {
   Bath, 
   Square, 
   Heart, 
-  Share2, 
   Play, 
   Pause, 
-  Volume2,
   Eye,
-  Calendar,
   TrendingUp,
   Award,
-  Phone,
-  Mail,
-  MessageCircle,
   Filter,
   Grid3X3,
   List,
@@ -289,7 +283,10 @@ export default function Properties() {
                       </Button>
                       <Button 
                         size="sm" 
-                        onClick={() => toggleAudio(property.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleAudio(property.id);
+                        }}
                         className={`backdrop-blur-sm shadow-lg transition-all duration-200 ${
                           isAudioPlaying[property.id] 
                             ? 'bg-zuhause-blue text-white animate-pulse' 

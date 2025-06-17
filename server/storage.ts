@@ -109,7 +109,13 @@ export class MemStorage implements IStorage {
         type: "Mansão",
         status: "available",
         features: ["Piscina com hidromassagem", "Sauna", "Elevador", "Adega", "Home office", "Cinema", "Academia", "10 vagas", "Terraço privativo", "Lounge gourmet"],
-        images: ["/attached_assets/Arouca_1750105633487.jpg"],
+        images: [
+          "/attached_assets/Arouca_1750105633487.jpg",
+          "/attached_assets/JM-15_1750195035304.jpg",
+          "/attached_assets/JM-19_1750195035305.jpg",
+          "/attached_assets/JM-18_1750195035307.jpg",
+          "/attached_assets/JM-21_1750195035308.jpg"
+        ],
         isForSale: true,
         isForRent: false,
         isFeatured: true,

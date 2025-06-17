@@ -141,7 +141,12 @@ export class MemStorage implements IStorage {
         type: "Casa",
         status: "available",
         features: ["Jardim de Inverno", "2 closets na suíte master", "Piscina", "Sauna", "Hidromassagem", "Cascata", "Churrasqueira Chauffage", "Subsolo 6 carros", "Elevador", "Ambientes envidraçados"],
-        images: ["/attached_assets/Alphaville 2_1750107264406.jpg"],
+        images: [
+          "/attached_assets/Alphaville 2_1750107264406.jpg",
+          "/attached_assets/DSC04595_1750194879000.jpg",
+          "/attached_assets/DJI_0068_1750194879002.jpg",
+          "/attached_assets/DSC04427_1750194879004.jpg"
+        ],
         isForSale: true,
         isForRent: false,
         isFeatured: true,

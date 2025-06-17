@@ -381,16 +381,7 @@ export default function PropertyDetailFull() {
                   </div>
                 
                 <div className="space-y-6">
-                  <Button 
-                    className="w-full bg-green-500 hover:bg-green-600 text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 border-0 py-6 text-lg font-semibold rounded-xl"
-                    onClick={() => window.open('https://wa.me/5521975155741', '_blank')}
-                  >
-                    <FaWhatsapp size={24} className="mr-4" />
-                    <div className="text-left">
-                      <div>Chamar no WhatsApp</div>
-                      <div className="text-sm opacity-90">Resposta rápida garantida</div>
-                    </div>
-                  </Button>
+
                   
                   <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                     <div className="flex items-center justify-center space-x-4">

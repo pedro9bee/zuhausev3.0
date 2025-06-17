@@ -52,7 +52,7 @@ export default function Navigation() {
             <img 
               src={logo} 
               alt="ZuHause Imóveis" 
-              className="h-16 w-auto"
+              className="h-24 w-auto"
             />
           </Link>
           

@@ -33,9 +33,9 @@ export default function Home() {
       {/* Featured Properties */}
       <section id="propriedades" className="bg-section-gradient py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Propriedades em Destaque</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Selecionamos cuidadosamente os melhores imóveis para você</p>
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">Propriedades em Destaque</h2>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">Selecionamos cuidadosamente os melhores imóveis para você</p>
           </div>
           
           {propertiesLoading ? (
@@ -52,16 +52,16 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {featuredProperties.map((property) => (
                 <PropertyCard key={property.id} property={property} />
               ))}
             </div>
           )}
           
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 sm:mt-12">
             <Link href="/propriedades">
-              <Button className="bg-zuhause-gradient text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg">
+              <Button className="bg-zuhause-gradient text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:opacity-90 transition-opacity shadow-lg">
                 Ver Todos os Imóveis
               </Button>
             </Link>
@@ -78,19 +78,19 @@ export default function Home() {
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-8">Sobre Nós</h2>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          <div className="text-center mb-12 sm:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 sm:mb-8">Sobre Nós</h2>
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
               16 anos de experiência transformando sonhos em realidade no mercado imobiliário brasileiro
             </p>
           </div>
           
-          <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-start">
             {/* Content Column */}
-            <div className="xl:col-span-7 space-y-8">
-              <div className="prose prose-lg max-w-none">
-                <div className="text-lg text-gray-700 space-y-6 leading-relaxed">
-                  <p className="text-xl leading-relaxed">
+            <div className="xl:col-span-7 space-y-6 sm:space-y-8">
+              <div className="prose prose-sm sm:prose-lg max-w-none">
+                <div className="text-base sm:text-lg text-gray-700 space-y-4 sm:space-y-6 leading-relaxed">
+                  <p className="text-lg sm:text-xl leading-relaxed">
                     Há <strong className="text-zuhause-blue font-bold">16 anos no mercado imobiliário</strong>, atuando em grandes empresas, decidimos dar um passo maior. Agora, estamos prontos para oferecer uma experiência única e humana na compra e venda de imóveis.
                   </p>
                   
@@ -105,27 +105,27 @@ export default function Home() {
               </div>
               
               {/* Statistics Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
-                <div className="text-center p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
-                  <div className="text-5xl font-bold text-zuhause-blue mb-3 group-hover:scale-110 transition-transform duration-300">16+</div>
-                  <div className="text-sm text-gray-600 font-semibold uppercase tracking-wide">Anos de Experiência</div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
+                <div className="text-center p-4 sm:p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
+                  <div className="text-3xl sm:text-5xl font-bold text-zuhause-blue mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">16+</div>
+                  <div className="text-xs sm:text-sm text-gray-600 font-semibold uppercase tracking-wide">Anos de Experiência</div>
                 </div>
-                <div className="text-center p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
-                  <div className="text-5xl font-bold text-zuhause-blue mb-3 group-hover:scale-110 transition-transform duration-300">500+</div>
-                  <div className="text-sm text-gray-600 font-semibold uppercase tracking-wide">Imóveis Vendidos</div>
+                <div className="text-center p-4 sm:p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
+                  <div className="text-3xl sm:text-5xl font-bold text-zuhause-blue mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">500+</div>
+                  <div className="text-xs sm:text-sm text-gray-600 font-semibold uppercase tracking-wide">Imóveis Vendidos</div>
                 </div>
-                <div className="text-center p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
-                  <div className="text-5xl font-bold text-zuhause-blue mb-3 group-hover:scale-110 transition-transform duration-300">100%</div>
-                  <div className="text-sm text-gray-600 font-semibold uppercase tracking-wide">Clientes Satisfeitos</div>
+                <div className="text-center p-4 sm:p-8 bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group border border-white/50">
+                  <div className="text-3xl sm:text-5xl font-bold text-zuhause-blue mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">100%</div>
+                  <div className="text-xs sm:text-sm text-gray-600 font-semibold uppercase tracking-wide">Clientes Satisfeitos</div>
                 </div>
               </div>
             </div>
             
             {/* Video Column */}
             <div className="xl:col-span-5 flex justify-center">
-              <div className="relative max-w-sm w-full">
+              <div className="relative max-w-xs sm:max-w-sm w-full">
                 {/* Video Container - Ready for video integration with vertical aspect ratio */}
-                <div className="relative bg-gradient-to-br from-zuhause-blue/10 to-purple-600/10 rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/50">
+                <div className="relative bg-gradient-to-br from-zuhause-blue/10 to-purple-600/10 rounded-3xl p-4 sm:p-8 shadow-2xl backdrop-blur-sm border border-white/50">
                   <div className="aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden">
                     <video 
                       className="w-full h-full object-contain"
@@ -138,8 +138,8 @@ export default function Home() {
                   </div>
                   
                   {/* Floating decorative elements */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 animate-bounce"></div>
-                  <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
+                  <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 w-12 h-12 sm:w-20 sm:h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 animate-bounce"></div>
+                  <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 w-10 h-10 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 animate-bounce" style={{animationDelay: '0.5s'}}></div>
                 </div>
               </div>
             </div>

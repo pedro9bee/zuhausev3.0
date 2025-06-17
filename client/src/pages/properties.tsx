@@ -6,9 +6,7 @@ import type { Property } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useState } from "react";
-import { FaWhatsapp } from "react-icons/fa";
 import { useLocation } from "wouter";
 import { 
   MapPin, 
@@ -30,13 +28,10 @@ import {
   Filter,
   Grid3X3,
   List,
-  Wand2,
-  Sparkles,
   X
 } from "lucide-react";
 
 export default function Properties() {
-  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState<{ [key: number]: boolean }>({});
   const [filter, setFilter] = useState<"all" | "sale" | "rent">("all");
   const [sortBy, setSortBy] = useState<"price" | "size" | "date">("price");
@@ -52,33 +47,12 @@ export default function Properties() {
     queryKey: ["/api/properties"],
   });
 
-  const filteredProperties = properties.filter(property => {
-    if (filter === "sale") return property.isForSale;
-    if (filter === "rent") return !property.isForSale;
-    return true;
-  });
-
-  const sortedProperties = [...filteredProperties].sort((a, b) => {
-    if (sortBy === "price") return parseFloat(a.price) - parseFloat(b.price);
-    if (sortBy === "size") return Number(a.area) - Number(b.area);
-    return 0;
-  });
-
-  const formatPrice = (price: string) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-      minimumFractionDigits: 0,
-    }).format(parseFloat(price));
-  };
-
   const toggleAudio = (propertyId: number) => {
     setIsAudioPlaying(prev => ({
       ...prev,
       [propertyId]: !prev[propertyId]
     }));
-    
-    // Simulate audio feedback
+
     setTimeout(() => {
       setIsAudioPlaying(prev => ({
         ...prev,
@@ -87,401 +61,158 @@ export default function Properties() {
     }, 3000);
   };
 
-  const PropertyDetailModal = ({ property }: { property: Property }) => (
-    <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
-      <DialogHeader>
-        <DialogTitle className="text-3xl font-bold bg-gradient-to-r from-zuhause-blue to-purple-600 bg-clip-text text-transparent">
-          {property.title}
-        </DialogTitle>
-      </DialogHeader>
-      
-      <div className="space-y-8">
-        {/* Property Images Carousel */}
-        <div className="relative">
-          <Carousel className="w-full">
-            <CarouselContent>
-              {property.images && property.images.length > 0 ? (
-                property.images.map((image, index) => (
-                  <CarouselItem key={index}>
-                    <div className="relative h-72 md:h-96 cursor-pointer group" onClick={() => setZoomedImage(image)}>
-                      <img 
-                        src={image} 
-                        alt={`${property.title} - ${index + 1}`}
-                        className="w-full h-full object-cover rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-xl"></div>
-                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center justify-center">
-                        <div className="text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
-                          Clique para ampliar
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                ))
-              ) : (
-                <CarouselItem>
-                  <div className="relative h-72 md:h-96 cursor-pointer group" onClick={() => setZoomedImage("https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600")}>
-                    <img 
-                      src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600"
-                      alt={property.title}
-                      className="w-full h-full object-cover rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-xl"></div>
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center justify-center">
-                      <div className="text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
-                        Clique para ampliar
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              )}
-            </CarouselContent>
-            <CarouselPrevious className="left-4" />
-            <CarouselNext className="right-4" />
-          </Carousel>
-          
-          <div className="absolute top-6 left-6">
-            <Badge className={`${property.isForSale ? "bg-green-500 hover:bg-green-600" : "bg-blue-500 hover:bg-blue-600"} text-white px-4 py-2 text-sm font-semibold shadow-lg`}>
-              {property.isForSale ? "À Venda" : "Para Alugar"}
-            </Badge>
-          </div>
-          
-          <div className="absolute top-6 right-6 flex gap-2">
-            <Button size="sm" className="bg-white/90 text-gray-700 hover:bg-white backdrop-blur-sm shadow-lg">
-              <Heart size={16} />
+  const formatPrice = (price: string) => {
+    const numPrice = parseFloat(price);
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(numPrice);
+  };
+
+  const filteredProperties = properties.filter(property => {
+    if (filter === "sale") return property.isForSale;
+    if (filter === "rent") return !property.isForSale;
+    return true;
+  });
+
+  const sortedProperties = [...filteredProperties].sort((a, b) => {
+    if (sortBy === "price") {
+      return parseFloat(b.price) - parseFloat(a.price);
+    }
+    if (sortBy === "size") {
+      return b.area - a.area;
+    }
+    return 0;
+  });
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      {/* Image Zoom Modal */}
+      {zoomedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
+          onClick={() => setZoomedImage(null)}
+        >
+          <div className="relative max-w-7xl max-h-full">
+            <img 
+              src={zoomedImage} 
+              alt="Imagem ampliada"
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+            <Button
+              size="sm"
+              className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white border-0"
+              onClick={(e) => {
+                e.stopPropagation();
+                setZoomedImage(null);
+              }}
+            >
+              <X size={16} />
             </Button>
-            <Button size="sm" className="bg-white/90 text-gray-700 hover:bg-white backdrop-blur-sm shadow-lg">
-              <Share2 size={16} />
-            </Button>
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black/50 px-3 py-1 rounded-full">
+              Clique para fechar
+            </div>
           </div>
         </div>
+      )}
 
-        {/* Property Info Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Details */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl border">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Informações Principais</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                  <Bed className="mx-auto mb-2 text-zuhause-blue" size={24} />
-                  <div className="font-semibold text-gray-900">{property.bedrooms}</div>
-                  <div className="text-xs text-gray-600">Quartos</div>
-                </div>
-                <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                  <Bath className="mx-auto mb-2 text-zuhause-blue" size={24} />
-                  <div className="font-semibold text-gray-900">{property.bathrooms}</div>
-                  <div className="text-xs text-gray-600">Banheiros</div>
-                </div>
-                <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                  <Square className="mx-auto mb-2 text-zuhause-blue" size={24} />
-                  <div className="font-semibold text-gray-900">{property.area}</div>
-                  <div className="text-xs text-gray-600">m²</div>
-                </div>
-                <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                  <MapPin className="mx-auto mb-2 text-zuhause-blue" size={24} />
-                  <div className="font-semibold text-gray-900 text-xs">{property.location}</div>
-                  <div className="text-xs text-gray-600">Localização</div>
-                </div>
+      <Navigation />
+      
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-r from-zuhause-blue via-purple-600 to-blue-700 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-30"></div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              Propriedades Premium
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-6">
+              Descubra o imóvel dos seus sonhos em nossa coleção exclusiva de propriedades premium
+            </p>
+            <div className="flex items-center justify-center gap-6 text-sm text-gray-300">
+              <div className="flex items-center gap-2">
+                <TrendingUp size={16} />
+                <span>Imóveis Exclusivos</span>
               </div>
-              
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm border-2 border-zuhause-blue/20">
-                <div className="text-3xl font-bold text-zuhause-blue mb-1">
-                  {formatPrice(property.price)}
-                </div>
-                {!property.isForSale && <div className="text-sm text-gray-600">por mês</div>}
+              <div className="flex items-center gap-2">
+                <Award size={16} />
+                <span>Localização Privilegiada</span>
               </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl border shadow-sm">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Descrição Completa</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                {property.description}
-              </p>
-              
-              <div className="border-t pt-4">
-                <h4 className="font-semibold text-gray-900 mb-3">Características do Imóvel</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {property.features.map((feature, index) => (
-                    <div key={index} className="flex items-center text-sm text-gray-600 py-1">
-                      <div className="w-2 h-2 bg-zuhause-blue rounded-full mr-3 flex-shrink-0"></div>
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-
-
-            {/* AI Decoration Section */}
-            <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl border border-purple-200 shadow-sm">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-3">
-                  <Wand2 className="text-white" size={20} />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">Casa Decorada com IA</h3>
-                  <p className="text-sm text-gray-600">Visualize como ficaria mobiliada</p>
-                </div>
-              </div>
-              
-              <p className="text-gray-700 mb-6 text-sm leading-relaxed">
-                Veja como este imóvel ficaria totalmente decorado e mobiliado usando nossa tecnologia de Inteligência Artificial. 
-                Simulação completa de uma casa pronta para morar com decoração moderna e funcional.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="bg-white p-3 rounded-lg shadow-sm border">
-                  <div className="flex items-center mb-2">
-                    <Sparkles size={14} className="text-purple-500 mr-2" />
-                    <span className="text-xs font-medium text-gray-900">Sala de Estar</span>
-                  </div>
-                  <div className="text-xs text-gray-600">Mobília completa</div>
-                </div>
-                <div className="bg-white p-3 rounded-lg shadow-sm border">
-                  <div className="flex items-center mb-2">
-                    <Sparkles size={14} className="text-purple-500 mr-2" />
-                    <span className="text-xs font-medium text-gray-900">Quartos</span>
-                  </div>
-                  <div className="text-xs text-gray-600">Camas e decoração</div>
-                </div>
-                <div className="bg-white p-3 rounded-lg shadow-sm border">
-                  <div className="flex items-center mb-2">
-                    <Sparkles size={14} className="text-purple-500 mr-2" />
-                    <span className="text-xs font-medium text-gray-900">Cozinha</span>
-                  </div>
-                  <div className="text-xs text-gray-600">Eletrodomésticos</div>
-                </div>
-                <div className="bg-white p-3 rounded-lg shadow-sm border">
-                  <div className="flex items-center mb-2">
-                    <Sparkles size={14} className="text-purple-500 mr-2" />
-                    <span className="text-xs font-medium text-gray-900">Banheiros</span>
-                  </div>
-                  <div className="text-xs text-gray-600">Acabamentos</div>
-                </div>
-              </div>
-              
-              <Button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all duration-300 shadow-lg">
-                <Wand2 size={16} className="mr-2" />
-                Ver Casa Decorada com IA (Em breve)
-              </Button>
-            </div>
-          </div>
-
-          {/* Contact Sidebar */}
-          <div className="space-y-6">
-            <div className="bg-gradient-to-br from-zuhause-blue via-purple-600 to-blue-700 p-8 rounded-2xl text-white shadow-2xl border border-white/10 backdrop-blur-sm">
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                  <Phone size={24} className="text-white" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Entre em Contato</h3>
-                <p className="text-white/90 text-sm leading-relaxed">
-                  Interessado neste imóvel? Nossa equipe especializada está pronta para ajudar você a realizar o sonho da casa própria!
-                </p>
-              </div>
-              
-              <div className="space-y-4">
-                <Button 
-                  className="w-full bg-green-500 hover:bg-green-600 text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 border-0 py-4 text-lg font-semibold rounded-xl"
-                  onClick={() => window.open('https://wa.me/5521975155741', '_blank')}
-                >
-                  <FaWhatsapp size={20} className="mr-3" />
-                  <div className="text-left">
-                    <div>Chamar no WhatsApp</div>
-                    <div className="text-xs opacity-90">Resposta rápida garantida</div>
-                  </div>
-                </Button>
-                
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                  <div className="flex items-center justify-center space-x-3">
-                    <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                      <Phone size={16} className="text-white" />
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-semibold">(21) 97515-5741</div>
-                      <div className="text-xs text-white/80">Ligue agora mesmo</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <Button className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 backdrop-blur-sm py-3 rounded-xl">
-                  <Mail size={16} className="mr-2" />
-                  Enviar Email
-                </Button>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl border shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Agendar Visita</h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Agendar uma visita personalizada para conhecer este imóvel.
-              </p>
-              <Button className="w-full bg-zuhause-gradient hover:opacity-90 transition-opacity">
-                <Calendar size={16} className="mr-2" />
-                Agendar Visita (Em breve)
-              </Button>
-            </div>
-
-            {property.isFeatured && (
-              <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl">
-                <div className="flex items-center mb-2">
-                  <Award size={16} className="text-amber-600 mr-2" />
-                  <span className="font-semibold text-amber-800">Destaque</span>
-                </div>
-                <p className="text-amber-700 text-sm">
-                  Este imóvel faz parte da nossa seleção premium com localização privilegiada.
-                </p>
-              </div>
-            )}
-
-            {/* Audio Narration Section */}
-            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 p-4 rounded-xl">
-              <div className="flex items-center mb-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-3">
-                  <Volume2 className="text-white" size={20} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900">Narração do Imóvel</h3>
-                  <p className="text-sm text-gray-600">Ouça a descrição completa</p>
-                </div>
-              </div>
-              
-              <p className="text-gray-700 mb-4 text-sm leading-relaxed">
-                Ouça nossa narração exclusiva com todos os detalhes e características especiais deste imóvel premium.
-              </p>
-              
-              <Button 
-                onClick={() => toggleAudio(property.id)}
-                className={`w-full transition-all duration-200 ${
-                  isAudioPlaying[property.id] 
-                    ? 'bg-red-500 hover:bg-red-600 text-white' 
-                    : 'bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white'
-                }`}
-              >
-                {isAudioPlaying[property.id] ? (
-                  <>
-                    <Pause size={16} className="mr-2" />
-                    Pausar Narração
-                  </>
-                ) : (
-                  <>
-                    <Play size={16} className="mr-2" />
-                    Reproduzir Narração (Em breve)
-                  </>
-                )}
-              </Button>
             </div>
           </div>
         </div>
       </div>
-    </DialogContent>
-  );
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <Navigation />
-      
-      <div className="pt-20 pb-16">
+      {/* Main Content */}
+      <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Hero Section */}
-          <div className="text-center mb-12 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-zuhause-blue/5 to-purple-600/5 rounded-3xl transform rotate-1 scale-105"></div>
-            <div className="relative bg-white/70 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-white/50">
-              <div className="inline-block animate-bounce mb-4">
-                <Award className="text-zuhause-blue" size={48} />
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-zuhause-blue via-purple-600 to-zuhause-blue bg-clip-text text-transparent mb-6">
-                Todas as Propriedades
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
-                Descubra o imóvel dos seus sonhos em nossa coleção exclusiva de propriedades premium
-              </p>
-              <div className="flex items-center justify-center gap-6 text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <TrendingUp size={16} />
-                  <span>Imóveis Exclusivos</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Award size={16} />
-                  <span>Localização Privilegiada</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Filters and Controls */}
-          <div className="mb-8 space-y-4">
+          
+          {/* Search and Filters */}
+          <div className="mb-12">
             <PropertySearch />
             
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white/50">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <Filter className="text-gray-600" size={18} />
-                    <span className="font-medium text-gray-700">Filtrar:</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button
-                      variant={filter === "all" ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setFilter("all")}
-                      className="transition-all duration-200 hover:scale-105"
-                    >
-                      Todos ({properties.length})
-                    </Button>
-                    <Button
-                      variant={filter === "sale" ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setFilter("sale")}
-                      className="transition-all duration-200 hover:scale-105"
-                    >
-                      À Venda ({properties.filter(p => p.isForSale).length})
-                    </Button>
-                    <Button
-                      variant={filter === "rent" ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setFilter("rent")}
-                      className="transition-all duration-200 hover:scale-105"
-                    >
-                      Para Alugar ({properties.filter(p => !p.isForSale).length})
-                    </Button>
-                  </div>
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-lg border border-white/50 shadow-lg">
+                  <Button
+                    variant={filter === "all" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setFilter("all")}
+                    className={filter === "all" ? "bg-zuhause-blue text-white" : ""}
+                  >
+                    Todos
+                  </Button>
+                  <Button
+                    variant={filter === "sale" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setFilter("sale")}
+                    className={filter === "sale" ? "bg-zuhause-blue text-white" : ""}
+                  >
+                    À Venda
+                  </Button>
+                  <Button
+                    variant={filter === "rent" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setFilter("rent")}
+                    className={filter === "rent" ? "bg-zuhause-blue text-white" : ""}
+                  >
+                    Para Alugar
+                  </Button>
                 </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as "price" | "size" | "date")}
+                  className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-lg px-4 py-2 text-sm shadow-lg"
+                >
+                  <option value="price">Ordenar por preço</option>
+                  <option value="size">Ordenar por tamanho</option>
+                  <option value="date">Mais recentes</option>
+                </select>
                 
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-gray-700">Ordenar:</span>
-                    <select 
-                      value={sortBy} 
-                      onChange={(e) => setSortBy(e.target.value as any)}
-                      className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-zuhause-blue focus:border-transparent"
-                    >
-                      <option value="price">Preço</option>
-                      <option value="size">Tamanho (m²)</option>
-                      <option value="date">Mais Recentes</option>
-                    </select>
-                  </div>
-                  
-                  <div className="flex items-center gap-1 border border-gray-200 rounded-lg p-1">
-                    <Button
-                      variant={viewMode === "grid" ? "default" : "ghost"}
-                      size="sm"
-                      onClick={() => setViewMode("grid")}
-                      className="h-8 w-8 p-0"
-                    >
-                      <Grid3X3 size={14} />
-                    </Button>
-                    <Button
-                      variant={viewMode === "list" ? "default" : "ghost"}
-                      size="sm"
-                      onClick={() => setViewMode("list")}
-                      className="h-8 w-8 p-0"
-                    >
-                      <List size={14} />
-                    </Button>
-                  </div>
+                <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-lg border border-white/50 shadow-lg">
+                  <Button
+                    variant={viewMode === "grid" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode("grid")}
+                    className="h-8 w-8 p-0"
+                  >
+                    <Grid3X3 size={14} />
+                  </Button>
+                  <Button
+                    variant={viewMode === "list" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode("list")}
+                    className="h-8 w-8 p-0"
+                  >
+                    <List size={14} />
+                  </Button>
                 </div>
               </div>
             </div>
@@ -522,9 +253,7 @@ export default function Properties() {
               {sortedProperties.map((property, index) => (
                 <Card 
                   key={property.id} 
-                  className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-zuhause-blue/20 ${
-                    viewMode === "list" ? "flex flex-row" : ""
-                  }`}
+                  className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-zuhause-blue/20 ${viewMode === "list" ? "flex flex-row" : ""}`}
                   style={{
                     animationDelay: `${index * 100}ms`,
                     animation: "slideInUp 0.8s ease-out forwards"
@@ -570,8 +299,6 @@ export default function Properties() {
                         {isAudioPlaying[property.id] ? <Pause size={14} /> : <Play size={14} />}
                       </Button>
                     </div>
-                    
-
                   </div>
                   
                   <CardContent className={`${viewMode === "list" ? "flex-1" : ""} p-6`}>
@@ -583,20 +310,20 @@ export default function Properties() {
                         <MapPin size={14} className="mr-2 flex-shrink-0" />
                         <span className="text-sm">{property.location}</span>
                       </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-3 gap-4 mb-4 text-sm text-gray-600">
-                      <div className="flex items-center justify-center p-2 bg-gray-50 rounded-lg">
-                        <Bed size={14} className="mr-1" />
-                        {property.bedrooms}
-                      </div>
-                      <div className="flex items-center justify-center p-2 bg-gray-50 rounded-lg">
-                        <Bath size={14} className="mr-1" />
-                        {property.bathrooms}
-                      </div>
-                      <div className="flex items-center justify-center p-2 bg-gray-50 rounded-lg">
-                        <Square size={14} className="mr-1" />
-                        {property.area}m²
+                      
+                      <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                        <div className="flex items-center">
+                          <Bed size={14} className="mr-1" />
+                          {property.bedrooms}
+                        </div>
+                        <div className="flex items-center">
+                          <Bath size={14} className="mr-1" />
+                          {property.bathrooms}
+                        </div>
+                        <div className="flex items-center">
+                          <Square size={14} className="mr-1" />
+                          {property.area}m²
+                        </div>
                       </div>
                     </div>
                     
@@ -648,35 +375,6 @@ export default function Properties() {
       </div>
 
       <Footer />
-
-      {/* Image Zoom Modal */}
-      {zoomedImage && (
-        <div 
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
-          onClick={() => setZoomedImage(null)}
-        >
-          <div className="relative max-w-7xl max-h-full">
-            <img 
-              src={zoomedImage} 
-              alt="Imagem ampliada"
-              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-            />
-            <Button
-              size="sm"
-              className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white border-0"
-              onClick={(e) => {
-                e.stopPropagation();
-                setZoomedImage(null);
-              }}
-            >
-              <X size={16} />
-            </Button>
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black/50 px-3 py-1 rounded-full">
-              Clique para fechar
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

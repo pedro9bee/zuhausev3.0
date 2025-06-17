@@ -369,13 +369,13 @@ export default function PropertyDetailFull() {
               
               {/* Contact Section - Fixed Position */}
               <div className="sticky top-24">
-                <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
+                <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-2xl shadow-xl border border-purple-200">
                   <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mr-4">
+                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-4">
                       <Phone size={24} className="text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900">Entre em Contato</h3>
+                      <h3 className="text-lg font-bold text-gray-900">Entre em Contato</h3>
                       <p className="text-sm text-gray-600">Fale com nossa equipe</p>
                     </div>
                   </div>
@@ -385,10 +385,10 @@ export default function PropertyDetailFull() {
                   </p>
                 
                   <div className="space-y-4">
-                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                          <Phone size={16} className="text-green-600" />
+                        <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                          <Phone size={16} className="text-purple-600" />
                         </div>
                         <div>
                           <div className="font-semibold text-gray-900">(21) 97515-5741</div>
@@ -398,7 +398,7 @@ export default function PropertyDetailFull() {
                     </div>
                     
                     <Button 
-                      className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white transition-all duration-300 shadow-lg py-4 rounded-lg"
+                      className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all duration-300 shadow-lg py-4 rounded-lg"
                       onClick={() => window.open('mailto:contato@zuhause.com.br', '_blank')}
                     >
                       <Mail size={20} className="mr-3" />

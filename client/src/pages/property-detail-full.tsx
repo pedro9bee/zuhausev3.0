@@ -125,14 +125,14 @@ export default function PropertyDetailFull() {
             {/* Close Button */}
             <Button
               size="sm"
-              className="absolute top-6 right-6 bg-white/20 hover:bg-white/30 text-white border-0 z-10"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-white/20 hover:bg-white/30 text-white border-0 z-10"
               onClick={() => setIsImageGalleryOpen(false)}
             >
-              <X size={20} />
+              <X size={18} className="sm:w-5 sm:h-5" />
             </Button>
             
             {/* Image Counter */}
-            <div className="absolute top-6 left-6 text-white text-lg bg-black/50 px-4 py-2 rounded-full z-10">
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 text-white text-sm sm:text-lg bg-black/50 px-3 py-1 sm:px-4 sm:py-2 rounded-full z-10">
               {currentImageIndex + 1} / {property.images.length}
             </div>
             
@@ -141,7 +141,7 @@ export default function PropertyDetailFull() {
               <CarouselContent>
                 {property.images.map((image, index) => (
                   <CarouselItem key={index}>
-                    <div className="flex items-center justify-center h-[90vh] p-4">
+                    <div className="flex items-center justify-center h-[85vh] sm:h-[90vh] p-2 sm:p-4">
                       <img 
                         src={image} 
                         alt={`${property.title} - ${index + 1}`}
@@ -151,13 +151,14 @@ export default function PropertyDetailFull() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="left-6 bg-white/20 hover:bg-white/30 text-white border-0" />
-              <CarouselNext className="right-6 bg-white/20 hover:bg-white/30 text-white border-0" />
+              <CarouselPrevious className="left-4 sm:left-6 bg-white/20 hover:bg-white/30 text-white border-0" />
+              <CarouselNext className="right-4 sm:right-6 bg-white/20 hover:bg-white/30 text-white border-0" />
             </Carousel>
             
             {/* Instructions */}
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black/50 px-4 py-2 rounded-full">
-              Use as setas para navegar • ESC para fechar
+            <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 text-white text-xs sm:text-sm bg-black/50 px-3 py-1 sm:px-4 sm:py-2 rounded-full">
+              <span className="hidden sm:inline">Use as setas para navegar • ESC para fechar</span>
+              <span className="sm:hidden">Toque para navegar</span>
             </div>
           </div>
         </div>

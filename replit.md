@@ -99,6 +99,11 @@ ZuHause is a full-stack real estate platform built for property management and c
 ## Changelog
 
 Recent Changes:
+- June 17, 2025: Comprehensive mobile responsiveness optimization across all components and pages
+- June 17, 2025: Enhanced property detail pages with mobile-optimized hero sections, responsive grids, and touch-friendly interfaces
+- June 17, 2025: Improved property cards with flexible layouts, responsive typography, and mobile-friendly interaction elements
+- June 17, 2025: Optimized navigation, hero section, footer, and contact forms for mobile devices with adaptive spacing and sizing
+- June 17, 2025: Enhanced image gallery modal with mobile-optimized controls, responsive positioning, and touch navigation
 - June 17, 2025: Increased navigation and footer logo sizes by 50% for better visibility and branding
 - June 17, 2025: Removed "Clique para ampliar" text from Properties page, kept only on property detail pages
 - June 17, 2025: Created floating WhatsApp button for all pages with custom call-to-action message

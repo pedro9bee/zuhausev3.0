@@ -56,10 +56,10 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           </Button>
         </div>
       </div>
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-xl font-bold text-gray-900 truncate">{property.title}</h3>
-          <span className="text-2xl font-bold text-zuhause-blue whitespace-nowrap ml-2">
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 truncate">{property.title}</h3>
+          <span className="text-xl sm:text-2xl font-bold text-zuhause-blue whitespace-nowrap">
             {property.isForSale 
               ? formatPrice(property.price) 
               : property.rentPrice 
@@ -67,27 +67,27 @@ export default function PropertyCard({ property }: PropertyCardProps) {
                 : formatPrice(property.price)}
           </span>
         </div>
-        <p className="text-gray-600 mb-4 flex items-center">
-          <MapPin size={16} className="mr-2 flex-shrink-0" />
+        <p className="text-gray-600 mb-4 flex items-center text-sm sm:text-base">
+          <MapPin size={14} className="mr-2 flex-shrink-0 sm:w-4 sm:h-4" />
           <span className="truncate">{property.location}</span>
         </p>
-        <div className="flex items-center justify-between text-gray-500 mb-4">
-          <span className="flex items-center">
-            <Bed size={16} className="mr-1" /> 
+        <div className="flex flex-wrap items-center justify-between text-gray-500 mb-4 gap-2 sm:gap-0">
+          <span className="flex items-center text-sm sm:text-base">
+            <Bed size={14} className="mr-1 sm:w-4 sm:h-4" /> 
             {property.bedrooms} Quartos
           </span>
-          <span className="flex items-center">
-            <Bath size={16} className="mr-1" /> 
+          <span className="flex items-center text-sm sm:text-base">
+            <Bath size={14} className="mr-1 sm:w-4 sm:h-4" /> 
             {property.bathrooms} Banheiros
           </span>
-          <span className="flex items-center">
-            <Square size={16} className="mr-1" /> 
+          <span className="flex items-center text-sm sm:text-base">
+            <Square size={14} className="mr-1 sm:w-4 sm:h-4" /> 
             {property.area}m²
           </span>
         </div>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{property.description}</p>
+        <p className="text-gray-600 text-xs sm:text-sm mb-4 line-clamp-2">{property.description}</p>
         <Link href={`/propriedade/${property.id}`}>
-          <Button className="w-full bg-zuhause-blue text-white py-3 rounded-lg font-medium hover:bg-zuhause-blue-dark transition-colors">
+          <Button className="w-full bg-zuhause-blue text-white py-2 sm:py-3 rounded-lg font-medium hover:bg-zuhause-blue-dark transition-colors text-sm sm:text-base">
             Ver Detalhes
           </Button>
         </Link>

@@ -76,11 +76,11 @@ export default function ContactForm() {
 
   return (
     <Card className="bg-gray-50">
-      <CardContent className="p-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">Envie sua Mensagem</h3>
+      <CardContent className="p-4 sm:p-8">
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Envie sua Mensagem</h3>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <FormField
                 control={form.control}
                 name="name"
@@ -109,7 +109,7 @@ export default function ContactForm() {
               />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <FormField
                 control={form.control}
                 name="phone"
@@ -178,12 +178,12 @@ export default function ContactForm() {
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-zuhause-blue transition-colors">
                     {!selectedFile ? (
                       <div>
-                        <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                        <div className="text-sm text-gray-600 mb-2">
+                        <Upload className="mx-auto h-8 w-8 sm:h-12 sm:w-12 text-gray-400 mb-3 sm:mb-4" />
+                        <div className="text-xs sm:text-sm text-gray-600 mb-2">
                           <label htmlFor="file-upload" className="cursor-pointer text-zuhause-blue hover:underline">
                             Clique para enviar
                           </label>
-                          <span> ou arraste seu currículo aqui</span>
+                          <span className="hidden sm:inline"> ou arraste seu currículo aqui</span>
                         </div>
                         <p className="text-xs text-gray-500">PDF até 10MB</p>
                         <input
@@ -195,11 +195,11 @@ export default function ContactForm() {
                         />
                       </div>
                     ) : (
-                      <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                      <div className="flex items-center justify-between bg-gray-50 p-3 sm:p-4 rounded-lg">
                         <div className="flex items-center">
-                          <FileText className="h-8 w-8 text-red-500 mr-3" />
+                          <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-red-500 mr-2 sm:mr-3" />
                           <div className="text-left">
-                            <p className="text-sm font-medium text-gray-900">{selectedFile.name}</p>
+                            <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">{selectedFile.name}</p>
                             <p className="text-xs text-gray-500">
                               {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                             </p>
@@ -223,7 +223,7 @@ export default function ContactForm() {
             
             <Button 
               type="submit" 
-              className="w-full bg-zuhause-gradient text-white py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity"
+              className="w-full bg-zuhause-gradient text-white py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:opacity-90 transition-opacity"
               disabled={contactMutation.isPending}
             >
               {contactMutation.isPending ? "Enviando..." : "Enviar Mensagem"}

@@ -25,16 +25,16 @@ export default function PropertySearch() {
   };
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Encontre Seu Imóvel Ideal</h2>
+        <div className="bg-gray-50 rounded-2xl p-4 sm:p-8 shadow-lg">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-6 sm:mb-8">Encontre Seu Imóvel Ideal</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Imóvel</label>
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">Tipo de Imóvel</label>
               <Select value={propertyType} onValueChange={setPropertyType}>
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full text-sm sm:text-base">
                   <SelectValue placeholder="Selecione o tipo" />
                 </SelectTrigger>
                 <SelectContent>
@@ -46,9 +46,9 @@ export default function PropertySearch() {
               </Select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Localização</label>
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">Localização</label>
               <Select value={location} onValueChange={setLocation}>
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full text-sm sm:text-base">
                   <SelectValue placeholder="Selecione a localização" />
                 </SelectTrigger>
                 <SelectContent>
@@ -61,9 +61,9 @@ export default function PropertySearch() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Preço Máximo</label>
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">Preço Máximo</label>
               <Select value={maxPrice} onValueChange={setMaxPrice}>
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full text-sm sm:text-base">
                   <SelectValue placeholder="Preço máximo" />
                 </SelectTrigger>
                 <SelectContent>
@@ -75,13 +75,14 @@ export default function PropertySearch() {
                 </SelectContent>
               </Select>
             </div>
-            <div className="flex items-end">
+            <div className="flex items-end sm:col-span-2 md:col-span-1">
               <Button 
                 onClick={handleSearch}
-                className="bg-zuhause-gradient text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 w-full"
+                className="bg-zuhause-gradient text-white px-4 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 w-full text-sm sm:text-base"
               >
-                <Search className="mr-2" size={18} />
-                Buscar
+                <Search className="mr-2" size={16} />
+                <span className="hidden sm:inline">Buscar</span>
+                <span className="sm:hidden">Buscar</span>
               </Button>
             </div>
           </div>

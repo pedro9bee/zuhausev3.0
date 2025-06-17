@@ -307,18 +307,7 @@ export default function PropertyDetailFull() {
                 </div>
               </div>
 
-              {/* Features */}
-              <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-white/50">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Características Especiais</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {property.features.map((feature, index) => (
-                    <div key={index} className="flex items-center p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
-                      <div className="w-3 h-3 bg-zuhause-blue rounded-full mr-4 flex-shrink-0"></div>
-                      <span className="text-gray-700 font-medium">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+
 
               {/* AI Decoration Section */}
               <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-2xl border border-purple-200 shadow-lg">
@@ -378,17 +367,18 @@ export default function PropertyDetailFull() {
             {/* Right Column - Contact & Actions */}
             <div className="space-y-8">
               
-              {/* Contact Section */}
-              <div className="bg-gradient-to-br from-zuhause-blue via-purple-600 to-blue-700 p-8 rounded-2xl text-white shadow-2xl border border-white/10 backdrop-blur-sm sticky top-8">
-                <div className="text-center mb-8">
-                  <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                    <Phone size={28} className="text-white" />
+              {/* Contact Section - Fixed Position */}
+              <div className="sticky top-24">
+                <div className="bg-gradient-to-br from-zuhause-blue via-blue-600 to-blue-700 p-8 rounded-2xl text-white shadow-2xl border border-white/10 backdrop-blur-sm">
+                  <div className="text-center mb-8">
+                    <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
+                      <Phone size={28} className="text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3">Entre em Contato</h3>
+                    <p className="text-white/90 leading-relaxed">
+                      Interessado neste imóvel? Nossa equipe especializada está pronta para ajudar você a realizar o sonho da casa própria!
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-bold mb-3">Entre em Contato</h3>
-                  <p className="text-white/90 leading-relaxed">
-                    Interessado neste imóvel? Nossa equipe especializada está pronta para ajudar você a realizar o sonho da casa própria!
-                  </p>
-                </div>
                 
                 <div className="space-y-6">
                   <Button 
@@ -414,74 +404,103 @@ export default function PropertyDetailFull() {
                     </div>
                   </div>
                   
-                  <Button className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 backdrop-blur-sm py-4 rounded-xl">
+                  <Button 
+                    className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 backdrop-blur-sm py-4 rounded-xl"
+                    onClick={() => window.open('mailto:contato@zuhause.com.br', '_blank')}
+                  >
                     <Mail size={20} className="mr-3" />
                     Enviar Email
                   </Button>
-                </div>
-              </div>
-
-              {/* Schedule Visit */}
-              <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl border border-white/50 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Agendar Visita</h3>
-                <p className="text-gray-600 mb-6">
-                  Agendar uma visita personalizada para conhecer este imóvel.
-                </p>
-                <Button className="w-full bg-zuhause-gradient hover:opacity-90 transition-opacity py-4">
-                  <Calendar size={20} className="mr-3" />
-                  Agendar Visita (Em breve)
-                </Button>
-              </div>
-
-              {/* Featured Badge */}
-              {property.isFeatured && (
-                <div className="bg-amber-50 border border-amber-200 p-6 rounded-2xl shadow-lg">
-                  <div className="flex items-center mb-4">
-                    <Award size={20} className="text-amber-600 mr-3" />
-                    <span className="font-bold text-amber-800 text-lg">Destaque</span>
                   </div>
-                  <p className="text-amber-700">
-                    Este imóvel faz parte da nossa seleção premium com localização privilegiada.
+                </div>
+                
+                {/* Schedule Visit Section */}
+                <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 mt-8">
+                  <div className="text-center mb-8">
+                    <div className="w-16 h-16 bg-zuhause-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Calendar className="text-white" size={24} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Agendar Visita</h3>
+                    <p className="text-gray-600">
+                      Conheça pessoalmente este imóvel excepcional
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <Button 
+                      className="w-full bg-gradient-to-r from-zuhause-blue to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 border-0 py-6 text-lg font-semibold rounded-xl"
+                      onClick={() => window.open('tel:+5521975155741', '_self')}
+                    >
+                      <Phone size={24} className="mr-4" />
+                      <div className="text-left">
+                        <div>Ligar Agora</div>
+                        <div className="text-sm opacity-90">(21) 97515-5741</div>
+                      </div>
+                    </Button>
+                    
+                    <Button 
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 border-0 py-6 text-lg font-semibold rounded-xl"
+                      onClick={() => window.open('mailto:contato@zuhause.com.br', '_blank')}
+                    >
+                      <Mail size={24} className="mr-4" />
+                      <div className="text-left">
+                        <div>Enviar E-mail</div>
+                        <div className="text-sm opacity-90">contato@zuhause.com.br</div>
+                      </div>
+                    </Button>
+                  </div>
+                </div>
+                
+                {/* Audio Narration Section */}
+                <div className="bg-gradient-to-br from-gray-50 to-blue-50 p-8 rounded-2xl shadow-xl border border-gray-200 mt-8">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-4">
+                      <Volume2 className="text-white" size={20} />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900">Narração do Imóvel</h3>
+                      <p className="text-sm text-gray-600">Ouça a descrição completa</p>
+                    </div>
+                  </div>
+                  
+                  <p className="text-gray-700 mb-6 leading-relaxed">
+                    Ouça nossa narração exclusiva com todos os detalhes e características especiais deste imóvel premium.
                   </p>
-                </div>
-              )}
-
-              {/* Audio Narration */}
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 p-6 rounded-2xl shadow-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-4">
-                    <Volume2 className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900">Narração do Imóvel</h3>
-                    <p className="text-sm text-gray-600">Ouça a descrição completa</p>
-                  </div>
+                  
+                  <Button 
+                    onClick={() => toggleAudio(property.id)}
+                    className={`w-full transition-all duration-200 py-4 ${
+                      isAudioPlaying[property.id] 
+                        ? 'bg-red-500 hover:bg-red-600 text-white' 
+                        : 'bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white'
+                    }`}
+                  >
+                    {isAudioPlaying[property.id] ? (
+                      <>
+                        <Pause size={20} className="mr-3" />
+                        Pausar Narração
+                      </>
+                    ) : (
+                      <>
+                        <Play size={20} className="mr-3" />
+                        Reproduzir Narração (Em breve)
+                      </>
+                    )}
+                  </Button>
                 </div>
                 
-                <p className="text-gray-700 mb-6 leading-relaxed">
-                  Ouça nossa narração exclusiva com todos os detalhes e características especiais deste imóvel premium.
-                </p>
-                
-                <Button 
-                  onClick={() => toggleAudio(property.id)}
-                  className={`w-full transition-all duration-200 py-4 ${
-                    isAudioPlaying[property.id] 
-                      ? 'bg-red-500 hover:bg-red-600 text-white' 
-                      : 'bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white'
-                  }`}
-                >
-                  {isAudioPlaying[property.id] ? (
-                    <>
-                      <Pause size={20} className="mr-3" />
-                      Pausar Narração
-                    </>
-                  ) : (
-                    <>
-                      <Play size={20} className="mr-3" />
-                      Reproduzir Narração (Em breve)
-                    </>
-                  )}
-                </Button>
+                {/* Features Section - Moved here */}
+                <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-white/50 mt-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Características Especiais</h2>
+                  <div className="grid grid-cols-1 gap-4">
+                    {property.features.map((feature, index) => (
+                      <div key={index} className="flex items-center p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+                        <div className="w-3 h-3 bg-zuhause-blue rounded-full mr-4 flex-shrink-0"></div>
+                        <span className="text-gray-700 font-medium">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

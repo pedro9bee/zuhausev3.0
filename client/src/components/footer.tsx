@@ -1,5 +1,7 @@
 import { Link } from "wouter";
 import whiteLogo from "@assets/white_logo_transparent_background_1749928120484.png";
+import { Instagram } from "lucide-react";
+import { FaYoutube, FaWhatsapp, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -16,15 +18,38 @@ export default function Footer() {
             </div>
             <p className="text-gray-300 text-lg mb-6 max-w-md">16 anos oferecendo uma experiência única e humana na compra e venda de imóveis no Rio de Janeiro.</p>
             <div className="flex space-x-4">
-              {["instagram", "facebook", "whatsapp", "linkedin"].map((social) => (
-                <a 
-                  key={social}
-                  href="#" 
-                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-zuhause-blue transition-colors"
-                >
-                  <i className={`fab fa-${social}`}></i>
-                </a>
-              ))}
+              <a 
+                href="https://www.instagram.com/zuhauseimoveisrj?igsh=a2RxanhkNWs0NDJh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-zuhause-blue transition-colors"
+              >
+                <Instagram size={20} />
+              </a>
+              <a 
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+              >
+                <FaYoutube size={20} />
+              </a>
+              <a 
+                href="https://wa.me/5521975155741"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-green-500 transition-colors"
+              >
+                <FaWhatsapp size={20} />
+              </a>
+              <a 
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
+              >
+                <FaLinkedin size={20} />
+              </a>
             </div>
           </div>
           

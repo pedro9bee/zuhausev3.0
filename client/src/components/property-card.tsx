@@ -35,11 +35,13 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           alt={property.title} 
           className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" 
         />
-        <div className="absolute top-4 left-4">
-          <Badge className={property.isForSale ? "bg-green-500" : property.isForRent ? "bg-orange-500" : "bg-blue-500"}>
-            {property.isForSale ? "À Venda" : property.isForRent ? "Aluguel" : "Lançamento"}
-          </Badge>
-        </div>
+        {property.isFeatured && (
+          <div className="absolute top-4 left-4">
+            <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
+              Destaque
+            </Badge>
+          </div>
+        )}
         <div className="absolute top-4 right-4">
           <Button
             size="sm"

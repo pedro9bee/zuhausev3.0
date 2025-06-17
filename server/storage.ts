@@ -76,7 +76,7 @@ export class MemStorage implements IStorage {
       {
         title: "Jardim Pindorama",
         description: "Viva o Exclusivo: Casas no Jardim Pindorama - Gávea\n\nSegurança e Privacidade\n- Portaria 24h com segurança reforçada\n- Condomínio fechado com acesso controlado\n- Privacidade garantida em cada uma das nossas residências\n\nNovidades e Tecnologia\n- Casas com sistema de automação e ar condicionado em todos os cômodos\n- Áreas gourmet e piscina privativa para desfrutar do lazer\n- Projetos assinados pelos renomados arquitetos Sergio Conde Caldas e Erick Figueira de Mello\n\nExclusividade e Sofisticação\n- Terrenos de 412m2 a 704m2 e áreas construídas de 470m2 a 602m2\n- Paisagismo icônico do Escritório Burle Marx\n- Localização privilegiada no Jardim Pindorama, Gávea",
-        price: "8500000",
+        price: "11680000",
         location: "Jardim Pindorama, Gávea, Rio de Janeiro",
         bedrooms: 4,
         bathrooms: 5,

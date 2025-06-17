@@ -304,11 +304,13 @@ export default function Properties() {
                       </div>
                     </div>
                     
-                    <div className="absolute top-4 left-4">
-                      <Badge className={`${property.isForSale ? "bg-green-500 animate-pulse" : "bg-blue-500 animate-pulse"} text-white px-3 py-1 text-xs font-semibold shadow-lg`}>
-                        {property.isForSale ? "À Venda" : "Para Alugar"}
-                      </Badge>
-                    </div>
+                    {property.isFeatured && (
+                      <div className="absolute top-4 left-4">
+                        <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 text-xs font-semibold shadow-lg animate-pulse">
+                          Destaque
+                        </Badge>
+                      </div>
+                    )}
                     
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-2">
                       <Button size="sm" className="bg-white/90 text-gray-700 hover:bg-white backdrop-blur-sm shadow-lg">

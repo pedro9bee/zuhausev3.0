@@ -68,7 +68,13 @@ export class MemStorage implements IStorage {
         type: "Cobertura",
         status: "available",
         features: ["Vista para o mar", "Piscina privativa", "Campo de golfe", "Heliporto", "Automação", "Climatização", "Terraço", "Closet", "Marcenaria Ornare", "Cozinha Florense"],
-        images: ["/attached_assets/GoldenGreen_1750105349165.jpg"],
+        images: [
+          "/attached_assets/GoldenGreen_1750105349165.jpg",
+          "/attached_assets/JM-05_1750195272418.jpg",
+          "/attached_assets/JM-11_1750195272419.jpg",
+          "/attached_assets/JM-13_1750195272419.jpg",
+          "/attached_assets/JM-08_1750195272420.jpg"
+        ],
         isForSale: true,
         isForRent: false,
         isFeatured: true,

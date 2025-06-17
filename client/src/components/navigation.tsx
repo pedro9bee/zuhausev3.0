@@ -60,31 +60,31 @@ export default function Navigation() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <button 
-                onClick={() => scrollToSection('inicio')}
+                onClick={() => handleNavigation('/')}
                 className="text-gray-900 hover:text-zuhause-blue px-3 py-2 text-sm font-medium transition-colors"
               >
                 Início
               </button>
-              <Link 
-                href="/propriedades"
+              <button 
+                onClick={() => handleNavigation('/propriedades')}
                 className="text-gray-600 hover:text-zuhause-blue px-3 py-2 text-sm font-medium transition-colors"
               >
                 Propriedades
-              </Link>
+              </button>
               <button 
-                onClick={() => scrollToSection('sobre')}
+                onClick={() => handleNavigation('#sobre')}
                 className="text-gray-600 hover:text-zuhause-blue px-3 py-2 text-sm font-medium transition-colors"
               >
                 Sobre Nós
               </button>
               <button 
-                onClick={() => scrollToSection('equipe')}
+                onClick={() => handleNavigation('#equipe')}
                 className="text-gray-600 hover:text-zuhause-blue px-3 py-2 text-sm font-medium transition-colors"
               >
                 Equipe
               </button>
               <button 
-                onClick={() => scrollToSection('contato')}
+                onClick={() => handleNavigation('#contato')}
                 className="text-gray-600 hover:text-zuhause-blue px-3 py-2 text-sm font-medium transition-colors"
               >
                 Contato
@@ -95,9 +95,9 @@ export default function Navigation() {
           <div className="hidden md:block">
             <Button 
               className="bg-zuhause-gradient text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity"
-              onClick={() => scrollToSection('contato')}
+              onClick={() => handleNavigation('#contato')}
             >
-              Fale Conosco
+              Quero falar com um corretor
             </Button>
           </div>
           
@@ -118,32 +118,31 @@ export default function Navigation() {
         <div className="md:hidden bg-white border-t shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1">
             <button 
-              onClick={() => scrollToSection('inicio')}
+              onClick={() => handleNavigation('/')}
               className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-zuhause-blue w-full text-left"
             >
               Início
             </button>
-            <Link 
-              href="/propriedades"
+            <button 
+              onClick={() => handleNavigation('/propriedades')}
               className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-zuhause-blue w-full text-left"
-              onClick={() => setIsMobileMenuOpen(false)}
             >
               Propriedades
-            </Link>
+            </button>
             <button 
-              onClick={() => scrollToSection('sobre')}
+              onClick={() => handleNavigation('#sobre')}
               className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-zuhause-blue w-full text-left"
             >
               Sobre Nós
             </button>
             <button 
-              onClick={() => scrollToSection('equipe')}
+              onClick={() => handleNavigation('#equipe')}
               className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-zuhause-blue w-full text-left"
             >
               Equipe
             </button>
             <button 
-              onClick={() => scrollToSection('contato')}
+              onClick={() => handleNavigation('#contato')}
               className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-zuhause-blue w-full text-left"
             >
               Contato
@@ -151,9 +150,9 @@ export default function Navigation() {
             <div className="px-3 py-2">
               <Button 
                 className="bg-zuhause-gradient text-white w-full"
-                onClick={() => scrollToSection('contato')}
+                onClick={() => handleNavigation('#contato')}
               >
-                Fale Conosco
+                Quero falar com um corretor
               </Button>
             </div>
           </div>

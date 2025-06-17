@@ -84,9 +84,8 @@ export default function Properties() {
     const local = urlParams.get('local');
     const preco = urlParams.get('preco');
     
-    // Filter by transaction type
-    if (filter === "sale" && !property.isForSale) return false;
-    if (filter === "rent" && property.isForSale) return false;
+    // Filter by featured properties
+    if (filter === "featured" && !property.isFeatured) return false;
     
     // Filter by property type (if specified in URL)
     if (tipo && !property.title.toLowerCase().includes(tipo.toLowerCase())) return false;
@@ -147,27 +146,43 @@ export default function Properties() {
 
       <Navigation />
       
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-zuhause-blue via-purple-600 to-blue-700 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-30"></div>
+      {/* Hero Section with Video */}
+      <div className="relative h-[70vh] overflow-hidden">
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/attached_assets/f1da91e5-ccce-41a1-a7ae-eecb9064992b_1750174683947.mp4" type="video/mp4" />
+          </video>
+        </div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-zuhause-blue/20 via-transparent to-blue-700/20"></div>
+        
+        <div className="relative h-full flex items-center justify-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white drop-shadow-lg">
               Propriedades Premium
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-6">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8 drop-shadow-lg">
               Descubra o imóvel dos seus sonhos em nossa coleção exclusiva de propriedades premium
             </p>
-            <div className="flex items-center justify-center gap-6 text-sm text-gray-300">
+            <div className="flex items-center justify-center gap-8 text-white/80">
               <div className="flex items-center gap-2">
-                <TrendingUp size={16} />
-                <span>Imóveis Exclusivos</span>
+                <TrendingUp size={20} />
+                <span className="text-lg">Imóveis Exclusivos</span>
               </div>
               <div className="flex items-center gap-2">
-                <Award size={16} />
-                <span>Localização Privilegiada</span>
+                <Award size={20} />
+                <span className="text-lg">Localização Privilegiada</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Star size={20} />
+                <span className="text-lg">Alto Padrão</span>
               </div>
             </div>
           </div>
@@ -194,20 +209,12 @@ export default function Properties() {
                     Todos
                   </Button>
                   <Button
-                    variant={filter === "sale" ? "default" : "ghost"}
+                    variant={filter === "featured" ? "default" : "ghost"}
                     size="sm"
-                    onClick={() => setFilter("sale")}
-                    className={filter === "sale" ? "bg-zuhause-blue text-white" : ""}
+                    onClick={() => setFilter("featured")}
+                    className={filter === "featured" ? "bg-zuhause-blue text-white" : ""}
                   >
-                    À Venda
-                  </Button>
-                  <Button
-                    variant={filter === "rent" ? "default" : "ghost"}
-                    size="sm"
-                    onClick={() => setFilter("rent")}
-                    className={filter === "rent" ? "bg-zuhause-blue text-white" : ""}
-                  >
-                    Para Alugar
+                    Destaques
                   </Button>
                 </div>
               </div>

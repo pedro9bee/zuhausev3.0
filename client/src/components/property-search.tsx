@@ -30,7 +30,7 @@ export default function PropertySearch() {
         <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Encontre Seu Imóvel Ideal</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Imóvel</label>
               <Select value={propertyType} onValueChange={setPropertyType}>
@@ -59,18 +59,7 @@ export default function PropertySearch() {
                 </SelectContent>
               </Select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Transação</label>
-              <Select value={transactionType} onValueChange={setTransactionType}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Venda ou Aluguel" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="venda">À Venda</SelectItem>
-                  <SelectItem value="aluguel">Para Alugar</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Preço Máximo</label>
               <Select value={maxPrice} onValueChange={setMaxPrice}>
@@ -78,10 +67,11 @@ export default function PropertySearch() {
                   <SelectValue placeholder="Preço máximo" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="500000">R$ 500.000</SelectItem>
-                  <SelectItem value="1000000">R$ 1.000.000</SelectItem>
                   <SelectItem value="2000000">R$ 2.000.000</SelectItem>
-                  <SelectItem value="5000000">R$ 5.000.000+</SelectItem>
+                  <SelectItem value="5000000">R$ 5.000.000</SelectItem>
+                  <SelectItem value="10000000">R$ 10.000.000</SelectItem>
+                  <SelectItem value="20000000">R$ 20.000.000</SelectItem>
+                  <SelectItem value="50000000">R$ 50.000.000+</SelectItem>
                 </SelectContent>
               </Select>
             </div>

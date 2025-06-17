@@ -128,9 +128,9 @@ export default function Home() {
                 <div className="relative bg-gradient-to-br from-zuhause-blue/10 to-purple-600/10 rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/50">
                   <div className="aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden">
                     <video 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       controls
-                      poster="/attached_assets/DSC05718-HDR-20_1750156747504.jpg"
+                      preload="metadata"
                     >
                       <source src="/attached_assets/Frame01_1750177625956.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.

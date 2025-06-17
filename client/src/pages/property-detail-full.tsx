@@ -406,40 +406,25 @@ export default function PropertyDetailFull() {
                 </div>
                 
                 {/* Schedule Visit Section */}
-                <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 mt-8">
-                  <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-zuhause-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 rounded-2xl shadow-xl border border-purple-200 mt-8">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-4">
                       <Calendar className="text-white" size={24} />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Agendar Visita</h3>
-                    <p className="text-gray-600">
-                      Conheça pessoalmente este imóvel excepcional
-                    </p>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900">Agendar Visita</h3>
+                      <p className="text-sm text-gray-600">Conheça pessoalmente este imóvel</p>
+                    </div>
                   </div>
                   
-                  <div className="space-y-6">
-                    <Button 
-                      className="w-full bg-gradient-to-r from-zuhause-blue to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 border-0 py-6 text-lg font-semibold rounded-xl"
-                      onClick={() => window.open('tel:+5521975155741', '_self')}
-                    >
-                      <Phone size={24} className="mr-4" />
-                      <div className="text-left">
-                        <div>Ligar Agora</div>
-                        <div className="text-sm opacity-90">(21) 97515-5741</div>
-                      </div>
-                    </Button>
-                    
-                    <Button 
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 border-0 py-6 text-lg font-semibold rounded-xl"
-                      onClick={() => window.open('mailto:contato@zuhause.com.br', '_blank')}
-                    >
-                      <Mail size={24} className="mr-4" />
-                      <div className="text-left">
-                        <div>Enviar E-mail</div>
-                        <div className="text-sm opacity-90">contato@zuhause.com.br</div>
-                      </div>
-                    </Button>
-                  </div>
+                  <p className="text-gray-700 mb-6 leading-relaxed">
+                    Agende uma visita personalizada para conhecer todos os detalhes deste imóvel excepcional.
+                  </p>
+                  
+                  <Button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all duration-300 shadow-lg py-4 text-lg">
+                    <Calendar size={20} className="mr-3" />
+                    Agende um horário (Em breve)
+                  </Button>
                 </div>
                 
                 {/* Audio Narration Section */}

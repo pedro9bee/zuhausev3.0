@@ -369,39 +369,41 @@ export default function PropertyDetailFull() {
               
               {/* Contact Section - Fixed Position */}
               <div className="sticky top-24">
-                <div className="bg-gradient-to-br from-zuhause-blue via-blue-600 to-blue-700 p-8 rounded-2xl text-white shadow-2xl border border-white/10 backdrop-blur-sm">
-                  <div className="text-center mb-8">
-                    <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                      <Phone size={28} className="text-white" />
+                <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mr-4">
+                      <Phone size={24} className="text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-3">Entre em Contato</h3>
-                    <p className="text-white/90 leading-relaxed">
-                      Interessado neste imóvel? Nossa equipe especializada está pronta para ajudar você a realizar o sonho da casa própria!
-                    </p>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900">Entre em Contato</h3>
+                      <p className="text-sm text-gray-600">Fale com nossa equipe</p>
+                    </div>
                   </div>
+                  
+                  <p className="text-gray-700 mb-6 leading-relaxed">
+                    Interessado neste imóvel? Nossa equipe especializada está pronta para ajudar você a realizar o sonho da casa própria!
+                  </p>
                 
-                <div className="space-y-6">
-
-                  
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                    <div className="flex items-center justify-center space-x-4">
-                      <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                        <Phone size={20} className="text-white" />
-                      </div>
-                      <div className="text-center">
-                        <div className="text-xl font-semibold">(21) 97515-5741</div>
-                        <div className="text-sm text-white/80">Ligue agora mesmo</div>
+                  <div className="space-y-4">
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                          <Phone size={16} className="text-green-600" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-gray-900">(21) 97515-5741</div>
+                          <div className="text-sm text-gray-600">Ligue agora mesmo</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  <Button 
-                    className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 backdrop-blur-sm py-4 rounded-xl"
-                    onClick={() => window.open('mailto:contato@zuhause.com.br', '_blank')}
-                  >
-                    <Mail size={20} className="mr-3" />
-                    Enviar Email
-                  </Button>
+                    
+                    <Button 
+                      className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white transition-all duration-300 shadow-lg py-4 rounded-lg"
+                      onClick={() => window.open('mailto:contato@zuhause.com.br', '_blank')}
+                    >
+                      <Mail size={20} className="mr-3" />
+                      Enviar Email
+                    </Button>
                   </div>
                 </div>
                 

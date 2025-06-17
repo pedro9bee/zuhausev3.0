@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import { 
   MapPin, 
   Bed, 
@@ -309,16 +310,16 @@ export default function Properties() {
               </p>
               
               <div className="space-y-3">
-                <Button className="w-full bg-white text-zuhause-blue hover:bg-gray-50 transition-colors">
-                  <Phone size={16} className="mr-2" />
-                  (21) 97515-5741
-                </Button>
                 <Button 
                   className="w-full bg-green-500 hover:bg-green-600 text-white transition-colors shadow-lg"
                   onClick={() => window.open('https://wa.me/5521975155741', '_blank')}
                 >
-                  <MessageCircle size={16} className="mr-2" />
+                  <FaWhatsapp size={16} className="mr-2" />
                   Chamar no WhatsApp
+                </Button>
+                <Button className="w-full bg-white text-zuhause-blue hover:bg-gray-50 transition-colors">
+                  <Phone size={16} className="mr-2" />
+                  (21) 97515-5741
                 </Button>
                 <Button className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors">
                   <Mail size={16} className="mr-2" />
@@ -588,7 +589,7 @@ export default function Properties() {
                             variant="outline"
                             size="sm"
                             onClick={() => setSelectedProperty(property)}
-                            className="bg-gradient-to-r from-zuhause-blue to-purple-600 text-white border-0 hover:from-purple-600 hover:to-zuhause-blue hover:scale-110 hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none"
+                            className="bg-gradient-to-r from-zuhause-blue to-purple-600 text-white border-0 hover:from-purple-600 hover:to-zuhause-blue hover:scale-110 hover:shadow-xl transition-all duration-300"
                           >
                             <Eye size={14} className="mr-1" />
                             Detalhes

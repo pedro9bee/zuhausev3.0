@@ -18,6 +18,7 @@ export const properties = pgTable("properties", {
   isForSale: boolean("is_for_sale").notNull().default(true),
   isForRent: boolean("is_for_rent").notNull().default(false),
   rentPrice: decimal("rent_price", { precision: 10, scale: 2 }),
+  isFeatured: boolean("is_featured").notNull().default(false),
 });
 
 export const contacts = pgTable("contacts", {

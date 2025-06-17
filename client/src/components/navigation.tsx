@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import whiteLogo from "@assets/white_logo_transparent_background_1749928120484.png";
-import darkLogo from "@assets/watermark_logo_transparent_background_1749928120484.png";
+import logo from "@assets/base_logo_transparent_background_1750168258045.png";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,9 +50,9 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center">
             <img 
-              src={darkLogo} 
+              src={logo} 
               alt="ZuHause Imóveis" 
-              className="h-10 w-auto"
+              className="h-12 w-auto"
             />
           </Link>
           

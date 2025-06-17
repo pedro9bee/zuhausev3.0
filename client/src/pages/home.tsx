@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Star, HomeIcon, Tag, Key, Calculator, Handshake, ClipboardList, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Instagram } from "lucide-react";
-import { FaYoutube } from "react-icons/fa";
 import { Link } from "wouter";
 
 export default function Home() {
@@ -359,14 +358,7 @@ export default function Home() {
                   >
                     <Instagram className="text-white" size={20} />
                   </a>
-                  <a 
-                    href="#" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity"
-                  >
-                    <FaYoutube className="text-white" size={20} />
-                  </a>
+
                 </div>
               </div>
             </div>

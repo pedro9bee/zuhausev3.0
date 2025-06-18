@@ -1,8 +1,7 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import PropertySearch from "@/components/property-search";
-import { useQuery } from "@tanstack/react-query";
-import type { Property } from "@shared/schema";
+import { properties } from "@/data/static-data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

@@ -3,7 +3,7 @@ import HeroSection from "@/components/hero-section";
 import PropertySearch from "@/components/property-search";
 import { properties, testimonials } from "@/data/static-data";
 import PropertyCard from "@/components/property-card";
-import ContactForm from "@/components/contact-form";
+import ContactForm from "@/components/contact-form-static";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

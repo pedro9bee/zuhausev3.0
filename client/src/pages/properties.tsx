@@ -46,9 +46,7 @@ export default function Properties() {
     setNavigationLocation(path);
   };
 
-  const { data: properties = [], isLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties"],
-  });
+  const isLoading = false;
 
   const toggleAudio = (propertyId: number) => {
     setIsAudioPlaying(prev => ({

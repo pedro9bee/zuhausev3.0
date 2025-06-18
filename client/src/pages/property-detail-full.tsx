@@ -1,7 +1,6 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import { useQuery } from "@tanstack/react-query";
-import type { Property } from "@shared/schema";
+import { properties } from "@/data/static-data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -38,11 +37,8 @@ export default function PropertyDetailFull() {
   const [isImageGalleryOpen, setIsImageGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const { data: properties = [], isLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties"],
-  });
-
   const property = properties.find(p => p.id === propertyId);
+  const isLoading = false;
 
   const toggleAudio = (propertyId: number) => {
     setIsAudioPlaying(prev => ({

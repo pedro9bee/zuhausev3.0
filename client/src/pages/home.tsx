@@ -131,7 +131,6 @@ export default function Home() {
                       className="w-full h-full object-contain"
                       controls
                       preload="none"
-                      loading="lazy"
                       poster="/attached_assets/image_1749915563758.png"
                     >
                       <source src="/attached_assets/Frame01_1750177625956.mp4" type="video/mp4" />

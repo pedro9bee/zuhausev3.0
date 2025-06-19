@@ -53,6 +53,8 @@ export default function Navigation() {
               src={logo} 
               alt="ZuHause Imóveis" 
               className="h-24 w-auto"
+              loading="eager"
+              decoding="async"
             />
           </Link>
           

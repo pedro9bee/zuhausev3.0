@@ -130,8 +130,7 @@ export default function Home() {
                     <video 
                       className="w-full h-full object-contain"
                       controls
-                      preload="none"
-                      poster="/attached_assets/image_1749915563758.png"
+                      preload="metadata"
                     >
                       <source src="/attached_assets/Frame01_1750177625956.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.

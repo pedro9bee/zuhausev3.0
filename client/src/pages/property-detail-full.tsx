@@ -5,7 +5,7 @@ import type { Property } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useRoute } from "wouter";
 import { 

@@ -12,6 +12,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Star, HomeIcon, Tag, Key, Calculator, Handshake, ClipboardList, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Instagram } from "lucide-react";
 import { Link } from "wouter";
+import { memo, useMemo, useCallback } from "react";
 
 export default function Home() {
   const { data: properties = [], isLoading: propertiesLoading } = useQuery<Property[]>({

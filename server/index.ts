@@ -6,16 +6,17 @@ import compression from "compression";
 
 const app = express();
 
-// Enable gzip compression for better performance
+// Enable aggressive gzip compression for better performance
 app.use(compression({
-  level: 6,
-  threshold: 1024, // Only compress files larger than 1KB
+  level: 9, // Maximum compression
+  threshold: 512, // Compress files larger than 512 bytes
+  memLevel: 8,
   filter: (req, res) => {
     // Don't compress if the client doesn't support it
     if (req.headers['x-no-compression']) {
       return false;
     }
-    // Fallback to standard compression filter
+    // Compress more aggressively
     return compression.filter(req, res);
   }
 }));

@@ -41,21 +41,21 @@ function PropertyCard({ property }: PropertyCardProps) {
   }, [property.price, property.rentPrice, property.isForSale, formatPrice]);
 
   return (
-    <Card className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group will-change-transform">
+    <Card className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group transform hover:scale-[1.02] will-change-transform">
       <div className="relative overflow-hidden">
         <div className="relative w-full h-64 bg-gray-200">
           <img 
             src={property.images[0]} 
             alt={property.title} 
-            className={`w-full h-full object-cover transition-all duration-200 will-change-transform ${
+            className={`w-full h-full object-cover transition-all duration-200 ${
               imageLoaded ? 'opacity-100 group-hover:scale-105' : 'opacity-0'
             }`}
             loading="eager"
             decoding="async"
             onLoad={handleImageLoad}
             style={{
-              contentVisibility: 'auto',
-              containIntrinsicSize: '100% 256px'
+              willChange: 'transform',
+              transform: 'translateZ(0)', // Force hardware acceleration
             }}
           />
           {!imageLoaded && (
@@ -73,12 +73,13 @@ function PropertyCard({ property }: PropertyCardProps) {
           <Button
             size="sm"
             variant="secondary"
-            className="bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all duration-200 will-change-transform hover:scale-110"
+            className="bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all duration-150 hover:scale-110 transform"
             onClick={toggleFavorite}
+            style={{ willChange: 'transform' }}
           >
             <Heart 
               size={16} 
-              className={`transition-colors duration-200 ${isFavorited ? "fill-red-500 text-red-500" : ""}`} 
+              className={`transition-colors duration-150 ${isFavorited ? "fill-red-500 text-red-500" : ""}`} 
             />
           </Button>
         </div>
@@ -110,7 +111,10 @@ function PropertyCard({ property }: PropertyCardProps) {
         </div>
         <p className="text-gray-600 text-xs sm:text-sm mb-4 line-clamp-2">{property.description}</p>
         <Link href={`/propriedade/${property.id}`}>
-          <Button className="w-full bg-zuhause-blue text-white py-2 sm:py-3 rounded-lg font-medium hover:bg-zuhause-blue-dark transition-all duration-200 will-change-transform hover:scale-[1.02] text-sm sm:text-base">
+          <Button 
+            className="w-full bg-zuhause-blue text-white py-2 sm:py-3 rounded-lg font-medium hover:bg-zuhause-blue-dark transition-all duration-150 hover:scale-[1.02] text-sm sm:text-base transform"
+            style={{ willChange: 'transform' }}
+          >
             Ver Detalhes
           </Button>
         </Link>

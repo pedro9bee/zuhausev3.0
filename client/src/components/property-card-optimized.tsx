@@ -41,21 +41,22 @@ function PropertyCard({ property }: PropertyCardProps) {
   }, [property.price, property.rentPrice, property.isForSale, formatPrice]);
 
   return (
-    <Card className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group transform hover:scale-[1.02] will-change-transform">
-      <div className="relative overflow-hidden">
+    <Card className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-150 group property-card">
+      <div className="relative overflow-hidden" style={{ contain: 'layout paint' }}>
         <div className="relative w-full h-64 bg-gray-200">
           <img 
             src={property.images[0]} 
             alt={property.title} 
-            className={`w-full h-full object-cover transition-all duration-200 ${
+            className={`w-full h-full object-cover transition-transform duration-150 ${
               imageLoaded ? 'opacity-100 group-hover:scale-105' : 'opacity-0'
             }`}
             loading="eager"
             decoding="async"
             onLoad={handleImageLoad}
             style={{
-              willChange: 'transform',
-              transform: 'translateZ(0)', // Force hardware acceleration
+              transform: 'translate3d(0, 0, 0)',
+              backfaceVisibility: 'hidden',
+              contain: 'layout paint'
             }}
           />
           {!imageLoaded && (

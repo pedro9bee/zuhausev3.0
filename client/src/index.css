@@ -8,13 +8,14 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto; /* Disable smooth scroll to prevent lag */
 }
 
 body {
   font-display: swap;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
+  transform: translateZ(0); /* Force hardware acceleration */
 }
 
 img {
@@ -60,39 +61,74 @@ button:hover {
   contain: layout;
 }
 
-/* Aggressive performance optimizations */
-section {
-  contain: layout style;
-}
-
-/* Optimize large content blocks */
-.property-grid {
-  contain: layout style paint;
-}
-
-/* Reduce reflow/repaint on scroll */
-.scroll-container {
-  transform: translateZ(0);
+/* Critical scroll performance fixes */
+*:not(html):not(body) {
   backface-visibility: hidden;
-  perspective: 1000px;
+  transform: translateZ(0);
 }
 
-/* Memory and CPU optimizations */
-.heavy-content {
-  will-change: auto;
+/* Prevent scroll jank */
+html {
+  scroll-padding-top: 0;
+  scroll-snap-type: none;
+}
+
+/* Optimize scroll container */
+.main-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: auto;
+}
+
+/* Aggressive containment for performance */
+section {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+.property-grid {
+  contain: strict;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Eliminate reflow during scroll */
+.scroll-container {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
   contain: layout style paint;
 }
 
-/* Prevent layout thrashing */
-.testimonial-carousel {
-  contain: layout;
+/* Optimize animations */
+.transition-all {
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
 }
 
-/* Optimize font rendering */
+/* Force GPU acceleration for all interactive elements */
+button, a, .group {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Optimize font rendering for speed */
 body {
   text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-feature-settings: normal;
+}
+
+/* Reduce paint complexity */
+.card, .property-card {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+/* Optimize testimonial carousel */
+.testimonial-carousel {
+  contain: strict;
+  transform: translate3d(0, 0, 0);
 }
 
 :root {

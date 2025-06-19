@@ -2,13 +2,44 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
+import compression from "compression";
 
 const app = express();
+
+// Enable gzip compression for better performance
+app.use(compression({
+  level: 6,
+  threshold: 1024, // Only compress files larger than 1KB
+  filter: (req, res) => {
+    // Don't compress if the client doesn't support it
+    if (req.headers['x-no-compression']) {
+      return false;
+    }
+    // Fallback to standard compression filter
+    return compression.filter(req, res);
+  }
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Serve attached assets
-app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached_assets')));
+// Serve attached assets with cache headers for performance
+app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached_assets'), {
+  maxAge: '1y', // Cache images for 1 year
+  etag: true,
+  lastModified: true,
+  immutable: true,
+  setHeaders: (res, path) => {
+    // Set aggressive caching for images
+    if (path.match(/\.(jpg|jpeg|png|gif|svg|ico|webp)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+    // Set moderate caching for videos
+    if (path.match(/\.(mp4|webm|ogg)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400'); // 1 day
+    }
+  }
+}));
 
 app.use((req, res, next) => {
   const start = Date.now();

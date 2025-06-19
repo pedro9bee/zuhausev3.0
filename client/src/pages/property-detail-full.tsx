@@ -191,9 +191,15 @@ export default function PropertyDetailFull() {
                       <img 
                         src={image} 
                         alt={`${property.title} - ${index + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading={index === 0 ? "eager" : "lazy"}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="eager"
                         decoding="async"
+                        style={{
+                          willChange: 'transform',
+                          transform: 'translateZ(0)',
+                          contentVisibility: 'auto',
+                          containIntrinsicSize: '100% 70vh'
+                        }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

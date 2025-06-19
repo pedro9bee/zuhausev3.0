@@ -284,10 +284,11 @@ export default function Properties() {
               {sortedProperties.map((property, index) => (
                 <Card 
                   key={property.id} 
-                  className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-zuhause-blue/20 ${viewMode === "list" ? "flex flex-row" : ""}`}
+                  className={`group overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-zuhause-blue/20 will-change-transform ${viewMode === "list" ? "flex flex-row" : ""}`}
                   style={{
-                    animationDelay: `${index * 100}ms`,
-                    animation: "slideInUp 0.8s ease-out forwards"
+                    animationDelay: `${index * 50}ms`,
+                    animation: "slideInUp 0.5s ease-out forwards",
+                    willChange: 'transform'
                   }}
                 >
                   <div 
@@ -297,9 +298,17 @@ export default function Properties() {
                     <img 
                       src={property.images && property.images.length > 0 ? property.images[0] : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
                       alt={property.title}
-                      className={`object-cover transition-all duration-700 group-hover:scale-110 ${
+                      className={`object-cover transition-all duration-300 group-hover:scale-105 ${
                         viewMode === "list" ? "w-full h-full" : "w-full h-56"
                       }`}
+                      loading="eager"
+                      decoding="async"
+                      style={{
+                        willChange: 'transform',
+                        transform: 'translateZ(0)',
+                        contentVisibility: 'auto',
+                        containIntrinsicSize: viewMode === "list" ? '100% 100%' : '100% 224px'
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
@@ -312,8 +321,12 @@ export default function Properties() {
                       </div>
                     )}
                     
-                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-2">
-                      <Button size="sm" className="bg-white/90 text-gray-700 hover:bg-white backdrop-blur-sm shadow-lg">
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-200 flex gap-2">
+                      <Button 
+                        size="sm" 
+                        className="bg-white/90 text-gray-700 hover:bg-white backdrop-blur-sm shadow-lg transition-all duration-150 hover:scale-110"
+                        style={{ willChange: 'transform' }}
+                      >
                         <Heart size={14} />
                       </Button>
                       <Button 
@@ -322,11 +335,12 @@ export default function Properties() {
                           e.stopPropagation();
                           toggleAudio(property.id);
                         }}
-                        className={`backdrop-blur-sm shadow-lg transition-all duration-200 ${
+                        className={`backdrop-blur-sm shadow-lg transition-all duration-150 hover:scale-110 ${
                           isAudioPlaying[property.id] 
                             ? 'bg-zuhause-blue text-white animate-pulse' 
                             : 'bg-white/90 text-gray-700 hover:bg-white'
                         }`}
+                        style={{ willChange: 'transform' }}
                       >
                         {isAudioPlaying[property.id] ? <Pause size={14} /> : <Play size={14} />}
                       </Button>
@@ -371,7 +385,8 @@ export default function Properties() {
                         variant="outline"
                         size="sm"
                         onClick={() => handleNavigation(`/propriedade/${property.id}`)}
-                        className="bg-zuhause-blue hover:bg-blue-700 text-white border-0 hover:scale-105 hover:shadow-lg transition-all duration-200"
+                        className="bg-zuhause-blue hover:bg-blue-700 text-white border-0 hover:scale-105 hover:shadow-lg transition-all duration-150 transform"
+                        style={{ willChange: 'transform' }}
                       >
                         <Eye size={14} className="mr-1" />
                         Detalhes

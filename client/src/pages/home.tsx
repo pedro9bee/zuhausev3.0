@@ -53,9 +53,15 @@ function Home() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 property-grid">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 property-grid scroll-container">
               {featuredProperties.map((property, index) => (
-                <div key={property.id} style={{ animationDelay: `${index * 100}ms` }}>
+                <div 
+                  key={property.id} 
+                  style={{ 
+                    animationDelay: `${index * 50}ms`,
+                    contain: 'layout style paint'
+                  }}
+                >
                   <PropertyCard property={property} />
                 </div>
               ))}

@@ -21,8 +21,23 @@ app.use(compression({
   }
 }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: false, limit: '10mb' }));
+
+// Add performance headers
+app.use((req, res, next) => {
+  // Enable keep-alive
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Keep-Alive', 'timeout=5, max=1000');
+  
+  // Optimize resource hints
+  res.setHeader('X-DNS-Prefetch-Control', 'on');
+  
+  // Prevent unnecessary prefetching
+  res.setHeader('X-Robots-Tag', 'noarchive, nosnippet');
+  
+  next();
+});
 
 // Serve attached assets with cache headers for performance
 app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached_assets'), {

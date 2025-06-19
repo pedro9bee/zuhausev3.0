@@ -146,8 +146,13 @@ export default function PropertyDetailFull() {
                         src={image} 
                         alt={`${property.title} - ${index + 1}`}
                         className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-                        loading="lazy"
+                        loading="eager"
                         decoding="async"
+                        style={{
+                          willChange: 'transform',
+                          transform: 'translateZ(0)',
+                          contentVisibility: 'auto'
+                        }}
                       />
                     </div>
                   </CarouselItem>

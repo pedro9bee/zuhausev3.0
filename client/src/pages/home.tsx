@@ -3,7 +3,7 @@ import HeroSection from "@/components/hero-section";
 import PropertySearch from "@/components/property-search";
 import { useQuery } from "@tanstack/react-query";
 import type { Property, Testimonial } from "@shared/schema";
-import PropertyCard from "@/components/property-card";
+import PropertyCard from "@/components/property-card-optimized";
 import ContactForm from "@/components/contact-form";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";

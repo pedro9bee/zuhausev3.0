@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo, useCallback } from "react";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ interface PropertyCardProps {
   property: Property;
 }
 
-export default function PropertyCard({ property }: PropertyCardProps) {
+function PropertyCard({ property }: PropertyCardProps) {
   const [isFavorited, setIsFavorited] = useState(false);
 
   const formatPrice = (price: string) => {
@@ -21,11 +21,11 @@ export default function PropertyCard({ property }: PropertyCardProps) {
     }).format(parseFloat(price));
   };
 
-  const toggleFavorite = (e: React.MouseEvent) => {
+  const toggleFavorite = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsFavorited(!isFavorited);
-  };
+  }, [isFavorited]);
 
   return (
     <Card className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 group">
@@ -34,6 +34,8 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           src={property.images[0]} 
           alt={property.title} 
           className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700" 
+          loading="lazy"
+          decoding="async"
         />
         {property.isFeatured && (
           <div className="absolute top-4 left-4">
@@ -95,3 +97,5 @@ export default function PropertyCard({ property }: PropertyCardProps) {
     </Card>
   );
 }
+
+export default memo(PropertyCard);

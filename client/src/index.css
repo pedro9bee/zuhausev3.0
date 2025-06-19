@@ -60,6 +60,41 @@ button:hover {
   contain: layout;
 }
 
+/* Aggressive performance optimizations */
+section {
+  contain: layout style;
+}
+
+/* Optimize large content blocks */
+.property-grid {
+  contain: layout style paint;
+}
+
+/* Reduce reflow/repaint on scroll */
+.scroll-container {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Memory and CPU optimizations */
+.heavy-content {
+  will-change: auto;
+  contain: layout style paint;
+}
+
+/* Prevent layout thrashing */
+.testimonial-carousel {
+  contain: layout;
+}
+
+/* Optimize font rendering */
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);

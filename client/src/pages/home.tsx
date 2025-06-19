@@ -1,9 +1,10 @@
 import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
 import PropertySearch from "@/components/property-search";
-import { properties, testimonials } from "@/data/static-data";
+import { useQuery } from "@tanstack/react-query";
+import type { Property, Testimonial } from "@shared/schema";
 import PropertyCard from "@/components/property-card";
-import ContactForm from "@/components/contact-form-static";
+import ContactForm from "@/components/contact-form";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,9 +14,15 @@ import { Instagram } from "lucide-react";
 import { Link } from "wouter";
 
 export default function Home() {
+  const { data: properties = [], isLoading: propertiesLoading } = useQuery<Property[]>({
+    queryKey: ["/api/properties"],
+  });
+
+  const { data: testimonials = [], isLoading: testimonialsLoading } = useQuery<Testimonial[]>({
+    queryKey: ["/api/testimonials"],
+  });
+
   const featuredProperties = properties.slice(0, 6);
-  const propertiesLoading = false;
-  const testimonialsLoading = false;
 
   return (
     <div className="min-h-screen">

@@ -1,7 +1,8 @@
 import { useParams } from "wouter";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
-import { properties } from "@/data/static-data";
+import { useQuery } from "@tanstack/react-query";
+import type { Property } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,9 +11,9 @@ import { Bed, Bath, Square, MapPin, Heart, Share2, Phone, Mail } from "lucide-re
 export default function PropertyDetail() {
   const { id } = useParams<{ id: string }>();
   
-  const property = properties.find(p => p.id === parseInt(id || '0'));
-  const isLoading = false;
-  const error = !property;
+  const { data: property, isLoading, error } = useQuery<Property>({
+    queryKey: ["/api/properties", id],
+  });
 
   if (error) {
     return (

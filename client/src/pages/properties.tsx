@@ -1,7 +1,8 @@
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 import PropertySearch from "@/components/property-search";
-import { properties } from "@/data/static-data";
+import { useQuery } from "@tanstack/react-query";
+import type { Property } from "@shared/schema";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -46,7 +47,9 @@ export default function Properties() {
     setNavigationLocation(path);
   };
 
-  const isLoading = false;
+  const { data: properties = [], isLoading } = useQuery<Property[]>({
+    queryKey: ["/api/properties"],
+  });
 
   const toggleAudio = (propertyId: number) => {
     setIsAudioPlaying(prev => ({

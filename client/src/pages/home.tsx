@@ -14,7 +14,7 @@ import { Instagram } from "lucide-react";
 import { Link } from "wouter";
 import { memo, useMemo, useCallback } from "react";
 
-export default function Home() {
+function Home() {
   const { data: properties = [], isLoading: propertiesLoading } = useQuery<Property[]>({
     queryKey: ["/api/properties"],
   });
@@ -23,7 +23,7 @@ export default function Home() {
     queryKey: ["/api/testimonials"],
   });
 
-  const featuredProperties = properties.slice(0, 6);
+  const featuredProperties = useMemo(() => properties.slice(0, 6), [properties]);
 
   return (
     <div className="min-h-screen">
@@ -53,9 +53,11 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {featuredProperties.map((property) => (
-                <PropertyCard key={property.id} property={property} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 property-grid">
+              {featuredProperties.map((property, index) => (
+                <div key={property.id} style={{ animationDelay: `${index * 100}ms` }}>
+                  <PropertyCard property={property} />
+                </div>
               ))}
             </div>
           )}
@@ -368,3 +370,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default memo(Home);

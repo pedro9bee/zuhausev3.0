@@ -99,6 +99,11 @@ ZuHause is a full-stack real estate platform built for property management and c
 ## Changelog
 
 Recent Changes:
+- June 19, 2025: Restored featured property card animations on homepage to match Properties page
+  - Added slideInUp animation with staggered delays
+  - Implemented hover effects with elevation and shadow transitions
+  - Added backdrop blur and transparency effects
+  - Maintained performance optimizations while restoring visual animations
 - June 19, 2025: Comprehensive performance optimization implementation
   - Added lazy loading for all images with proper loading attributes
   - Implemented React.memo() and useCallback() for PropertyCard component optimization

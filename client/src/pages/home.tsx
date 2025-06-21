@@ -57,8 +57,11 @@ function Home() {
               {featuredProperties.map((property, index) => (
                 <div 
                   key={property.id} 
-                  style={{ 
+                  className="group overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-zuhause-blue/20 will-change-transform"
+                  style={{
                     animationDelay: `${index * 50}ms`,
+                    animation: "slideInUp 0.5s ease-out forwards",
+                    willChange: 'transform',
                     contain: 'layout style paint'
                   }}
                 >

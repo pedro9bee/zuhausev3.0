@@ -131,6 +131,18 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
+/* Animation for property cards */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);

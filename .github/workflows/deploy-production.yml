@@ -1,4 +1,4 @@
-name: Deploy to Oracle Cloud Production (Separated Jobs)
+name: Deploy to Oracle Cloud Production
 
 on:
   push:
@@ -7,9 +7,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/zuhausev3.0/zuhause  # Ajustado para refletir a estrutura zuhausev3.0/zuhause
-  REGISTRY_USERNAME: pedro9bee
-
+  IMAGE_NAME: ${{ github.repository }}/zuhause
+  
 jobs:
   build-job:
     runs-on: ubuntu-latest
@@ -21,37 +20,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0  # Fetch all history for accurate metadata
-      run: |
-        echo "✅ Code checked out from repository: https://github.com/pedro9bee/zuhausev3.0"
-        ls -la
-
+        fetch-depth: 0
+        
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
-      run: |
-        echo "🔧 Setting up Docker Buildx environment..."
-        docker buildx version
-
-    - name: Log in to GitHub Container Registry with GITHUB_TOKEN
+      
+    - name: Log in to GitHub Container Registry
       uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        echo "🔐 Logging in to GitHub Container Registry with GITHUB_TOKEN..."
-        echo "Using username: ${{ github.actor }}"
-
-    - name: Log in to GHCR with Personal Token
-      uses: docker/login-action@v3
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ env.REGISTRY_USERNAME }}
+        username: ${{ secrets.GHCR_USERNAME }}
         password: ${{ secrets.GHCR_TOKEN }}
-      run: |
-        echo "🔐 Logging in to GHCR with personal token for pedro9bee..."
-        echo "Registry: ${{ env.REGISTRY }}"
-
+        
     - name: Extract metadata for Docker image
       id: meta
       uses: docker/metadata-action@v5
@@ -60,11 +40,8 @@ jobs:
         tags: |
           type=ref,event=branch
           type=sha,prefix={{branch}}-
-          type=raw,value=production,enable={{is_default_branch}}
-      run: |
-        echo "📋 Extracting metadata for Docker image..."
-        echo "Generated tags: ${{ steps.meta.outputs.tags }}"
-
+          type=raw,value=latest
+          
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
@@ -74,15 +51,11 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
-      run: |
-        echo "🏗️ Building Docker image with tags: ${{ steps.meta.outputs.tags }}"
-        echo "Pushing image to ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}..."
-        docker images
-
+        
     - name: Verify image push
       run: |
         echo "✅ Image build and push completed!"
-        echo "Image available at: ghcr.io/pedro9bee/zuhausev3.0/zuhause:production"
+        echo "Image available at: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
 
   deploy-job:
     runs-on: ubuntu-latest
@@ -93,19 +66,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      run: |
-        echo "✅ Code checked out for deploy preparation..."
-
+      
     - name: Deploy to Oracle Cloud Instance
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.OCI_SSH_PRIVATE_KEY }}
-        SSH_USER: ${{ secrets.OCI_SSH_USER }}
-        INSTANCE_IP: ${{ secrets.OCI_INSTANCE_IP }}
-        GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
       run: |
         echo "🚀 Starting deployment to Oracle Cloud Instance..."
-        echo "Target IP: $INSTANCE_IP"
-        echo "SSH User: $SSH_USER"
+        echo "Target IP: ${{ secrets.OCI_HOST }}"
+        echo "SSH User: ${{ secrets.OCI_USERNAME }}"
+
+        # Create SSH key file
+        echo "${{ secrets.OCI_SSH_KEY }}" > /tmp/ssh_key
+        chmod 600 /tmp/ssh_key
 
         # Create deployment script
         echo "📝 Creating deployment script..."
@@ -117,100 +87,89 @@ jobs:
         
         # Log in to GitHub Container Registry
         echo "🔐 Logging in to GHCR on instance..."
-        echo "$GHCR_TOKEN" | sudo docker login ghcr.io -u pedro9bee --password-stdin
+        echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
         
         # Stop and remove existing container
         echo "🛑 Stopping and removing existing container..."
-        sudo docker stop zuhause-prod || true
-        sudo docker rm zuhause-prod || true
+        docker stop zuhause-prod || true
+        docker rm zuhause-prod || true
         
         # Pull the latest image
-        echo "📥 Pulling image ghcr.io/pedro9bee/zuhausev3.0/zuhause:production..."
-        sudo docker pull ghcr.io/pedro9bee/zuhausev3.0/zuhause:production
-        
-        # Create environment file
-        echo "📝 Creating environment file /tmp/.env..."
-        cat > /tmp/.env << 'ENVEOF'
-        NODE_ENV=production
-        AIRTABLE_API_KEY=${AIRTABLE_API_KEY}
-        AIRTABLE_BASE_ID=${AIRTABLE_BASE_ID}
-        AIRTABLE_TABLE_NAME=${AIRTABLE_TABLE_NAME}
-        AIRTABLE_VIEW_ID=${AIRTABLE_VIEW_ID}
-        SESSION_SECRET=${SESSION_SECRET}
-        ENVEOF
+        echo "📥 Pulling image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest..."
+        docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
         
         # Run new container
         echo "🚀 Starting new container..."
-        sudo docker run -d \
+        docker run -d \
           --name zuhause-prod \
           --restart unless-stopped \
-          -p 80:3000 \
-          --env-file /tmp/.env \
-          ghcr.io/pedro9bee/zuhausev3.0/zuhause:production
-        
-        # Clean up
-        echo "🧹 Cleaning up temporary files..."
-        rm /tmp/.env
+          -p 3000:3000 \
+          -e NODE_ENV=production \
+          -e AIRTABLE_API_KEY="${{ secrets.AIRTABLE_API_KEY }}" \
+          -e AIRTABLE_BASE_ID="${{ secrets.AIRTABLE_BASE_ID }}" \
+          -e AIRTABLE_TABLE_NAME="${{ secrets.AIRTABLE_TABLE_NAME }}" \
+          -e AIRTABLE_VIEW_ID="${{ secrets.AIRTABLE_VIEW_ID }}" \
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
         
         # Clean up old images
         echo "🧹 Pruning unused images..."
-        sudo docker image prune -f
+        docker image prune -f
         
         echo "✅ Deployment completed on instance!"
         EOF
         
         # Make script executable
-        echo "🔧 Making deploy script executable..."
         chmod +x deploy.sh
         
-        # Copy and execute deployment script on Oracle Cloud instance
-        echo "📤 Copying deploy script to $INSTANCE_IP..."
-        echo "$SSH_PRIVATE_KEY" | ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /dev/stdin "$SSH_USER@$INSTANCE_IP" "cat > /tmp/deploy.sh"
+        # Copy deployment script to Oracle Cloud instance
+        echo "📤 Copying deploy script to ${{ secrets.OCI_HOST }}..."
+        scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+          -i /tmp/ssh_key \
+          deploy.sh ${{ secrets.OCI_USERNAME }}@${{ secrets.OCI_HOST }}:/tmp/
         
-        echo "🚀 Executing deploy script on $INSTANCE_IP..."
-        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i <(echo "$SSH_PRIVATE_KEY") "$SSH_USER@$INSTANCE_IP" "chmod +x /tmp/deploy.sh && /tmp/deploy.sh"
+        # Execute deployment script on Oracle Cloud instance
+        echo "🚀 Executing deploy script on ${{ secrets.OCI_HOST }}..."
+        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+          -i /tmp/ssh_key \
+          ${{ secrets.OCI_USERNAME }}@${{ secrets.OCI_HOST }} \
+          "chmod +x /tmp/deploy.sh && /tmp/deploy.sh"
+        
+        # Clean up SSH key
+        rm -f /tmp/ssh_key
       
     - name: Health Check
-      env:
-        INSTANCE_IP: ${{ secrets.OCI_INSTANCE_IP }}
       run: |
         echo "🔍 Starting health check for application..."
-        echo "Target URL: http://$INSTANCE_IP/"
+        echo "Target URL: http://${{ secrets.OCI_HOST }}:3000/"
+        
         # Wait for deployment to complete
         echo "⏳ Waiting 30 seconds for container to start..."
         sleep 30
         
         # Check if the application is responding
         for i in {1..12}; do
-          echo "🔍 Attempt $i/12: Checking http://$INSTANCE_IP/..."
-          if curl -f -s http://$INSTANCE_IP/; then
-            echo "✅ Application is healthy and responding at http://$INSTANCE_IP/"
+          echo "🔍 Attempt $i/12: Checking http://${{ secrets.OCI_HOST }}:3000/..."
+          if curl -f -s http://${{ secrets.OCI_HOST }}:3000/; then
+            echo "✅ Application is healthy and responding at http://${{ secrets.OCI_HOST }}:3000/"
             exit 0
           fi
           echo "⏳ Waiting for application to start... (attempt $i/12)"
           sleep 10
         done
         
-        echo "❌ Health check failed - application not responding at http://$INSTANCE_IP/"
-        
-        # Get container logs for debugging
-        echo "📋 Fetching container logs from $INSTANCE_IP..."
-        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i <(echo "${{ secrets.OCI_SSH_PRIVATE_KEY }}") "${{ secrets.OCI_SSH_USER }}@$INSTANCE_IP" "sudo docker logs zuhause-prod --tail 50"
-        
+        echo "❌ Health check failed - application not responding at http://${{ secrets.OCI_HOST }}:3000/"
         exit 1
         
     - name: Deployment Summary
       if: always()
-      env:
-        INSTANCE_IP: ${{ secrets.OCI_INSTANCE_IP }}
       run: |
         echo "📊 Generating deployment summary..."
         echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         if [ "${{ job.status }}" == "success" ]; then
           echo "✅ **Status**: Deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
-          echo "🌐 **Application URL**: http://$INSTANCE_IP" >> $GITHUB_STEP_SUMMARY
-          echo "🐳 **Docker Image**: \`ghcr.io/pedro9bee/zuhausev3.0/zuhause:production\`" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 **Application URL**: http://${{ secrets.OCI_HOST }}:3000" >> $GITHUB_STEP_SUMMARY
+          echo "🐳 **Docker Image**: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest\`" >> $GITHUB_STEP_SUMMARY
         else
           echo "❌ **Status**: Deployment failed" >> $GITHUB_STEP_SUMMARY
           echo "📋 **Details**: Check the workflow logs for detailed error information" >> $GITHUB_STEP_SUMMARY

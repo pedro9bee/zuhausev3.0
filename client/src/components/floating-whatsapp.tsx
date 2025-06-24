@@ -33,9 +33,11 @@ export default function FloatingWhatsapp() {
   }, []);
 
   return (
-    <div className={`fixed bottom-6 right-6 z-50 transition-all duration-500 ${
-      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
-    }`}>
+    <div 
+      className={`fixed bottom-6 right-6 z-50 transition-all duration-500 ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
+      }`}
+    >
       {/* Expanded message */}
       {isExpanded && (
         <div className="mb-4 mr-2 bg-white p-4 rounded-lg shadow-lg border max-w-xs relative animate-in slide-in-from-bottom-2">

@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import whiteLogo from "@assets/white_logo_transparent_background_1749928120484.png";
+import whiteLogo from "@assets/webp/white_logo_transparent_background_1749928120484.webp";
 import { Instagram } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 

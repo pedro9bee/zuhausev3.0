@@ -293,10 +293,10 @@ export default function Properties() {
                 >
                   <div 
                     className={`relative overflow-hidden cursor-pointer ${viewMode === "list" ? "w-80 flex-shrink-0" : ""}`}
-                    onClick={() => setZoomedImage(property.images && property.images.length > 0 ? property.images[0] : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600")}
+                    onClick={() => setZoomedImage(property.images && property.images.length > 0 ? (typeof property.images[0] === 'string' ? property.images[0] : property.images[0]?.url) : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600")}
                   >
                     <img 
-                      src={property.images && property.images.length > 0 ? property.images[0] : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
+                      src={property.images && property.images.length > 0 ? (typeof property.images[0] === 'string' ? property.images[0] : property.images[0]?.url) : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
                       alt={property.title}
                       className={`object-cover transition-all duration-300 group-hover:scale-105 ${
                         viewMode === "list" ? "w-full h-full" : "w-full h-56"

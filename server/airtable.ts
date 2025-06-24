@@ -73,7 +73,7 @@ export const propertiesTable = {
       area: record.get('area') as number,
       type: record.get('type') as string,
       status: record.get('status') as string || 'available',
-      images: (record.get('images') as string[]) || [],
+      images: ((record.get('images') as any[]) || []).map(img => img.url || img),
       features: (record.get('features') as string[]) || [],
       isForSale: record.get('isForSale') as boolean ?? true,
       isForRent: record.get('isForRent') as boolean ?? false,
@@ -96,7 +96,7 @@ export const propertiesTable = {
         area: record.get('area') as number,
         type: record.get('type') as string,
         status: record.get('status') as string || 'available',
-        images: (record.get('images') as string[]) || [],
+        images: ((record.get('images') as any[]) || []).map(img => img.url || img),
         features: (record.get('features') as string[]) || [],
         isForSale: record.get('isForSale') as boolean ?? true,
         isForRent: record.get('isForRent') as boolean ?? false,
@@ -172,23 +172,37 @@ export const contactsTable = {
 export const testimonialsTable = {
   async findAll(): Promise<AirtableTestimonial[]> {
     const records = await base(TABLES.TESTIMONIALS).select().all();
-    return records.map(record => ({
-      id: record.id,
-      name: record.get('name') as string,
-      location: record.get('location') as string,
-      rating: record.get('rating') as number,
-      message: record.get('message') as string,
-      avatar: record.get('avatar') as string,
-    }));
+    return records.map(record => {
+      const fullText = record.get('Name') as string || '';
+      // Parse the format: "⭐⭐⭐⭐⭐ Nome - Local - 'Mensagem'"
+      const parts = fullText.split(' - ');
+      const stars = (fullText.match(/⭐/g) || []).length;
+      
+      let name = 'Cliente';
+      let location = 'São Paulo';
+      let message = fullText;
+      
+      if (parts.length >= 3) {
+        name = parts[0].replace(/⭐/g, '').trim();
+        location = parts[1];
+        message = parts.slice(2).join(' - ').replace(/['"]/g, '');
+      }
+      
+      return {
+        id: record.id,
+        name,
+        location,
+        rating: stars || 5,
+        message,
+        avatar: "https://i.pravatar.cc/150?img=" + Math.floor(Math.random() * 50),
+      };
+    });
   },
 
   async create(testimonial: Omit<AirtableTestimonial, 'id'>): Promise<AirtableTestimonial> {
+    const fullText = `${'⭐'.repeat(testimonial.rating)} ${testimonial.name} - ${testimonial.location} - '${testimonial.message}'`;
     const record = await base(TABLES.TESTIMONIALS).create({
-      name: testimonial.name,
-      location: testimonial.location,
-      rating: testimonial.rating,
-      message: testimonial.message,
-      avatar: testimonial.avatar,
+      Name: fullText,
     });
 
     return {

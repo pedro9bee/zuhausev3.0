@@ -45,7 +45,7 @@ function PropertyCard({ property }: PropertyCardProps) {
       <div className="relative overflow-hidden">
         <div className="relative w-full h-64 bg-gray-200">
           <img 
-            src={property.images[0]} 
+            src={typeof property.images[0] === 'string' ? property.images[0] : property.images[0]?.url} 
             alt={property.title} 
             className={`w-full h-full object-cover transition-all duration-200 will-change-transform ${
               imageLoaded ? 'opacity-100 group-hover:scale-105' : 'opacity-0'

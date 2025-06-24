@@ -1,0 +1,116 @@
+name: Deploy to Oracle Cloud Production
+
+on:
+  push:
+    branches: [production]
+  workflow_dispatch:
+
+env:
+  REGISTRY: iad.ocir.io
+  REGION: sa-saopaulo-1
+  COMPARTMENT_ID: ${{ secrets.OCI_COMPARTMENT_ID }}
+  
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Configure OCI CLI
+      uses: oracle-actions/configure-oci-cli@v1.1
+      with:
+        user: ${{ secrets.OCI_USER_OCID }}
+        fingerprint: ${{ secrets.OCI_KEY_FINGERPRINT }}
+        tenancy: ${{ secrets.OCI_TENANCY_OCID }}
+        region: ${{ env.REGION }}
+        private_key: ${{ secrets.OCI_PRIVATE_KEY }}
+        
+    - name: Log in to Oracle Container Registry
+      run: |
+        echo "${{ secrets.OCI_AUTH_TOKEN }}" | docker login ${{ env.REGISTRY }} -u "${{ secrets.OCI_TENANCY_NAMESPACE }}/${{ secrets.OCI_USERNAME }}" --password-stdin
+        
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: |
+          ${{ env.REGISTRY }}/${{ secrets.OCI_TENANCY_NAMESPACE }}/zuhause:latest
+          ${{ env.REGISTRY }}/${{ secrets.OCI_TENANCY_NAMESPACE }}/zuhause:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Deploy to Oracle Cloud Instance
+      run: |
+        # Create deployment script
+        cat > deploy.sh << 'EOF'
+        #!/bin/bash
+        set -e
+        
+        # Stop and remove existing container
+        sudo docker stop zuhause-prod || true
+        sudo docker rm zuhause-prod || true
+        
+        # Pull latest image
+        sudo docker pull ${{ env.REGISTRY }}/${{ secrets.OCI_TENANCY_NAMESPACE }}/zuhause:latest
+        
+        # Run new container
+        sudo docker run -d \
+          --name zuhause-prod \
+          --restart unless-stopped \
+          -p 80:3000 \
+          -e NODE_ENV=production \
+          -e AIRTABLE_API_KEY="${{ secrets.AIRTABLE_API_KEY }}" \
+          -e AIRTABLE_BASE_ID="${{ secrets.AIRTABLE_BASE_ID }}" \
+          -e AIRTABLE_TABLE_NAME="${{ secrets.AIRTABLE_TABLE_NAME }}" \
+          -e AIRTABLE_VIEW_ID="${{ secrets.AIRTABLE_VIEW_ID }}" \
+          -e SESSION_SECRET="${{ secrets.SESSION_SECRET }}" \
+          ${{ env.REGISTRY }}/${{ secrets.OCI_TENANCY_NAMESPACE }}/zuhause:latest
+        
+        # Clean up old images
+        sudo docker image prune -f
+        EOF
+        
+        # Make script executable
+        chmod +x deploy.sh
+        
+        # Copy and execute deployment script on Oracle Cloud instance
+        scp -o StrictHostKeyChecking=no -i <(echo "${{ secrets.OCI_SSH_PRIVATE_KEY }}") \
+          deploy.sh ${{ secrets.OCI_SSH_USER }}@${{ secrets.OCI_INSTANCE_IP }}:/tmp/
+        
+        ssh -o StrictHostKeyChecking=no -i <(echo "${{ secrets.OCI_SSH_PRIVATE_KEY }}") \
+          ${{ secrets.OCI_SSH_USER }}@${{ secrets.OCI_INSTANCE_IP }} \
+          "chmod +x /tmp/deploy.sh && /tmp/deploy.sh"
+          
+    - name: Health check
+      run: |
+        # Wait for deployment to complete
+        sleep 30
+        
+        # Check if the application is responding
+        for i in {1..10}; do
+          if curl -f http://${{ secrets.OCI_INSTANCE_IP }}/; then
+            echo "✅ Application is healthy!"
+            exit 0
+          fi
+          echo "Waiting for application to start... (attempt $i/10)"
+          sleep 10
+        done
+        
+        echo "❌ Health check failed"
+        exit 1
+        
+    - name: Notify deployment status
+      if: always()
+      run: |
+        if [ "${{ job.status }}" == "success" ]; then
+          echo "🚀 Deployment to Oracle Cloud completed successfully!"
+          echo "🌐 Application URL: http://${{ secrets.OCI_INSTANCE_IP }}"
+        else
+          echo "❌ Deployment failed. Check the logs for details."
+        fi

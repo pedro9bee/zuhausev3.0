@@ -1,50 +1,34 @@
-# Multi-stage build
-FROM node:18-alpine AS base
+# Etapa 1: Builder com dependências completas
+FROM node:18-alpine AS builder
 
-# Install dependencies stage
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-RUN npm ci --only=production
-
-# Build stage
-FROM base AS builder
-WORKDIR /app
+# Copia apenas os arquivos de dependência
 COPY package*.json ./
 RUN npm ci
 
-# Copy source code
+# Copia o restante da aplicação
 COPY . .
 
-# Build the application
+# Executa o build com Vite
 RUN npm run build
 
-# Production stage
-FROM base AS runner
+
+# Etapa 2: Runner com dependências de produção
+FROM node:18-alpine AS runner
+
 WORKDIR /app
 
+# Copia apenas os artefatos de build
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/attached_assets ./attached_assets
+
+# Copia apenas os arquivos de dependência novamente para instalar só as deps de produção
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Define variáveis de ambiente padrão (opcional)
 ENV NODE_ENV=production
 
-# Create non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Copy built application
-COPY --from=builder /app/dist ./dist
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-
-# Copy database migration files if they exist
-COPY --from=builder /app/migrations ./migrations 2>/dev/null || true
-COPY --from=builder /app/drizzle.config.ts ./drizzle.config.ts
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT=3000
-
-CMD ["npm", "start"]
+# Comando de inicialização
+CMD ["node", "dist/index.js"]

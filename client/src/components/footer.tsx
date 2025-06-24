@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import whiteLogo from "@assets/white_logo_transparent_background_1749928120484.png";
+import whiteLogo from "@assets/webp/white_logo_transparent_background_1749928120484.webp";
 import { Instagram } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -14,6 +14,8 @@ export default function Footer() {
                 src={whiteLogo} 
                 alt="ZuHause Imóveis" 
                 className="h-20 sm:h-24 w-auto"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <p className="text-gray-300 text-base sm:text-lg mb-4 sm:mb-6 max-w-md">16 anos oferecendo uma experiência única e humana na compra e venda de imóveis no Rio de Janeiro.</p>

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import heroImage from "@assets/DSC05718-HDR-20_1750156747504.jpg";
+import heroImage from "@assets/webp/DSC05718-HDR-20_1750156747504.webp";
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -15,7 +15,8 @@ export default function HeroSection() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('${heroImage}')`
+          backgroundImage: `url('${heroImage}')`,
+          willChange: 'transform'
         }}
       ></div>
       <div className="absolute inset-0 bg-gradient-to-r from-zuhause-blue/80 via-zuhause-blue/60 to-transparent"></div>

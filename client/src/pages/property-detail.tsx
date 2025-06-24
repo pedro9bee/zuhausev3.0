@@ -71,9 +71,17 @@ export default function PropertyDetail() {
           {/* Property Images */}
           <div className="relative mb-8">
             <img 
-              src={property.images && property.images.length > 0 ? property.images[0] : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600"} 
+              src={property.images && property.images.length > 0 ? (typeof property.images[0] === 'string' ? property.images[0] : property.images[0]?.url) : "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600"} 
               alt={property.title}
               className="w-full h-96 object-cover rounded-2xl"
+              loading="eager"
+              decoding="async"
+              style={{
+                willChange: 'transform',
+                transform: 'translateZ(0)',
+                contentVisibility: 'auto',
+                containIntrinsicSize: '100% 384px'
+              }}
             />
             <div className="absolute top-4 left-4">
               <Badge className={property.isForSale ? "bg-green-500" : "bg-blue-500"}>

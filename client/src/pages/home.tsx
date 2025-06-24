@@ -3,7 +3,7 @@ import HeroSection from "@/components/hero-section";
 import PropertySearch from "@/components/property-search";
 import { useQuery } from "@tanstack/react-query";
 import type { Property, Testimonial } from "@shared/schema";
-import PropertyCard from "@/components/property-card";
+import PropertyCard from "@/components/property-card-optimized";
 import ContactForm from "@/components/contact-form";
 import Footer from "@/components/footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,8 +12,9 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Star, HomeIcon, Tag, Key, Calculator, Handshake, ClipboardList, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Instagram } from "lucide-react";
 import { Link } from "wouter";
+import { memo, useMemo, useCallback } from "react";
 
-export default function Home() {
+function Home() {
   const { data: properties = [], isLoading: propertiesLoading } = useQuery<Property[]>({
     queryKey: ["/api/properties"],
   });
@@ -22,7 +23,7 @@ export default function Home() {
     queryKey: ["/api/testimonials"],
   });
 
-  const featuredProperties = properties.slice(0, 6);
+  const featuredProperties = useMemo(() => properties.slice(0, 6), [properties]);
 
   return (
     <div className="min-h-screen">
@@ -52,9 +53,20 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {featuredProperties.map((property) => (
-                <PropertyCard key={property.id} property={property} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 property-grid scroll-container">
+              {featuredProperties.map((property, index) => (
+                <div 
+                  key={property.id} 
+                  className="group overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white/90 backdrop-blur-sm border-0 shadow-lg hover:shadow-zuhause-blue/20 will-change-transform"
+                  style={{
+                    animationDelay: `${index * 50}ms`,
+                    animation: "slideInUp 0.5s ease-out forwards",
+                    willChange: 'transform',
+                    contain: 'layout style paint'
+                  }}
+                >
+                  <PropertyCard property={property} />
+                </div>
               ))}
             </div>
           )}
@@ -132,7 +144,8 @@ export default function Home() {
                       controls
                       preload="metadata"
                     >
-                      <source src="/attached_assets/Frame01_1750177625956.mp4" type="video/mp4" />
+                      <source src="/attached_assets/webm/Frame01_1750177625956.webm" type="video/webm" />
+                      <source src="/attached_assets/originals/Frame01_1750177625956.mp4" type="video/mp4" />
                       Seu navegador não suporta vídeos HTML5.
                     </video>
                   </div>
@@ -198,9 +211,9 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {[
-              { name: "Júnior Martins", role: "Corretor", experience: "12 anos de experiência", image: "/attached_assets/Junior Martins_1750110494934.png" },
-              { name: "Pedro Lemos", role: "Diretor de AI", experience: "5 anos de experiência", image: "/attached_assets/kk_1750110195335.png" },
-              { name: "Camila Souza", role: "Corretora", experience: "6 anos de experiência", image: "/attached_assets/Leonardo_Kino_XL_A_candid_shot_of_the_real_estate_agent_holdin_0_1750111077584.jpg" },
+              { name: "Júnior Martins", role: "Corretor", experience: "12 anos de experiência", image: "/attached_assets/webp/Junior Martins_1750110494934.webp" },
+              { name: "Pedro Lemos", role: "Diretor de AI", experience: "5 anos de experiência", image: "/attached_assets/webp/kk_1750110195335.webp" },
+              { name: "Camila Souza", role: "Corretora", experience: "6 anos de experiência", image: "/attached_assets/webp/Leonardo_Kino_XL_A_candid_shot_of_the_real_estate_agent_holdin_0_1750111077584.webp" },
               { name: "Bruno Almeida", role: "Analista de Precificação de Imóveis", experience: "4 anos de experiência", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Ricardo Santos", role: "Especialista em Crédito Imobiliário", experience: "7 anos de experiência", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
               { name: "Fernanda Silva", role: "Gestora de Relacionamento com o Cliente", experience: "5 anos de experiência", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" },
@@ -367,3 +380,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default memo(Home);

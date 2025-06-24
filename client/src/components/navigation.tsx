@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import logo from "@assets/base_logo_transparent_background_1750168258045.png";
+import logo from "@assets/webp/base_logo_transparent_background_1750168258045.webp";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,6 +53,8 @@ export default function Navigation() {
               src={logo} 
               alt="ZuHause Imóveis" 
               className="h-24 w-auto"
+              loading="eager"
+              decoding="async"
             />
           </Link>
           

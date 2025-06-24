@@ -2,6 +2,147 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Disable smooth scroll to prevent lag */
+}
+
+body {
+  font-display: swap;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 200px;
+  image-rendering: optimizeQuality;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Optimize transitions for better performance */
+.group:hover .group-hover\:scale-110 {
+  will-change: transform;
+  transform: translateZ(0) scale(1.1);
+}
+
+.group:hover .group-hover\:scale-105 {
+  will-change: transform;
+  transform: translateZ(0) scale(1.05);
+}
+
+/* Button performance optimizations */
+button {
+  will-change: auto;
+}
+
+button:hover {
+  will-change: transform;
+}
+
+/* Card animation optimizations */
+.transition-all {
+  transition-property: transform, box-shadow, opacity;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Optimize property cards */
+.property-card {
+  contain: layout style paint;
+}
+
+/* Improve scroll performance */
+.overflow-hidden {
+  contain: layout;
+}
+
+/* Critical scroll performance fixes */
+*:not(html):not(body) {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Prevent scroll jank */
+html {
+  scroll-padding-top: 0;
+  scroll-snap-type: none;
+}
+
+/* Optimize scroll container */
+.main-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: auto;
+}
+
+/* Aggressive containment for performance */
+section {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+.property-grid {
+  contain: strict;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Eliminate reflow during scroll */
+.scroll-container {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* Optimize animations */
+.transition-all {
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+/* Force GPU acceleration for all interactive elements */
+button, a, .group {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Optimize font rendering for speed */
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-feature-settings: normal;
+}
+
+/* Reduce paint complexity */
+.card, .property-card {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+/* Optimize testimonial carousel */
+.testimonial-carousel {
+  contain: strict;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Animation for property cards */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);

@@ -1,14 +1,62 @@
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
+import compression from "compression";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
-// Serve attached assets
-app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached_assets')));
+// Enable aggressive gzip compression for better performance
+app.use(compression({
+  level: 9, // Maximum compression
+  threshold: 512, // Compress files larger than 512 bytes
+  memLevel: 8,
+  filter: (req, res) => {
+    // Don't compress if the client doesn't support it
+    if (req.headers['x-no-compression']) {
+      return false;
+    }
+    // Compress more aggressively
+    return compression.filter(req, res);
+  }
+}));
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: false, limit: '10mb' }));
+
+// Add performance headers
+app.use((req, res, next) => {
+  // Enable keep-alive
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('Keep-Alive', 'timeout=5, max=1000');
+  
+  // Optimize resource hints
+  res.setHeader('X-DNS-Prefetch-Control', 'on');
+  
+  // Prevent unnecessary prefetching
+  res.setHeader('X-Robots-Tag', 'noarchive, nosnippet');
+  
+  next();
+});
+
+// Serve attached assets with cache headers for performance
+app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached_assets'), {
+  maxAge: '1y', // Cache images for 1 year
+  etag: true,
+  lastModified: true,
+  immutable: true,
+  setHeaders: (res, path) => {
+    // Set aggressive caching for images
+    if (path.match(/\.(jpg|jpeg|png|gif|svg|ico|webp)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+    // Set moderate caching for videos
+    if (path.match(/\.(mp4|webm|ogg)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400'); // 1 day
+    }
+  }
+}));
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -60,10 +108,8 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
+  // Use port from environment or default to 3000
+  const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
   server.listen({
     port,
     host: "0.0.0.0",

@@ -12,7 +12,7 @@ const dummyProperties = [
     area: 280,
     type: "Casa",
     status: "available",
-    images: ["/attached_assets/Alphaville 2_1750107264406.jpg"],
+    images: ["/attached_assets/webp/Alphaville 2_1750107264406.webp"],
     features: ["Piscina", "Área Gourmet", "Garagem", "Jardim"],
     isForSale: true,
     isForRent: false,
@@ -28,7 +28,7 @@ const dummyProperties = [
     area: 200,
     type: "Apartamento",
     status: "available",
-    images: ["/attached_assets/DSC03004_1750194498785.jpg"],
+    images: ["/attached_assets/webp/DSC03004_1750194498785.webp"],
     features: ["Terraço", "Churrasqueira", "Vista Panorâmica", "Suítes"],
     isForSale: true,
     isForRent: true,
@@ -45,7 +45,7 @@ const dummyProperties = [
     area: 150,
     type: "Casa",
     status: "available",
-    images: ["/attached_assets/Arouca_1750105633487.jpg"],
+    images: ["/attached_assets/webp/Arouca_1750105633487.webp"],
     features: ["Terreno Grande", "Árvores Frutíferas", "Varanda", "Lareira"],
     isForSale: true,
     isForRent: false,
@@ -61,7 +61,7 @@ const dummyProperties = [
     area: 320,
     type: "Sobrado",
     status: "available",
-    images: ["/attached_assets/GoldenGreen_1750105349165.jpg"],
+    images: ["/attached_assets/webp/GoldenGreen_1750105349165.webp"],
     features: ["Área de Lazer", "Suítes", "Garagem", "Jardim Paisagístico"],
     isForSale: true,
     isForRent: false,
@@ -77,7 +77,7 @@ const dummyProperties = [
     area: 180,
     type: "Casa",
     status: "available",
-    images: ["/attached_assets/Jardim Itanhangá_1750105882168.jpg"],
+    images: ["/attached_assets/webp/Jardim Itanhangá_1750105882168.webp"],
     features: ["Quintal", "Garagem", "Área de Serviço", "Localização"],
     isForSale: true,
     isForRent: true,
@@ -92,28 +92,28 @@ const dummyTestimonials = [
     location: "Alphaville, SP",
     rating: 5,
     message: "Excelente atendimento! Encontrei a casa dos meus sonhos rapidamente. Equipe muito profissional e atenciosa.",
-    avatar: "/attached_assets/Junior Martins_1750110494934.png"
+    avatar: "/attached_assets/webp/Junior Martins_1750110494934.webp"
   },
   {
     name: "João Santos",
     location: "Vila Madalena, SP",
     rating: 5,
     message: "Processo de compra muito tranquilo. Recomendo a todos que buscam um imóvel de qualidade.",
-    avatar: "/attached_assets/Leonardo_Kino_XL_A_candid_shot_of_the_real_estate_agent_holdin_0_1750111077584.jpg"
+    avatar: "/attached_assets/webp/Leonardo_Kino_XL_A_candid_shot_of_the_real_estate_agent_holdin_0_1750111077584.webp"
   },
   {
     name: "Ana Costa",
     location: "Atibaia, SP",
     rating: 4,
     message: "Ótima experiência! Venderam minha casa rapidamente e com um preço justo. Muito satisfeita.",
-    avatar: "/attached_assets/Junior Martins_1750110494934.png"
+    avatar: "/attached_assets/webp/Junior Martins_1750110494934.webp"
   },
   {
     name: "Carlos Oliveira",
     location: "Barueri, SP",
     rating: 5,
     message: "Profissionais competentes e honestos. Me ajudaram a encontrar o investimento perfeito.",
-    avatar: "/attached_assets/Leonardo_Kino_XL_A_candid_shot_of_the_real_estate_agent_holdin_0_1750111077584.jpg"
+    avatar: "/attached_assets/webp/Leonardo_Kino_XL_A_candid_shot_of_the_real_estate_agent_holdin_0_1750111077584.webp"
   }
 ];
 

@@ -153,7 +153,8 @@ export default function Properties() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/attached_assets/f1da91e5-ccce-41a1-a7ae-eecb9064992b_1750174683947.mp4" type="video/mp4" />
+            <source src="/attached_assets/webm/f1da91e5-ccce-41a1-a7ae-eecb9064992b_1750174683947.webm" type="video/webm" />
+            <source src="/attached_assets/originals/f1da91e5-ccce-41a1-a7ae-eecb9064992b_1750174683947.mp4" type="video/mp4" />
           </video>
         </div>
         

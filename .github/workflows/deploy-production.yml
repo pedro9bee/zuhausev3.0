@@ -1,4 +1,4 @@
-name: Deploy to Oracle Cloud Production
+name: Build and Deploy to Oracle Cloud Production
 
 on:
   push:
@@ -10,11 +10,16 @@ env:
   IMAGE_NAME: ${{ github.repository }}/zuhausev3.0/zuhause
   
 jobs:
-  build-and-deploy:
+  build:
+    name: Build Docker Image
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+    
+    outputs:
+      image-digest: ${{ steps.build.outputs.digest }}
+      image-tag: ${{ steps.meta.outputs.tags }}
     
     steps:
     - name: Checkout code
@@ -41,6 +46,7 @@ jobs:
           type=raw,value=latest
           
     - name: Build and push Docker image
+      id: build
       uses: docker/build-push-action@v5
       with:
         context: .
@@ -50,6 +56,25 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         
+    - name: Build summary
+      run: |
+        echo "## 🐳 Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **Status**: Docker image built and pushed successfully!" >> $GITHUB_STEP_SUMMARY
+        echo "🐳 **Docker Image**: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest\`" >> $GITHUB_STEP_SUMMARY
+        echo "📝 **Image Digest**: \`${{ steps.build.outputs.digest }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "📅 **Build Time**: $(date -u)" >> $GITHUB_STEP_SUMMARY
+
+  deploy:
+    name: Deploy to Oracle Cloud
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    
+    steps:
     - name: Deploy to Oracle Cloud Instance
       uses: appleboy/ssh-action@v1.0.0
       with:
@@ -67,6 +92,10 @@ jobs:
           docker stop zuhause-prod || true
           docker rm zuhause-prod || true
           
+          # Fix Docker networking issues with firewalld
+          echo "🔧 Fixing Docker networking..."
+          sudo systemctl restart docker
+          
           # Pull latest image
           echo "📥 Pulling latest image..."
           docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
@@ -82,6 +111,7 @@ jobs:
             -e AIRTABLE_BASE_ID="${{ secrets.AIRTABLE_BASE_ID }}" \
             -e AIRTABLE_TABLE_NAME="${{ secrets.AIRTABLE_TABLE_NAME }}" \
             -e AIRTABLE_VIEW_ID="${{ secrets.AIRTABLE_VIEW_ID }}" \
+            -e SESSION_SECRET="${{ secrets.SESSION_SECRET }}" \
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           
           # Wait for container to start
@@ -104,9 +134,11 @@ jobs:
         
         # Check if the application is responding on port 80
         for i in {1..10}; do
-          if curl -f -s http://${{ secrets.OCI_HOST }}:80/; then
+          if curl -f -s http://${{ secrets.OCI_HOST }}/; then
             echo "✅ Application is healthy and responding!"
-            echo "🌐 Application URL: http://${{ secrets.OCI_HOST }}:80"
+            echo "🌐 Application URLs:"
+            echo "  - Primary: http://${{ secrets.OCI_HOST }}"
+            echo "  - Custom Domain: http://zuhause.labz.my"
             exit 0
           fi
           echo "⏳ Waiting for application to start... (attempt $i/10)"
@@ -123,9 +155,11 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         if [ "${{ job.status }}" == "success" ]; then
           echo "✅ **Status**: Deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
-          echo "🌐 **Application URL**: http://${{ secrets.OCI_HOST }}:80" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 **Application URLs**:" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Primary**: http://${{ secrets.OCI_HOST }}" >> $GITHUB_STEP_SUMMARY
+          echo "  - **Custom Domain**: http://zuhause.labz.my" >> $GITHUB_STEP_SUMMARY
           echo "🐳 **Docker Image**: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest\`" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 **Ready for Cloudflare Tunnel**: Yes" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 **Port**: 80 (standard HTTP)" >> $GITHUB_STEP_SUMMARY
         else
           echo "❌ **Status**: Deployment failed" >> $GITHUB_STEP_SUMMARY
           echo "📋 **Details**: Check the workflow logs for detailed error information" >> $GITHUB_STEP_SUMMARY

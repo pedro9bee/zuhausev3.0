@@ -46,6 +46,9 @@ async function discoverTestimonialFields() {
     
     // Agora listar todos os registros para ver os campos
     console.log("\n📋 Listando registros existentes...");
+    console.log("\n📋 ALTERADO");
+    console.log("\n📋 ALTERADO");
+    console.log("\n📋 ALTERADO");
     const records = await base('Testimonials').select().all();
     
     if (records.length > 0) {
